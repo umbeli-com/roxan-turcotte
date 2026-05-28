@@ -13,9 +13,14 @@ if (existsSync(join(DIST, 'index.html'))) {
   console.log('404.html créé (copie de index.html, fallback SPA).');
 }
 
-const cname = process.env.PAGES_CNAME || 'turcotte.umbeli.com';
-writeFileSync(join(DIST, 'CNAME'), cname + '\n', 'utf8');
-console.log(`CNAME = ${cname}`);
+const cname = process.env.PAGES_CNAME;
+if (cname !== '' && cname !== undefined) {
+  const valeur = cname || 'turcotte.umbeli.com';
+  writeFileSync(join(DIST, 'CNAME'), valeur + '\n', 'utf8');
+  console.log(`CNAME = ${valeur}`);
+} else {
+  console.log('CNAME non écrit (PAGES_CNAME vide).');
+}
 
 writeFileSync(join(DIST, '.nojekyll'), '', 'utf8');
 console.log('.nojekyll posé.');

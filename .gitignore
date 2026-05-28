@@ -12,3 +12,7 @@ server/data/*.sqlite-journal
 server/uploads
 client/dist
 client/.vite
+
+# Fichiers sources fournis hors livraison (placés à la racine pour traitement,
+# pas à commit dans le dépôt).
+/roxan-logo.png

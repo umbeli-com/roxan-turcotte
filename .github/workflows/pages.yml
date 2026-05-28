@@ -39,8 +39,12 @@ jobs:
       - name: Construire le site statique (SSG)
         working-directory: client
         env:
-          PUBLIC_SITE_URL: https://turcotte.umbeli.com
-          PAGES_CNAME: turcotte.umbeli.com
+          # Pour la démo immédiate à umbeli-com.github.io/roxan-turcotte/,
+          # le base est le sous-chemin. Quand le DNS turcotte.umbeli.com sera
+          # configuré, repasser PUBLIC_BASE à '/' et rétablir PAGES_CNAME.
+          PUBLIC_BASE: /roxan-turcotte/
+          PUBLIC_SITE_URL: https://umbeli-com.github.io/roxan-turcotte
+          PAGES_CNAME: ''
           VITE_API_URL: /api
           VITE_STUB_FORMS: 'true'
         run: npm run build
