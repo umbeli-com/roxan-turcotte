@@ -1,0 +1,83 @@
+{
+  "_note": "Métadonnées des guides téléchargeables. Régénéré au build à partir de la BD une fois le back-office en service. Les valeurs ci-dessous sont des données provisoires à valider avec le client.",
+  "guides": [
+    {
+      "slug": "guide-de-lacheteur",
+      "titre": "Guide de l'acheteur",
+      "sousTitre": "Acheter sa première propriété ou la suivante, en confiance.",
+      "description": "Un guide complet pour démystifier toutes les étapes de l'achat d'une propriété : préparation financière, recherche, visites, offre d'achat, inspection, signature chez le notaire et premier emménagement.",
+      "categorie": "Achat",
+      "tableMatieres": [
+        "Préparer sa capacité d'achat et son préapprobation",
+        "Définir ses critères et explorer les quartiers",
+        "Visiter intelligemment et lire entre les lignes",
+        "Rédiger une offre d'achat solide",
+        "L'inspection préachat : à quoi s'attendre",
+        "Le rendez-vous chez le notaire",
+        "Premiers jours dans votre nouvelle propriété"
+      ],
+      "etiqueteCRM": "guide-acheteur",
+      "fichier": "/files/guides/guide-de-lacheteur.pdf",
+      "couvertureMot": "Acheteur",
+      "provisoire": true
+    },
+    {
+      "slug": "guide-du-vendeur",
+      "titre": "Guide du vendeur",
+      "sousTitre": "Vendre au juste prix, dans le délai prévu.",
+      "description": "Tout ce qu'il faut savoir pour réussir la vente de votre propriété : évaluation, préparation, stratégie de mise en marché, négociation, conditions et signature.",
+      "categorie": "Vente",
+      "tableMatieres": [
+        "Bien évaluer la juste valeur marchande",
+        "Préparer la propriété : petits travaux à grands effets",
+        "La stratégie de mise en marché professionnelle",
+        "Visites : ce qui vend, ce qui freine",
+        "Négocier sans céder sur l'essentiel",
+        "Les conditions de l'offre : tout comprendre",
+        "Préparer la signature chez le notaire"
+      ],
+      "etiqueteCRM": "guide-vendeur",
+      "fichier": "/files/guides/guide-du-vendeur.pdf",
+      "couvertureMot": "Vendeur",
+      "provisoire": true
+    },
+    {
+      "slug": "guide-home-staging",
+      "titre": "Guide de la valorisation résidentielle",
+      "sousTitre": "Mettre en scène pour mieux vendre.",
+      "description": "La valorisation résidentielle (home staging) augmente la perception de valeur et accélère la vente. Voici les principes simples, les pièges à éviter, et les retours sur investissement à viser.",
+      "categorie": "Vente",
+      "tableMatieres": [
+        "Les principes fondamentaux de la valorisation résidentielle",
+        "Désencombrer, dépersonnaliser, désaturer",
+        "Petits travaux, gros impacts",
+        "L'éclairage et la photographie",
+        "Pièce par pièce : recommandations ciblées",
+        "Estimer le retour sur investissement"
+      ],
+      "etiqueteCRM": "guide-staging",
+      "fichier": "/files/guides/guide-home-staging.pdf",
+      "couvertureMot": "Valorisation",
+      "provisoire": true
+    },
+    {
+      "slug": "guide-investisseur",
+      "titre": "Guide de l'investisseur immobilier",
+      "sousTitre": "Évaluer un immeuble comme un professionnel.",
+      "description": "Comprendre la rentabilité réelle, lire l'état d'un bâtiment, anticiper les travaux : ce guide outille l'investisseur résidentiel et commercial pour des décisions éclairées.",
+      "categorie": "Investissement",
+      "tableMatieres": [
+        "Calculer la rentabilité brute, nette, et le flux de trésorerie",
+        "Lire un immeuble : les signaux à ne pas manquer",
+        "Estimer les travaux à prévoir",
+        "Stratégies de financement",
+        "Aspects fiscaux à considérer",
+        "Construire un portefeuille progressivement"
+      ],
+      "etiqueteCRM": "guide-investisseur",
+      "fichier": "/files/guides/guide-investisseur.pdf",
+      "couvertureMot": "Investisseur",
+      "provisoire": true
+    }
+  ]
+}

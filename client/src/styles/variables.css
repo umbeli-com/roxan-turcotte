@@ -1,0 +1,72 @@
+:root {
+  /* Fonds sombres */
+  --rt-noir: #0B0B0C;
+  --rt-charbon: #161618;
+  --rt-charbon-2: #1F1F22;
+  --rt-charbon-3: #28282C;
+  --rt-ligne: #2C2C30;
+
+  /* Or signature */
+  --rt-or: #C8A24A;
+  --rt-or-clair: #E6C878;
+  --rt-or-fonce: #9A7B2E;
+  --rt-or-soft: rgba(200, 162, 74, 0.12);
+  --rt-or-glow: rgba(230, 200, 120, 0.25);
+
+  /* Texte */
+  --rt-ivoire: #F5F2EA;
+  --rt-gris-texte: #B7B3AB;
+  --rt-gris-faible: #6E6B65;
+
+  /* Co-branding Royal LePage */
+  --rlp-rouge: #E2231A;
+
+  /* États */
+  --rt-succes: #3FA66A;
+  --rt-alerte: #E0A92E;
+  --rt-erreur: #D2493B;
+
+  /* Dégradé or signature */
+  --rt-degrade-or: linear-gradient(135deg, #E6C878 0%, #C8A24A 45%, #9A7B2E 100%);
+  --rt-degrade-or-doux: linear-gradient(180deg, rgba(230, 200, 120, 0.18) 0%, rgba(154, 123, 46, 0.04) 100%);
+
+  /* Typographie */
+  --rt-font-titre: 'Cinzel', 'Times New Roman', serif;
+  --rt-font-sous-titre: 'Cormorant Garamond', 'Georgia', serif;
+  --rt-font-corps: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Espacements (échelle modulaire) */
+  --rt-esp-1: 0.25rem;
+  --rt-esp-2: 0.5rem;
+  --rt-esp-3: 0.75rem;
+  --rt-esp-4: 1rem;
+  --rt-esp-5: 1.5rem;
+  --rt-esp-6: 2rem;
+  --rt-esp-7: 3rem;
+  --rt-esp-8: 4rem;
+  --rt-esp-9: 6rem;
+  --rt-esp-10: 8rem;
+
+  /* Rayons */
+  --rt-radius-s: 4px;
+  --rt-radius-m: 6px;
+  --rt-radius-l: 10px;
+  --rt-radius-pill: 999px;
+
+  /* Largeurs maximales */
+  --rt-largeur-max: 1240px;
+  --rt-largeur-texte: 68ch;
+
+  /* Z-index */
+  --rt-z-header: 100;
+  --rt-z-modal: 1000;
+
+  /* Transitions */
+  --rt-transition-rapide: 0.18s ease;
+  --rt-transition-douce: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  --rt-transition-lente: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Ombres */
+  --rt-ombre-carte: 0 18px 50px rgba(0, 0, 0, 0.55);
+  --rt-ombre-or: 0 0 24px rgba(200, 162, 74, 0.25);
+}

@@ -1,0 +1,20 @@
+<!-- Emplacement réservé pour le logo définitif fourni par le client. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256">
+  <defs>
+    <linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#E6C878"/>
+      <stop offset="55%" stop-color="#C8A24A"/>
+      <stop offset="100%" stop-color="#9A7B2E"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" rx="32" fill="#0B0B0C"/>
+  <g transform="translate(48 44)" fill="url(#g)">
+    <path d="M80 0 L90 16 L100 2.4 L106 20 L118.4 6 L123.2 22.8 L138 13.6 L138.4 32 L154.4 26 L152 44 L166 44 L158 58 L164 68 L150 70 L154 84 L140 84 L140 100 L128 92 L124 108 L112 96 L100 108 L92 92 L80 100 L80 84 L66 84 L70 70 L56 68 L62 58 L54 44 L68 44 L65.6 26 L81.6 32 Z"/>
+    <ellipse cx="80" cy="68" rx="26" ry="24" fill="#0B0B0C"/>
+    <ellipse cx="80" cy="68" rx="26" ry="24" fill="none" stroke="url(#g)" stroke-width="2"/>
+    <circle cx="70.4" cy="62" r="3.8" fill="#E6C878"/>
+    <circle cx="89.6" cy="62" r="3.8" fill="#E6C878"/>
+    <path d="M76.8 73.6 L83.2 73.6 L80 78.4 Z" fill="#E6C878"/>
+  </g>
+  <text x="128" y="222" text-anchor="middle" font-family="Cinzel, serif" font-size="22" letter-spacing="0.25em" fill="url(#g)">R T</text>
+</svg>

@@ -1,0 +1,77 @@
+{
+  "_note": "Données provisoires pour les calculateurs. À valider et indexer chaque année avec le client avant mise en service. Tranches de droits de mutation = barème de base provincial; les municipalités peuvent ajouter des tranches supplémentaires.",
+  "indexationAnnee": 2026,
+  "tranchesParDefaut": [
+    { "plafond": 61500, "taux": 0.005 },
+    { "plafond": 307800, "taux": 0.010 },
+    { "plafond": null, "taux": 0.015 }
+  ],
+  "municipalites": [
+    {
+      "slug": "trois-rivieres",
+      "nom": "Trois-Rivières",
+      "region": "Mauricie",
+      "tauxMunicipal": 0.0095,
+      "tauxScolaire": 0.0010,
+      "tranchesMutation": [
+        { "plafond": 61500, "taux": 0.005 },
+        { "plafond": 307800, "taux": 0.010 },
+        { "plafond": 500000, "taux": 0.015 },
+        { "plafond": null, "taux": 0.025 }
+      ],
+      "provisoire": true
+    },
+    {
+      "slug": "shawinigan",
+      "nom": "Shawinigan",
+      "region": "Mauricie",
+      "tauxMunicipal": 0.0110,
+      "tauxScolaire": 0.0010,
+      "tranchesMutation": null,
+      "provisoire": true
+    },
+    {
+      "slug": "becancour",
+      "nom": "Bécancour",
+      "region": "Centre-du-Québec",
+      "tauxMunicipal": 0.0090,
+      "tauxScolaire": 0.0010,
+      "tranchesMutation": null,
+      "provisoire": true
+    },
+    {
+      "slug": "louiseville",
+      "nom": "Louiseville",
+      "region": "Mauricie",
+      "tauxMunicipal": 0.0100,
+      "tauxScolaire": 0.0010,
+      "tranchesMutation": null,
+      "provisoire": true
+    },
+    {
+      "slug": "yamachiche",
+      "nom": "Yamachiche",
+      "region": "Mauricie",
+      "tauxMunicipal": 0.0085,
+      "tauxScolaire": 0.0010,
+      "tranchesMutation": null,
+      "provisoire": true
+    },
+    {
+      "slug": "saint-tite",
+      "nom": "Saint-Tite",
+      "region": "Mauricie",
+      "tauxMunicipal": 0.0098,
+      "tauxScolaire": 0.0010,
+      "tranchesMutation": null,
+      "provisoire": true
+    }
+  ],
+  "fraisAcquisition": {
+    "notaire": { "min": 1200, "max": 1800 },
+    "inspectionPrachat": { "min": 450, "max": 900 },
+    "ajustementsNotaire": { "min": 800, "max": 2000 },
+    "evaluationFinanciere": { "min": 0, "max": 300 },
+    "fraisDivers": { "min": 200, "max": 600 }
+  }
+}
