@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { PageHead, schemaAgent } from '@/components/Head';
 import { Section, TitreSection, BoutonInterne, PastilleReco, CtaBandeau } from '@/components/blocs';
 import { Embleme } from '@/components/Embleme';
+import { SliderActivites } from '@/components/SliderActivites';
 import { contenuAccueil } from '@content/pages/accueil';
 import { marque } from '@content/marque';
 import { servicesParSlug } from '@content/services';
@@ -49,6 +50,15 @@ export default function Accueil() {
 
       <Section variante="charbon">
         <TitreSection
+          eyebrow="Activités phares"
+          titre="Six manières d’avancer avec moi."
+          description="Faites défiler les activités principales. Pour chacune, un aperçu et la météo en direct sur sa zone d’opération."
+        />
+        <SliderActivites />
+      </Section>
+
+      <Section variante="noir">
+        <TitreSection
           eyebrow={contenuAccueil.intro.eyebrow}
           titre={contenuAccueil.intro.titre}
         />
@@ -59,11 +69,11 @@ export default function Accueil() {
         </div>
       </Section>
 
-      <Section variante="noir">
+      <Section variante="charbon">
         <TitreSection
-          eyebrow="Services"
-          titre="Un service par projet, une stratégie par client."
-          description="Six pôles d'expertise pour répondre à chaque ambition immobilière."
+          eyebrow="Tous les services"
+          titre="Une stratégie par client, un service par projet."
+          description="Accès direct à chaque domaine d’expertise."
         />
         <div className="rt-grille rt-grille--3">
           {contenuAccueil.servicesAffiches.map((slug) => {
@@ -80,7 +90,7 @@ export default function Accueil() {
         </div>
       </Section>
 
-      <Section variante="charbon">
+      <Section variante="noir">
         <TitreSection
           eyebrow={contenuAccueil.reconnaissances.eyebrow}
           titre={contenuAccueil.reconnaissances.titre}
@@ -97,7 +107,7 @@ export default function Accueil() {
         </div>
       </Section>
 
-      <Section variante="noir">
+      <Section variante="charbon">
         <TitreSection
           eyebrow={contenuAccueil.temoignages.eyebrow}
           titre={contenuAccueil.temoignages.titre}
@@ -112,7 +122,7 @@ export default function Accueil() {
         </div>
       </Section>
 
-      <Section variante="charbon">
+      <Section variante="noir">
         <CtaBandeau
           titre={contenuAccueil.cta.titre}
           sousTitre={contenuAccueil.cta.sousTitre}

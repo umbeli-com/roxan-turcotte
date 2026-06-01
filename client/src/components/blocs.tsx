@@ -39,24 +39,24 @@ export function TitreSection({
 
 export function BoutonInterne({
   href,
-  enfants,
+  children,
   variante = 'primaire',
 }: {
   href: string;
-  enfants: ReactNode;
+  children: ReactNode;
   variante?: 'primaire' | 'secondaire' | 'ghost';
 }) {
   // Lien externe (ancre ou autre) versus lien interne (react-router)
   if (href.startsWith('#') || href.startsWith('http')) {
     return (
       <a href={href} className={`rt-bouton rt-bouton--${variante}`}>
-        {enfants}
+        {children}
       </a>
     );
   }
   return (
     <Link to={href} className={`rt-bouton rt-bouton--${variante}`}>
-      {enfants}
+      {children}
     </Link>
   );
 }

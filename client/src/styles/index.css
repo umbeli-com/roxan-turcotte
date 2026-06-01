@@ -3,6 +3,7 @@
 @import './hero.css';
 @import './formulaires.css';
 @import './calculateurs.css';
+@import './slider.css';
 
 /* Apparition au scroll (utilisé par IntersectionObserver côté client) */
 .rt-apparition {
