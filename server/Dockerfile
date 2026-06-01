@@ -26,4 +26,7 @@ ENV NODE_ENV=production
 ENV PORT=3010
 EXPOSE 3010
 
-CMD ["node", "src/index.js"]
+# Run migrations standalone first — the app's index.js imports app.js
+# which eagerly db.prepare()s in route modules before bootstrap can run
+# the migrations itself, so a fresh volume crashes on "no such table".
+CMD ["sh", "-c", "node src/db/migrate.js && node src/index.js"]
