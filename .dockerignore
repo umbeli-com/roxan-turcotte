@@ -1,0 +1,14 @@
+.git
+.gitattributes
+.gitignore
+.github
+.DS_Store
+**/.DS_Store
+**/node_modules
+**/dist
+server/data/*
+!server/data/.gitkeep
+**/*.log
+docs
+instructions.md
+README.md

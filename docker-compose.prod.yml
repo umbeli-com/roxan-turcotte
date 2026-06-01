@@ -1,0 +1,53 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: server/Dockerfile
+    image: roxan-turcotte-backend:latest
+    container_name: roxan-turcotte-backend
+    restart: always
+    env_file: .env
+    environment:
+      NODE_ENV: production
+      PORT: "3010"
+      DATABASE_PATH: /app/data/roxan.sqlite
+      PUBLIC_BASE_URL: https://turcotte.umbeli.com
+      PUBLIC_SITE_URL: https://turcotte.umbeli.com
+      COOKIE_SECURE: "true"
+    volumes:
+      - roxan_turcotte_data:/app/data
+      - roxan_turcotte_uploads:/app/uploads
+    networks:
+      - app_network
+
+  frontend:
+    build:
+      context: .
+      dockerfile: client/Dockerfile
+      args:
+        VITE_API_URL: /api
+        PUBLIC_BASE: /
+        PUBLIC_SITE_URL: https://turcotte.umbeli.com
+    image: roxan-turcotte-frontend:latest
+    container_name: roxan-turcotte-frontend
+    restart: always
+    depends_on:
+      - backend
+    expose:
+      - "80"
+    environment:
+      - VIRTUAL_HOST=turcotte.umbeli.com
+      - LETSENCRYPT_HOST=turcotte.umbeli.com
+      - LETSENCRYPT_EMAIL=admin@umbeli.com
+      - VIRTUAL_PORT=80
+    networks:
+      - app_network
+
+volumes:
+  roxan_turcotte_data:
+  roxan_turcotte_uploads:
+
+networks:
+  app_network:
+    external: true
+    name: app_network
