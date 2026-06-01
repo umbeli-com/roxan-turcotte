@@ -4,6 +4,7 @@
 @import './formulaires.css';
 @import './calculateurs.css';
 @import './slider.css';
+@import './admin.css';
 
 /* Apparition au scroll (utilisé par IntersectionObserver côté client) */
 .rt-apparition {
