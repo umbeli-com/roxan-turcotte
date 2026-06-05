@@ -6,7 +6,6 @@
   background: var(--rt-surface);
   border: 1px solid var(--rt-ligne);
   border-radius: var(--rt-radius-l);
-  box-shadow: var(--rt-ombre-douce);
   position: relative;
 }
 

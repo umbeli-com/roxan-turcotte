@@ -28,7 +28,7 @@ export const marque = {
   reconnaissances: [
     { titre: 'Top 10 %', mention: 'National Royal LePage 2025' },
     { titre: 'Prix Platine', mention: 'du Directeur 2025' },
-    { titre: '23 ans', mention: 'Expérience construction neuve' },
+    { titre: '23 ans', mention: 'Construction neuve' },
     { titre: '8 ans', mention: 'Entrepreneur général' },
   ],
   // Logos et badges (chemins relatifs au dossier public, résolus via lib/asset).

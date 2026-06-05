@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, type MouseEvent } from 'react';
 import { Link } from 'react-router-dom';
 import { activitesAccueil, type Activite, type CtaActivite } from '@content/activites';
 import { marque } from '@content/marque';
@@ -39,14 +39,6 @@ export function HeroActivites() {
           <h1 className="rt-heroact__titre">{activite.titre}</h1>
           <p className="rt-heroact__accroche">{activite.accroche}</p>
 
-          {activite.badges.length > 0 && (
-            <div className="rt-heroact__badges">
-              {activite.badges.map((b) => (
-                <img key={b.chemin} className="rt-heroact__badge" src={asset(b.chemin)} alt={b.alt} />
-              ))}
-            </div>
-          )}
-
           <div className="rt-heroact__cta">
             {activite.ctas.map((c) => (
               <CtaHero key={c.libelle} cta={c} />
@@ -56,23 +48,22 @@ export function HeroActivites() {
 
         <div className="rt-heroact__apercus">
           {autres.map(({ a, i }) => (
-            <button
-              key={a.slug}
-              type="button"
-              className="rt-heroact__apercu"
-              onClick={() => setActif(i)}
-              aria-label={`Afficher l’activité ${nomCourt(a)}`}
-              style={{ backgroundImage: `url(${a.apercu.src})` }}
-            >
-              <span className="rt-heroact__apercu-voile" aria-hidden="true" />
-              <span className="rt-logo-plaque rt-heroact__apercu-logo">
-                <img src={asset(a.logo.chemin)} alt="" />
-              </span>
-              <span className="rt-heroact__apercu-corps">
+            <div key={a.slug} className="rt-heroact__apercu-wrap">
+              <button
+                type="button"
+                className="rt-heroact__apercu"
+                onClick={() => setActif(i)}
+                aria-label={`Voir l’activité ${nomCourt(a)} en arrière-plan`}
+                style={{ backgroundImage: `url(${a.apercu.src})` }}
+              >
+                <span className="rt-heroact__apercu-voile" aria-hidden="true" />
+                <span className="rt-logo-plaque rt-heroact__apercu-logo">
+                  <img src={asset(a.logo.chemin)} alt="" />
+                </span>
                 <span className="rt-heroact__apercu-titre">{nomCourt(a)}</span>
-                <span className="rt-heroact__apercu-voir" aria-hidden="true">Découvrir →</span>
-              </span>
-            </button>
+              </button>
+              <ApercuDecouvrir route={a.route} nom={nomCourt(a)} />
+            </div>
           ))}
         </div>
       </div>
@@ -86,6 +77,25 @@ export function HeroActivites() {
 
 function nomCourt(a: Activite): string {
   return a.entite.split('·')[0].trim();
+}
+
+// Bouton « Découvrir » du rectangle : va à la page dédiée (ou au lien externe
+// Airbnb), distinct du clic sur la carte qui ne fait que changer le fond.
+function ApercuDecouvrir({ route, nom }: { route: string; nom: string }) {
+  const stop = (e: MouseEvent) => e.stopPropagation();
+  const libelle = 'Découvrir →';
+  if (/^https?:/i.test(route)) {
+    return (
+      <a className="rt-heroact__apercu-decouvrir" href={route} target="_blank" rel="noopener noreferrer" onClick={stop} aria-label={`Découvrir ${nom}`}>
+        {libelle}
+      </a>
+    );
+  }
+  return (
+    <Link className="rt-heroact__apercu-decouvrir" to={route} onClick={stop} aria-label={`Découvrir ${nom}`}>
+      {libelle}
+    </Link>
+  );
 }
 
 function CtaHero({ cta }: { cta: CtaActivite }) {

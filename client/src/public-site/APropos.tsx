@@ -1,5 +1,6 @@
 import { PageHead, schemaAgent } from '@/components/Head';
-import { Section, TitreSection, CtaBandeau, PastilleReco } from '@/components/blocs';
+import { Section, TitreSection, CtaBandeau } from '@/components/blocs';
+import { BandeauConfiance } from '@/components/BandeauConfiance';
 import { asset } from '@/lib/asset';
 import { contenuAPropos } from '@content/pages/a-propos';
 import { marque } from '@content/marque';
@@ -21,11 +22,9 @@ export default function APropos() {
           <p className="lead" style={{ fontStyle: 'italic', color: 'var(--rt-or-fonce)' }}>
             {contenuAPropos.hero.sousTitre}
           </p>
-          <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '0.5rem', marginTop: '2rem' }}>
-            {marque.reconnaissances.map((r) => (
-              <PastilleReco key={r.titre} titre={r.titre} mention={r.mention} />
-            ))}
-          </div>
+        </div>
+        <div style={{ marginTop: '2.5rem' }}>
+          <BandeauConfiance />
         </div>
       </Section>
 

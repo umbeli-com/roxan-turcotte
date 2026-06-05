@@ -25,6 +25,7 @@ export type Activite = {
   logo: { chemin: string; alt: string };
   image: Photo;   // fond plein écran
   apercu: Photo;  // vignette du rectangle quand l'activité n'est pas active
+  route: string;  // page dédiée (bouton « Découvrir » du rectangle)
   accent: string; // couleur d'accent (indicateur actif)
   badges: BadgeActivite[]; // vraies images d'accréditation (ex. Royal LePage)
   ctas: CtaActivite[];
@@ -46,6 +47,7 @@ export const activitesAccueil: Activite[] = [
     logo: { chemin: marque.logos.royalLepage, alt: 'Royal LePage Centre' },
     image: images.heros.royalLepage,
     apercu: images.activites.royalLepage,
+    route: '/services/courtier-immobilier',
     accent: '#C8A24A',
     badges: [
       { chemin: marque.badges.top10Blanc, alt: 'Top 10 % National Royal LePage 2025' },
@@ -66,6 +68,7 @@ export const activitesAccueil: Activite[] = [
     logo: { chemin: marque.logos.sunset, alt: 'Sunset Real Estate' },
     image: images.heros.sunset,
     apercu: images.activites.sunset,
+    route: '/services/sunset',
     accent: '#F0A45A',
     badges: [],
     ctas: [
@@ -83,6 +86,7 @@ export const activitesAccueil: Activite[] = [
     logo: { chemin: marque.logos.chaletsAirbnb, alt: 'Chalets & Airbnb' },
     image: images.heros.chalets,
     apercu: images.activites.chalets,
+    route: lienAirbnb,
     accent: '#3C5444',
     badges: [],
     ctas: [

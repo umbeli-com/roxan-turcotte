@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import { PageHead, schemaAgent } from '@/components/Head';
 import { Section, TitreSection, BoutonInterne, CtaBandeau } from '@/components/blocs';
 import { HeroActivites } from '@/components/HeroActivites';
+import { BandeauConfiance } from '@/components/BandeauConfiance';
 import { asset } from '@/lib/asset';
 import { contenuAccueil } from '@content/pages/accueil';
 import { marque } from '@content/marque';
@@ -11,11 +12,6 @@ const routesActivite: Record<string, string> = {
   'royal-lepage': '/services/courtier-immobilier',
   sunset: '/services/sunset',
   'chalets-airbnb': '/services/chalets',
-};
-
-const badges: Record<'top10' | 'platine', string> = {
-  top10: marque.badges.top10,
-  platine: marque.badges.platine,
 };
 
 export default function Accueil() {
@@ -30,11 +26,16 @@ export default function Accueil() {
 
       <HeroActivites />
 
-      {/* Qui est Roxan — portrait + texte */}
+      {/* Bande de confiance fixe (ne change pas avec le slider d'activité) */}
+      <Section variante="blanc">
+        <BandeauConfiance />
+      </Section>
+
+      {/* Qui est Roxan — photo + texte */}
       <Section variante="creme">
         <div className="rt-portrait">
-          <div className="rt-portrait__media rt-portrait__media--detoure">
-            <img src={asset(marque.portrait)} alt="Roxan Turcotte, courtier immobilier" loading="lazy" decoding="async" />
+          <div className="rt-portrait__media">
+            <img src={contenuAccueil.intro.image.src} alt={contenuAccueil.intro.image.alt} loading="lazy" decoding="async" />
           </div>
           <div>
             <span className="rt-eyebrow">{contenuAccueil.intro.eyebrow}</span>
@@ -116,22 +117,6 @@ export default function Accueil() {
               <p>{c.texte}</p>
               <BoutonInterne href={c.bouton.href} variante="secondaire">{c.bouton.libelle}</BoutonInterne>
             </div>
-          ))}
-        </div>
-      </Section>
-
-      {/* Distinctions (badges réels) */}
-      <Section variante="blanc">
-        <TitreSection
-          eyebrow={contenuAccueil.distinctions.eyebrow}
-          titre={contenuAccueil.distinctions.titre}
-        />
-        <div className="rt-distinctions">
-          {contenuAccueil.distinctions.items.map((d) => (
-            <figure className="rt-distinction" key={d.badge} style={{ margin: 0 }}>
-              <img src={asset(badges[d.badge])} alt={d.legende} />
-              <figcaption><span>{d.legende}</span></figcaption>
-            </figure>
           ))}
         </div>
       </Section>

@@ -275,6 +275,52 @@
   color: var(--rt-texte-doux);
 }
 
+/* --- Bande de confiance (reconnaissances fixes) --------------------- */
+.rt-confiance {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(1.25rem, 4vw, 2.75rem);
+}
+
+.rt-confiance__image { height: 66px; width: auto; object-fit: contain; }
+
+.rt-confiance__medaillon {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 10px 18px;
+  border: 1px solid var(--rt-ligne-forte);
+  border-radius: var(--rt-radius-m);
+  background: var(--rt-surface);
+  min-width: 120px;
+}
+
+.rt-confiance__medaillon strong {
+  font-family: var(--rt-font-titre);
+  color: var(--rt-or-fonce);
+  font-size: 1.35rem;
+  line-height: 1;
+  letter-spacing: 0.02em;
+}
+
+.rt-confiance__medaillon span {
+  margin-top: 5px;
+  font-size: 0.72rem;
+  color: var(--rt-texte-doux);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  line-height: 1.2;
+}
+
+@media (max-width: 520px) {
+  .rt-confiance__image { height: 54px; }
+  .rt-confiance__medaillon { min-width: 100px; padding: 8px 14px; }
+}
+
 /* --- Bande de logos (co-branding) ----------------------------------- */
 .rt-bande-logos {
   display: flex;

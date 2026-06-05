@@ -36,11 +36,11 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: var(--rt-largeur-max);
+  max-width: 1400px;
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 4rem) var(--rt-esp-5);
   display: grid;
-  grid-template-columns: 1.5fr 0.7fr;
+  grid-template-columns: 1.85fr 0.6fr;
   gap: clamp(1.5rem, 3vw, 3rem);
   align-items: center;
 }
@@ -52,17 +52,17 @@
   left: clamp(0px, 1.5vw, 24px);
   bottom: 0;
   z-index: 1;
-  height: min(86%, 600px);
+  height: min(84%, 560px);
   width: auto;
   object-fit: contain;
   object-position: bottom center;
   pointer-events: none;
-  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
-  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 82%, transparent 100%);
   filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.40));
 }
 
-.rt-heroact__contenu { padding-left: clamp(400px, 28vw, 440px); }
+.rt-heroact__contenu { padding-left: clamp(370px, 25vw, 400px); }
 
 .rt-heroact__logo {
   margin-bottom: var(--rt-esp-5);
@@ -153,18 +153,12 @@
 
 .rt-heroact__apercu-logo img { height: 26px; width: auto; }
 
-.rt-heroact__apercu-corps {
-  position: absolute;
-  left: 14px;
-  right: 14px;
-  bottom: 12px;
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  gap: 8px;
-}
+.rt-heroact__apercu-wrap { position: relative; }
 
 .rt-heroact__apercu-titre {
+  position: absolute;
+  left: 16px;
+  bottom: 14px;
   color: #fff;
   font-family: var(--rt-font-titre);
   font-size: 1.05rem;
@@ -172,11 +166,31 @@
   text-shadow: 0 1px 8px rgba(0, 0, 0, 0.55);
 }
 
-.rt-heroact__apercu-voir {
+/* Bouton « Découvrir » : distinct du clic sur la carte (qui change le fond) */
+.rt-heroact__apercu-decouvrir {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  z-index: 2;
+  display: inline-flex;
+  align-items: center;
+  min-height: 36px;
+  padding: 6px 12px;
+  border-radius: var(--rt-radius-pill);
+  background: rgba(15, 20, 16, 0.55);
+  border: 1px solid rgba(243, 239, 230, 0.3);
   color: var(--rt-or-clair);
   font-weight: 700;
-  font-size: 0.85rem;
+  font-size: 0.84rem;
   white-space: nowrap;
+  text-decoration: none;
+}
+
+.rt-heroact__apercu-decouvrir:hover,
+.rt-heroact__apercu-decouvrir:focus-visible {
+  color: #fff;
+  background: rgba(15, 20, 16, 0.8);
+  border-color: var(--rt-or-clair);
 }
 
 /* Sous 1080px : le portrait se retire pour libérer de la place (il reste
@@ -190,6 +204,24 @@
 @media (max-width: 920px) {
   .rt-heroact__inner { grid-template-columns: 1fr; }
   .rt-heroact__apercus { grid-template-columns: 1fr 1fr; }
+}
+
+/* Mobile : on ré-affiche Roxan (devant le décor, derrière le texte) pour qu'on
+   voie tout de suite qui c'est, avec un fondu en bas. */
+@media (max-width: 720px) {
+  .rt-heroact { align-items: flex-start; }
+  .rt-heroact__portrait {
+    display: block;
+    left: auto;
+    right: -7%;
+    bottom: 0;
+    height: 58%;
+    max-height: 440px;
+    opacity: 0.96;
+    z-index: 1;
+  }
+  .rt-heroact__inner { padding-top: clamp(1.5rem, 6vw, 2.5rem); }
+  .rt-heroact__contenu { padding-left: 0; }
 }
 
 @media (max-width: 560px) {

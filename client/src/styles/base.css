@@ -272,14 +272,19 @@ hr {
 .rt-bouton--primaire {
   background: var(--rt-degrade-or);
   color: var(--rt-noir);
-  box-shadow: var(--rt-ombre-douce);
 }
 
-.rt-bouton--primaire:hover,
-.rt-bouton--primaire:focus-visible {
+.rt-bouton--primaire:hover {
   transform: translateY(-2px);
   box-shadow: var(--rt-ombre-or);
   color: var(--rt-noir);
+}
+
+/* Anneau de focus arrondi (box-shadow suit la courbure du bouton, contrairement
+   à outline qui reste rectangulaire sur certains navigateurs). */
+.rt-bouton:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px var(--rt-fond), 0 0 0 6px var(--rt-or-fonce);
 }
 
 .rt-bouton--secondaire {
@@ -288,8 +293,7 @@ hr {
   border-color: var(--rt-or);
 }
 
-.rt-bouton--secondaire:hover,
-.rt-bouton--secondaire:focus-visible {
+.rt-bouton--secondaire:hover {
   background: var(--rt-or-soft);
   color: var(--rt-or-fonce);
   border-color: var(--rt-or-fonce);
@@ -300,8 +304,7 @@ hr {
   color: var(--rt-sur-nuit);
 }
 
-.rt-bouton--fonce:hover,
-.rt-bouton--fonce:focus-visible {
+.rt-bouton--fonce:hover {
   transform: translateY(-2px);
   background: var(--rt-vert-clair);
   color: var(--rt-sur-nuit);
@@ -313,8 +316,7 @@ hr {
   border-color: var(--rt-ligne-forte);
 }
 
-.rt-bouton--ghost:hover,
-.rt-bouton--ghost:focus-visible {
+.rt-bouton--ghost:hover {
   border-color: var(--rt-or);
   color: var(--rt-or-fonce);
 }

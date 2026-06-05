@@ -14,7 +14,6 @@
   border: 1px solid var(--rt-ligne);
   border-radius: var(--rt-radius-l);
   padding: var(--rt-esp-6);
-  box-shadow: var(--rt-ombre-douce);
 }
 
 .rt-calc__resultat {
@@ -26,7 +25,6 @@
   border: 1px solid var(--rt-or);
   border-radius: var(--rt-radius-l);
   padding: var(--rt-esp-6);
-  box-shadow: var(--rt-ombre-douce);
 }
 
 .rt-calc__metric {
