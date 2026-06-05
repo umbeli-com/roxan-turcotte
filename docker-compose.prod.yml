@@ -14,6 +14,11 @@ services:
       PUBLIC_BASE_URL: https://turcotte.umbeli.com
       PUBLIC_SITE_URL: https://turcotte.umbeli.com
       COOKIE_SECURE: "true"
+      # The .env shipped from local sets RATE_LIMIT_MAX=10 (intended for the
+      # public contact/quote forms), but app.js applies the same limiter to
+      # /api/admin/* — at 10/minute, normal admin usage (login, /me, listing
+      # leads) hits 429. Bump it here to keep both surfaces happy.
+      RATE_LIMIT_MAX: "60"
     volumes:
       - roxan_turcotte_data:/app/data
       - roxan_turcotte_uploads:/app/uploads
