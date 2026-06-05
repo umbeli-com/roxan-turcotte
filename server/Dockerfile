@@ -29,4 +29,7 @@ EXPOSE 3010
 # Run migrations standalone first — the app's index.js imports app.js
 # which eagerly db.prepare()s in route modules before bootstrap can run
 # the migrations itself, so a fresh volume crashes on "no such table".
-CMD ["sh", "-c", "node src/db/migrate.js && node src/index.js"]
+# Migrations + seed run before the server starts. seed.js is idempotent: it
+# only creates the default admin (roxan/Bonjour-2026!) and reference data
+# when the tables are empty, so it's safe on every boot.
+CMD ["sh", "-c", "node src/db/migrate.js && node src/db/seed.js && node src/index.js"]
