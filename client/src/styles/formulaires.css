@@ -1,5 +1,6 @@
 .rt-formulaire {
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: var(--rt-esp-4);
   padding: var(--rt-esp-6);
   background: var(--rt-surface);
@@ -45,6 +46,8 @@
   height: 38px;
   border-radius: 50%;
   object-fit: cover;
+  object-position: top center;
+  background: var(--rt-fond-alt);
   flex-shrink: 0;
 }
 
@@ -90,6 +93,8 @@
   border-radius: 0;
   padding: 2px 0;
   cursor: pointer;
+  max-width: 100%;
+  min-width: 0;
 }
 
 .rt-champ {

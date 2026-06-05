@@ -1,6 +1,7 @@
 import { PageHead, schemaAgent } from '@/components/Head';
 import { Section, TitreSection } from '@/components/blocs';
 import { FormulaireContact } from '@/components/FormulaireContact';
+import { asset } from '@/lib/asset';
 import { marque } from '@content/marque';
 
 export default function Contact() {
@@ -26,6 +27,13 @@ export default function Contact() {
       <Section variante="creme">
         <div className="rt-coord">
           <div className="rt-coord__bloc">
+            <div className="rt-contact-portrait">
+              <img src={asset(marque.portrait)} alt="Roxan Turcotte, courtier immobilier" loading="lazy" decoding="async" />
+              <div>
+                <strong>{marque.nomCourt}</strong>
+                <span>Courtier immobilier · {marque.banniere}</span>
+              </div>
+            </div>
             <h4>Téléphone</h4>
             <p>
               <a href={`tel:${marque.contact.telephone.replace(/\s/g, '')}`} className="rt-bouton rt-bouton--ghost">

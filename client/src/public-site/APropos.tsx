@@ -1,5 +1,6 @@
 import { PageHead, schemaAgent } from '@/components/Head';
 import { Section, TitreSection, CtaBandeau, PastilleReco } from '@/components/blocs';
+import { asset } from '@/lib/asset';
 import { contenuAPropos } from '@content/pages/a-propos';
 import { marque } from '@content/marque';
 
@@ -29,11 +30,17 @@ export default function APropos() {
       </Section>
 
       <Section variante="creme">
-        <TitreSection eyebrow="Parcours" titre={contenuAPropos.parcours.titre} />
-        <div style={{ maxWidth: 'var(--rt-largeur-texte)', margin: '0 auto' }}>
-          {contenuAPropos.parcours.paragraphes.map((p, i) => (
-            <p key={i} className={i === 0 ? 'lead' : ''}>{p}</p>
-          ))}
+        <div className="rt-portrait rt-portrait--inverse">
+          <div className="rt-portrait__media rt-portrait__media--detoure">
+            <img src={asset(marque.portrait)} alt="Roxan Turcotte, courtier immobilier" loading="lazy" decoding="async" />
+          </div>
+          <div>
+            <span className="rt-eyebrow">Parcours</span>
+            <h2>{contenuAPropos.parcours.titre}</h2>
+            {contenuAPropos.parcours.paragraphes.map((p, i) => (
+              <p key={i} className={i === 0 ? 'lead' : ''}>{p}</p>
+            ))}
+          </div>
         </div>
       </Section>
 

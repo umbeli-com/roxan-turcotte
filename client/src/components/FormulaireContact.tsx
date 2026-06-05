@@ -1,6 +1,7 @@
 import { useState, FormEvent } from 'react';
 import { marque } from '@content/marque';
 import type { Profil } from '@content/profils';
+import { asset } from '@/lib/asset';
 
 export type FormulaireProps = {
   typeFormulaire: string;
@@ -141,7 +142,7 @@ export function FormulaireContact({
       {profils && profils.length > 0 && (
         <div className="rt-formulaire__destinataire">
           {profilSel?.photo ? (
-            <img src={profilSel.photo} alt="" />
+            <img src={asset(profilSel.photo)} alt="" />
           ) : (
             <span className="rt-formulaire__destinataire-initiales" aria-hidden="true">
               {initiales(profilSel?.nom)}

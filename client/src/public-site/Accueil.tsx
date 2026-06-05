@@ -33,8 +33,8 @@ export default function Accueil() {
       {/* Qui est Roxan — portrait + texte */}
       <Section variante="creme">
         <div className="rt-portrait">
-          <div className="rt-portrait__media">
-            <img src={contenuAccueil.intro.image.src} alt={contenuAccueil.intro.image.alt} loading="lazy" decoding="async" />
+          <div className="rt-portrait__media rt-portrait__media--detoure">
+            <img src={asset(marque.portrait)} alt="Roxan Turcotte, courtier immobilier" loading="lazy" decoding="async" />
           </div>
           <div>
             <span className="rt-eyebrow">{contenuAccueil.intro.eyebrow}</span>

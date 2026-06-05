@@ -40,6 +40,9 @@ export const marque = {
     chaletsAirbnb: 'marque/airbnb.png',
     airbnb: 'marque/airbnb.png',
   },
+  // Portrait détouré (fond transparent) de Roxan — présent sur le hero, la
+  // page contact, l'à-propos, etc. « C'est toujours lui ».
+  portrait: 'marque/roxan.png',
   badges: {
     top10: 'marque/top10-noir.png',
     top10Blanc: 'marque/top10-blanc.png',

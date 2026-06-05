@@ -27,6 +27,7 @@ export const profils: Profil[] = [
       'Votre courtier pour la vente, l’achat et l’investissement à Trois-Rivières et en Mauricie. 23 ans d’expertise en construction neuve.',
     entite: 'royal-lepage',
     tag: 'royal-lepage',
+    photo: 'marque/roxan.png',
   },
   {
     slug: 'roxan-sunset',
@@ -36,6 +37,7 @@ export const profils: Profil[] = [
       'Pour vos projets de propriété au soleil : résidence secondaire, retraite ou investissement, avec coordination locale.',
     entite: 'sunset',
     tag: 'sunset',
+    photo: 'marque/roxan.png',
   },
   {
     slug: 'roxan-chalets',
@@ -45,6 +47,7 @@ export const profils: Profil[] = [
       'Pour acquérir et exploiter un chalet en location courte durée : rentabilité, règlements et repérage.',
     entite: 'chalets',
     tag: 'chalet',
+    photo: 'marque/roxan.png',
   },
   {
     slug: 'courtier-hypothecaire',

@@ -1,5 +1,6 @@
 import { useRef, useState } from 'react';
 import type { Profil } from '@content/profils';
+import { asset } from '@/lib/asset';
 import { FormulaireContact, type FormulaireProps } from './FormulaireContact';
 
 function initiales(nom: string): string {
@@ -30,7 +31,7 @@ export function ProfilsContact({
         >
           <div className="rt-profil-carte__tete">
             {p.photo ? (
-              <img className="rt-profil-carte__photo" src={p.photo} alt="" />
+              <img className="rt-profil-carte__photo" src={asset(p.photo)} alt="" />
             ) : (
               <span className="rt-profil-carte__photo rt-profil-carte__photo--initiales" aria-hidden="true">
                 {initiales(p.nom)}

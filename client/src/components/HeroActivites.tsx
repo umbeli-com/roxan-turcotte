@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { activitesAccueil, type Activite, type CtaActivite } from '@content/activites';
+import { marque } from '@content/marque';
 import { asset } from '@/lib/asset';
 
 // Slider plein écran de l'accueil. Le fond, le logo, les accréditations et les
@@ -28,6 +29,10 @@ export function HeroActivites() {
       </div>
 
       <div className="rt-heroact__inner">
+        <div className="rt-heroact__portrait">
+          <img src={asset(marque.portrait)} alt="Roxan Turcotte, courtier immobilier" />
+        </div>
+
         <div className="rt-heroact__contenu">
           <span className="rt-logo-plaque rt-heroact__logo">
             <img src={asset(activite.logo.chemin)} alt={activite.logo.alt} />

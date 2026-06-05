@@ -24,7 +24,7 @@ export function PageGuideTemplate({ guide }: { guide: Guide }) {
       />
 
       <Section variante="ivoire">
-        <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '3rem', alignItems: 'start' }}>
+        <div className="rt-guide-entete">
           <div className="rt-guide-carte__couverture" style={{ height: '420px', borderRadius: '10px' }}>
             <span className="rt-guide-carte__couverture-titre" style={{ fontSize: '1.6rem' }}>
               {guide.couvertureMot}
