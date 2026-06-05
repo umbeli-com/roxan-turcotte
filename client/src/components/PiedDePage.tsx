@@ -64,7 +64,10 @@ export function PiedDePage() {
       </div>
 
       <div className="rt-footer__bas">
-        <span className="rt-footer__signature">© {annee} — {marque.nom}</span>
+        {/* Si le build a tourne une annee differente de celle du visiteur (build
+            en decembre, ouverture en janvier), l'hydratation echoue avec #418.
+            On supprime l'avertissement pour ce seul span. */}
+        <span className="rt-footer__signature" suppressHydrationWarning>© {annee} — {marque.nom}</span>
         <br />
         <span style={{ display: 'inline-block', marginTop: '0.5rem' }}>
           {marque.banniere}, agence immobilière franchisée indépendante et autonome. Réalisation : Umbeli.

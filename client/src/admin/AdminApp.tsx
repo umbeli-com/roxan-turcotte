@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { FournisseurAuth, RouteProtegee } from './lib/auth';
 import { AdminLayout } from './components/AdminLayout';
@@ -13,6 +14,16 @@ import AdminExport from './pages/Export';
 // par authentification. Routes internes sous /admin/*.
 
 export default function AdminApp() {
+  // vite-react-ssg pré-rend cette route, mais l'intention est CSR pur (cf.
+  // routes.tsx). On rend null à l'hydratation initiale puis on monte le vrai
+  // contenu après — évite les erreurs React #418 / #423 (mismatch entre le
+  // HTML pré-rendu et le rendu client) que provoquaient les routes internes.
+  const [monte, setMonte] = useState(false);
+  useEffect(() => {
+    setMonte(true);
+  }, []);
+  if (!monte) return null;
+
   return (
     <FournisseurAuth>
       <Routes>
