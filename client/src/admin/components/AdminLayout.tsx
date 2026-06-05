@@ -25,6 +25,18 @@ const entrees: { libelle: string; href: string; icone: ReactNode }[] = [
     ),
   },
   {
+    libelle: 'Partenaires',
+    href: '/admin/partenaires',
+    icone: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <circle cx="9" cy="8" r="3.2" />
+        <path d="M2.5 20c0-3.2 2.9-5.5 6.5-5.5s6.5 2.3 6.5 5.5" />
+        <circle cx="17.5" cy="9" r="2.4" />
+        <path d="M16 14.5c3 .3 5 2.4 5 5" />
+      </svg>
+    ),
+  },
+  {
     libelle: 'Étiquettes',
     href: '/admin/tags',
     icone: (

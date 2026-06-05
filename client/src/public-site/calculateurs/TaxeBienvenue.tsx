@@ -4,6 +4,12 @@ import { Section, TitreSection } from '@/components/blocs';
 import { MentionLegaleCalc } from './MentionLegaleCalc';
 import { dollarsArrondis } from '@/lib/format';
 import municipalitiesData from '@content/municipalities.json';
+import { BlocAideOutil } from '@/components/blocsAide';
+import { calculateursParSlug } from '@content/calculateurs';
+import { servicesAide } from '@content/aide';
+import { profilsPour } from '@content/profils';
+
+const calc = calculateursParSlug['taxe-de-bienvenue'];
 
 type Tranche = { plafond: number | null; taux: number };
 
@@ -48,7 +54,7 @@ export default function CalculateurTaxeBienvenue() {
         schema={schemaAgent}
       />
 
-      <Section variante="noir">
+      <Section variante="creme">
         <TitreSection
           eyebrow="Calculateur"
           titre="Taxe de bienvenue"
@@ -104,6 +110,15 @@ export default function CalculateurTaxeBienvenue() {
           </div>
         </div>
       </Section>
+
+      <BlocAideOutil
+        aide={servicesAide(calc.aide)}
+        profils={profilsPour(calc.profils)}
+        typeFormulaire={`calculateur-${calc.slug}`}
+        pageOrigine={calc.route}
+        etiquettes={['calculateur', calc.slug]}
+        sourceEntite="royal-lepage"
+      />
     </>
   );
 }

@@ -1,34 +1,61 @@
 :root {
-  /* Fonds sombres */
-  --rt-noir: #0B0B0C;
-  --rt-charbon: #161618;
-  --rt-charbon-2: #1F1F22;
-  --rt-charbon-3: #28282C;
-  --rt-ligne: #2C2C30;
+  /* ------------------------------------------------------------------ *
+   * Palette « Ivoire & or chaud » — claire, accessible (WCAG AA), premium.
+   * Le clair est la valeur par défaut ; le sombre est un accent délibéré.
+   * Les anciens noms de tokens sont conservés (remappés) pour compat.
+   * ------------------------------------------------------------------ */
 
-  /* Or signature */
-  --rt-or: #C8A24A;
-  --rt-or-clair: #E6C878;
-  --rt-or-fonce: #9A7B2E;
-  --rt-or-soft: rgba(200, 162, 74, 0.12);
-  --rt-or-glow: rgba(230, 200, 120, 0.25);
+  /* Surfaces claires */
+  --rt-fond: #FAF7F0;          /* ivoire — fond de page */
+  --rt-fond-alt: #F3ECDD;      /* crème — section alternée */
+  --rt-surface: #FFFFFF;       /* blanc — cartes, formulaires, panneaux */
+  --rt-surface-2: #FBF7EF;     /* blanc cassé — élévation douce */
+
+  /* Surfaces sombres (rares : pied de page, sections « nuit ») */
+  --rt-nuit: #18201B;          /* vert-noir chaud */
+  --rt-nuit-2: #243027;
+  --rt-vert: #2E4034;          /* vert forêt — secondaire premium */
+  --rt-vert-clair: #3C5444;
 
   /* Texte */
-  --rt-ivoire: #F5F2EA;
-  --rt-gris-texte: #B7B3AB;
-  --rt-gris-faible: #6E6B65;
+  --rt-texte: #1E2420;         /* encre — texte principal */
+  --rt-texte-doux: #515A50;    /* secondaire (≥ AA sur ivoire) */
+  --rt-texte-faible: #6C746A;  /* discret (AA texte normal) */
+  --rt-sur-nuit: #F3EFE6;      /* texte sur fond sombre */
+  --rt-sur-nuit-doux: #C7C9BD;
+
+  /* Or signature (affiné) */
+  --rt-or: #B0863A;            /* or — accents, bordures */
+  --rt-or-fonce: #8A6826;      /* or foncé — texte/liens sur clair (AA) */
+  --rt-or-clair: #C8A24A;      /* or clair — accents sur fond sombre */
+  --rt-or-soft: rgba(176, 134, 58, 0.12);
+  --rt-or-glow: rgba(176, 134, 58, 0.22);
+
+  /* Lignes */
+  --rt-ligne: #E6DECD;
+  --rt-ligne-forte: #D6CBB2;
+  --rt-ligne-nuit: rgba(243, 239, 230, 0.16);
 
   /* Co-branding Royal LePage */
   --rlp-rouge: #E2231A;
 
-  /* États */
-  --rt-succes: #3FA66A;
-  --rt-alerte: #E0A92E;
-  --rt-erreur: #D2493B;
+  /* États (contrastes ≥ AA sur fond clair) */
+  --rt-succes: #2F7D4F;
+  --rt-alerte: #845914;
+  --rt-erreur: #C0392B;
 
   /* Dégradé or signature */
-  --rt-degrade-or: linear-gradient(135deg, #E6C878 0%, #C8A24A 45%, #9A7B2E 100%);
-  --rt-degrade-or-doux: linear-gradient(180deg, rgba(230, 200, 120, 0.18) 0%, rgba(154, 123, 46, 0.04) 100%);
+  --rt-degrade-or: linear-gradient(135deg, #D7B468 0%, #B0863A 50%, #8A6826 100%);
+  --rt-degrade-or-doux: linear-gradient(180deg, rgba(176, 134, 58, 0.14) 0%, rgba(176, 134, 58, 0.03) 100%);
+
+  /* --- Alias rétro-compatibles (anciens noms -> valeurs claires) --------- */
+  --rt-noir: #18201B;          /* « noir » = encre sombre (texte sur or, overlays) */
+  --rt-charbon: #F3ECDD;       /* sections crème */
+  --rt-charbon-2: #FFFFFF;     /* cartes / formulaires / inputs */
+  --rt-charbon-3: #F6F0E4;     /* élévation douce */
+  --rt-ivoire: #1E2420;        /* « ivoire » repointé vers l'encre (texte principal) */
+  --rt-gris-texte: #515A50;    /* texte secondaire */
+  --rt-gris-faible: #6C746A;   /* texte discret */
 
   /* Typographie */
   --rt-font-titre: 'Cinzel', 'Times New Roman', serif;
@@ -48,9 +75,9 @@
   --rt-esp-10: 8rem;
 
   /* Rayons */
-  --rt-radius-s: 4px;
-  --rt-radius-m: 6px;
-  --rt-radius-l: 10px;
+  --rt-radius-s: 6px;
+  --rt-radius-m: 10px;
+  --rt-radius-l: 16px;
   --rt-radius-pill: 999px;
 
   /* Largeurs maximales */
@@ -66,7 +93,8 @@
   --rt-transition-douce: 0.35s cubic-bezier(0.4, 0, 0.2, 1);
   --rt-transition-lente: 0.6s cubic-bezier(0.22, 1, 0.36, 1);
 
-  /* Ombres */
-  --rt-ombre-carte: 0 18px 50px rgba(0, 0, 0, 0.55);
-  --rt-ombre-or: 0 0 24px rgba(200, 162, 74, 0.25);
+  /* Ombres (douces, adaptées au fond clair) */
+  --rt-ombre-carte: 0 18px 44px rgba(43, 36, 18, 0.12);
+  --rt-ombre-douce: 0 8px 24px rgba(43, 36, 18, 0.08);
+  --rt-ombre-or: 0 10px 28px rgba(176, 134, 58, 0.28);
 }

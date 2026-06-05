@@ -14,6 +14,7 @@ import { db } from './connection.js';
 import { appliquerMigrations } from './migrate.js';
 import { tagsRepo } from './repositories/tags.js';
 import { municipalitesRepo, adminUsersRepo } from './repositories/divers.js';
+import { partenairesRepo } from './repositories/partenaires.js';
 
 const ETIQUETTES_DEFAUT = [
   { nom: 'royal-lepage', entite: 'royal-lepage' },
@@ -30,6 +31,17 @@ const ETIQUETTES_DEFAUT = [
   { nom: 'calculateur', entite: 'royal-lepage' },
   { nom: 'infolettre', entite: 'royal-lepage' },
   { nom: 'reference-partenaire', entite: 'royal-lepage' },
+];
+
+// Partenaires « personnes à contacter » (slugs alignés sur client/content/profils.ts).
+// Le courriel reste vide : l'administrateur le renseignera dans le dashboard.
+const PARTENAIRES_DEFAUT = [
+  { slug: 'roxan-turcotte', nom: 'Roxan Turcotte', role: 'Courtier immobilier · Royal LePage Centre', entite: 'royal-lepage', description: 'Vente, achat et investissement à Trois-Rivières et en Mauricie.' },
+  { slug: 'roxan-sunset', nom: 'Roxan Turcotte', role: 'Sunset · Immobilier dans le Sud', entite: 'sunset', description: 'Projets de propriété au soleil : résidence secondaire, retraite, investissement.' },
+  { slug: 'roxan-chalets', nom: 'Roxan Turcotte', role: 'Chalets & Airbnb', entite: 'chalets', description: 'Acquisition et exploitation de chalets en location courte durée.' },
+  { slug: 'courtier-hypothecaire', nom: 'Courtier hypothécaire partenaire', role: 'Financement hypothécaire', entite: 'partenaire', description: 'Comparaison des taux et structuration du financement.' },
+  { slug: 'notaire', nom: 'Notaire partenaire', role: 'Acte de vente · vérification des titres', entite: 'partenaire', description: 'Acte notarié, vérifications de titres et signature.' },
+  { slug: 'inspecteur', nom: 'Inspecteur en bâtiment', role: 'Inspection préachat', entite: 'partenaire', description: 'Inspection rigoureuse avant l’engagement.' },
 ];
 
 const MUNICIPALITES_DEFAUT = [
@@ -55,6 +67,15 @@ export async function semer({ silencieux = false } = {}) {
     for (const m of MUNICIPALITES_DEFAUT) municipalitesRepo.creer(m);
     log(`Municipalités par défaut créées (${MUNICIPALITES_DEFAUT.length}).`);
   }
+
+  // Partenaires : ajoute ceux qui manquent (n'écrase pas les courriels saisis).
+  let nbPartenaires = 0;
+  for (const p of PARTENAIRES_DEFAUT) {
+    const avant = partenairesRepo.parSlug(p.slug);
+    partenairesRepo.upsertSiAbsent(p);
+    if (!avant) nbPartenaires += 1;
+  }
+  if (nbPartenaires) log(`Partenaires créés (${nbPartenaires}).`);
 
   // Compte admin initial : ne crée QUE s'il n'existe aucun admin du tout
   // (et pas seulement si l'admin avec ce nom-là n'existe pas) pour éviter

@@ -13,7 +13,7 @@ export default function Contact() {
         schema={schemaAgent}
       />
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto' }}>
           <span className="rt-eyebrow">Contact</span>
           <h1 className="rt-titre-gravure">Parlons de votre projet.</h1>
@@ -23,7 +23,7 @@ export default function Contact() {
         </div>
       </Section>
 
-      <Section variante="charbon">
+      <Section variante="creme">
         <div className="rt-coord">
           <div className="rt-coord__bloc">
             <h4>Téléphone</h4>
@@ -58,7 +58,7 @@ export default function Contact() {
         </div>
       </Section>
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <TitreSection eyebrow="Carte" titre="Royal LePage Centre, Trois-Rivières" />
         <div
           style={{
@@ -66,11 +66,11 @@ export default function Contact() {
             borderRadius: '10px',
             overflow: 'hidden',
             height: '420px',
-            background: 'var(--rt-charbon-2)',
+            background: 'var(--rt-surface)',
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'center',
-            color: 'var(--rt-gris-faible)',
+            color: 'var(--rt-texte-doux)',
             fontFamily: 'var(--rt-font-sous-titre)',
             fontStyle: 'italic',
           }}

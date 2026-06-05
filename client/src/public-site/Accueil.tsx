@@ -1,113 +1,143 @@
 import { Link } from 'react-router-dom';
 import { PageHead, schemaAgent } from '@/components/Head';
-import { Section, TitreSection, BoutonInterne, PastilleReco, CtaBandeau } from '@/components/blocs';
-import { Embleme } from '@/components/Embleme';
-import { SliderActivites } from '@/components/SliderActivites';
+import { Section, TitreSection, BoutonInterne, CtaBandeau } from '@/components/blocs';
+import { HeroActivites } from '@/components/HeroActivites';
+import { asset } from '@/lib/asset';
 import { contenuAccueil } from '@content/pages/accueil';
 import { marque } from '@content/marque';
-import { servicesParSlug } from '@content/services';
+import { activitesAccueil } from '@content/activites';
+
+const routesActivite: Record<string, string> = {
+  'royal-lepage': '/services/courtier-immobilier',
+  sunset: '/services/sunset',
+  'chalets-airbnb': '/services/chalets',
+};
+
+const badges: Record<'top10' | 'platine', string> = {
+  top10: marque.badges.top10,
+  platine: marque.badges.platine,
+};
 
 export default function Accueil() {
   return (
     <>
       <PageHead
-        titre={`${marque.nomCourt} | Courtier immobilier prestige, Trois-Rivières`}
-        description="Courtier immobilier résidentiel et commercial à Trois-Rivières, Roxan Turcotte conjugue 23 ans d'expertise en construction neuve et une stratégie de mise en marché professionnelle. Top 10 % National Royal LePage 2025."
+        titre={`${marque.nomCourt} | Courtier immobilier, Trois-Rivières et la Mauricie`}
+        description="Roxan Turcotte, courtier immobilier résidentiel et commercial chez Royal LePage Centre. Vente, achat, investissement, immobilier dans le Sud (Sunset) et chalets en location courte durée. Top 10 % National Royal LePage 2025."
         cheminCanonique="/"
         schema={schemaAgent}
       />
 
-      <section className="rt-hero">
-        <div className="rt-hero__motif" aria-hidden="true" />
-        <div className="rt-hero__halo" aria-hidden="true" />
-        <div className="rt-hero__contenu">
-          <div className="rt-hero__principal">
-            <span className="rt-eyebrow">{contenuAccueil.hero.eyebrow}</span>
-            <h1 className="rt-titre-gravure">{contenuAccueil.hero.titre}</h1>
-            <p className="rt-hero__sous-titre">{contenuAccueil.hero.sousTitre}</p>
-            <p className="rt-hero__accroche">{contenuAccueil.hero.accroche}</p>
-            <div className="rt-hero__cta">
-              <BoutonInterne href={contenuAccueil.hero.ctaPrimaire.href}>
-                {contenuAccueil.hero.ctaPrimaire.libelle}
-              </BoutonInterne>
-              <BoutonInterne href={contenuAccueil.hero.ctaSecondaire.href} variante="secondaire">
-                {contenuAccueil.hero.ctaSecondaire.libelle}
-              </BoutonInterne>
-            </div>
-            <div className="rt-hero__reconnaissances">
-              {marque.reconnaissances.map((r) => (
-                <PastilleReco key={r.titre} titre={r.titre} mention={r.mention} />
-              ))}
-            </div>
+      <HeroActivites />
+
+      {/* Qui est Roxan — portrait + texte */}
+      <Section variante="creme">
+        <div className="rt-portrait">
+          <div className="rt-portrait__media">
+            <img src={contenuAccueil.intro.image.src} alt={contenuAccueil.intro.image.alt} loading="lazy" decoding="async" />
           </div>
-          <div className="rt-hero__visuel" style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className="rt-hero__embleme-grand">
-              <Embleme taille={260} />
+          <div>
+            <span className="rt-eyebrow">{contenuAccueil.intro.eyebrow}</span>
+            <h2>{contenuAccueil.intro.titre}</h2>
+            {contenuAccueil.intro.paragraphes.map((p, i) => (
+              <p key={i} className={i === 0 ? 'lead' : ''}>{p}</p>
+            ))}
+            <div style={{ marginTop: 'var(--rt-esp-5)' }}>
+              <BoutonInterne href={contenuAccueil.intro.cta.href} variante="secondaire">
+                {contenuAccueil.intro.cta.libelle}
+              </BoutonInterne>
             </div>
           </div>
         </div>
-      </section>
-
-      <Section variante="charbon">
-        <TitreSection
-          eyebrow="Activités phares"
-          titre="Six manières d’avancer avec moi."
-          description="Faites défiler les activités principales. Pour chacune, un aperçu et la météo en direct sur sa zone d’opération."
-        />
-        <SliderActivites />
       </Section>
 
-      <Section variante="noir">
+      {/* Types de projets / propriétés avec photos */}
+      <Section variante="ivoire">
         <TitreSection
-          eyebrow={contenuAccueil.intro.eyebrow}
-          titre={contenuAccueil.intro.titre}
-        />
-        <div style={{ maxWidth: 'var(--rt-largeur-texte)', margin: '0 auto' }}>
-          {contenuAccueil.intro.paragraphes.map((p, i) => (
-            <p key={i} className={i === 0 ? 'lead' : ''}>{p}</p>
-          ))}
-        </div>
-      </Section>
-
-      <Section variante="charbon">
-        <TitreSection
-          eyebrow="Tous les services"
-          titre="Une stratégie par client, un service par projet."
-          description="Accès direct à chaque domaine d’expertise."
+          eyebrow={contenuAccueil.typesProprietes.eyebrow}
+          titre={contenuAccueil.typesProprietes.titre}
+          description={contenuAccueil.typesProprietes.description}
         />
         <div className="rt-grille rt-grille--3">
-          {contenuAccueil.servicesAffiches.map((slug) => {
-            const s = servicesParSlug[slug];
-            if (!s) return null;
-            return (
-              <Link key={s.slug} to={s.route} className="rt-service-carte">
-                <span className="rt-service-carte__entite">{s.entite}</span>
-                <h3>{s.titre}</h3>
-                <p>{s.resume}</p>
-              </Link>
-            );
-          })}
-        </div>
-      </Section>
-
-      <Section variante="noir">
-        <TitreSection
-          eyebrow={contenuAccueil.reconnaissances.eyebrow}
-          titre={contenuAccueil.reconnaissances.titre}
-        />
-        <div className="rt-grille rt-grille--4">
-          {contenuAccueil.reconnaissances.items.map((r) => (
-            <article key={r.titre} className="rt-carte">
-              <h3 style={{ fontFamily: 'var(--rt-font-titre)', fontSize: '1.1rem', letterSpacing: '0.06em' }}>
-                {r.titre}
-              </h3>
-              <p>{r.description}</p>
-            </article>
+          {contenuAccueil.typesProprietes.items.map((it) => (
+            <Link key={it.titre} to={it.lien} className="rt-carte-photo">
+              <span className="rt-carte-photo__media">
+                <img src={it.image.src} alt={it.image.alt} loading="lazy" decoding="async" />
+                <span className="rt-carte-photo__etiquette">{it.etiquette}</span>
+              </span>
+              <span className="rt-carte-photo__corps">
+                <h3>{it.titre}</h3>
+                <p>{it.texte}</p>
+                <span className="rt-carte-photo__lien">En savoir plus →</span>
+              </span>
+            </Link>
           ))}
         </div>
       </Section>
 
-      <Section variante="charbon">
+      {/* Les 3 activités */}
+      <Section variante="creme">
+        <TitreSection
+          eyebrow={contenuAccueil.activites.eyebrow}
+          titre={contenuAccueil.activites.titre}
+          description={contenuAccueil.activites.description}
+        />
+        <div className="rt-grille rt-grille--3">
+          {activitesAccueil.map((a) => (
+            <Link key={a.slug} to={routesActivite[a.slug] ?? '/contact'} className="rt-carte-photo">
+              <span className="rt-carte-photo__media">
+                <img src={a.apercu.src} alt={a.apercu.alt} loading="lazy" decoding="async" />
+                <span className="rt-logo-plaque" style={{ position: 'absolute', top: 12, left: 12, height: 38, padding: '6px 10px' }}>
+                  <img src={asset(a.logo.chemin)} alt="" style={{ height: 24, width: 'auto' }} />
+                </span>
+              </span>
+              <span className="rt-carte-photo__corps">
+                <span className="rt-service-carte__entite">{a.entite}</span>
+                <h3>{a.titre}</h3>
+                <p>{a.accroche}</p>
+                <span className="rt-carte-photo__lien">Découvrir →</span>
+              </span>
+            </Link>
+          ))}
+        </div>
+      </Section>
+
+      {/* Outils gratuits */}
+      <Section variante="ivoire">
+        <TitreSection
+          eyebrow={contenuAccueil.outils.eyebrow}
+          titre={contenuAccueil.outils.titre}
+          description={contenuAccueil.outils.description}
+        />
+        <div className="rt-plus-loin">
+          {contenuAccueil.outils.cartes.map((c) => (
+            <div key={c.titre} className="rt-plus-loin__carte">
+              <h3>{c.titre}</h3>
+              <p>{c.texte}</p>
+              <BoutonInterne href={c.bouton.href} variante="secondaire">{c.bouton.libelle}</BoutonInterne>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      {/* Distinctions (badges réels) */}
+      <Section variante="blanc">
+        <TitreSection
+          eyebrow={contenuAccueil.distinctions.eyebrow}
+          titre={contenuAccueil.distinctions.titre}
+        />
+        <div className="rt-distinctions">
+          {contenuAccueil.distinctions.items.map((d) => (
+            <figure className="rt-distinction" key={d.badge} style={{ margin: 0 }}>
+              <img src={asset(badges[d.badge])} alt={d.legende} />
+              <figcaption><span>{d.legende}</span></figcaption>
+            </figure>
+          ))}
+        </div>
+      </Section>
+
+      {/* Témoignages */}
+      <Section variante="creme">
         <TitreSection
           eyebrow={contenuAccueil.temoignages.eyebrow}
           titre={contenuAccueil.temoignages.titre}
@@ -122,7 +152,25 @@ export default function Accueil() {
         </div>
       </Section>
 
-      <Section variante="noir">
+      {/* Pour aller plus loin */}
+      <Section variante="ivoire">
+        <TitreSection
+          eyebrow={contenuAccueil.plusLoin.eyebrow}
+          titre={contenuAccueil.plusLoin.titre}
+          description={contenuAccueil.plusLoin.description}
+        />
+        <div className="rt-plus-loin">
+          {contenuAccueil.plusLoin.cartes.map((c) => (
+            <div key={c.titre} className="rt-plus-loin__carte">
+              <h3>{c.titre}</h3>
+              <p>{c.texte}</p>
+              <BoutonInterne href={c.bouton.href}>{c.bouton.libelle}</BoutonInterne>
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <Section variante="creme">
         <CtaBandeau
           titre={contenuAccueil.cta.titre}
           sousTitre={contenuAccueil.cta.sousTitre}

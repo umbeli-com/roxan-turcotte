@@ -13,18 +13,18 @@ export default function ClubPrivilege() {
         schema={schemaAgent}
       />
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto' }}>
           <span className="rt-eyebrow">{contenuClubPrivilege.hero.eyebrow}</span>
           <h1 className="rt-titre-gravure">{contenuClubPrivilege.hero.titre}</h1>
-          <p className="lead" style={{ fontStyle: 'italic', color: 'var(--rt-or-clair)' }}>
+          <p className="lead" style={{ fontStyle: 'italic', color: 'var(--rt-or-fonce)' }}>
             {contenuClubPrivilege.hero.sousTitre}
           </p>
           <p style={{ marginTop: '2rem' }}>{contenuClubPrivilege.intro}</p>
         </div>
       </Section>
 
-      <Section variante="charbon">
+      <Section variante="creme">
         <TitreSection titre={contenuClubPrivilege.avantages.titre} eyebrow="Avantages" />
         <div className="rt-grille rt-grille--2">
           {contenuClubPrivilege.avantages.items.map((a) => (
@@ -36,7 +36,7 @@ export default function ClubPrivilege() {
         </div>
       </Section>
 
-      <Section variante="noir" id="formulaire">
+      <Section variante="ivoire" id="formulaire">
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <TitreSection
             titre={contenuClubPrivilege.formulaireTitre}

@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { PageHead } from '@/components/Head';
-import { api, type Lead, type Etiquette } from '../lib/api';
+import { api, type Lead, type Etiquette, type Partenaire } from '../lib/api';
 import { formaterDateHeure, libelleStatut } from '../lib/format';
 
 const STATUTS = ['nouveau', 'contacte', 'qualifie', 'client', 'perdu', 'archive'];
@@ -11,6 +11,7 @@ export default function AdminLeadDetail() {
   const navigate = useNavigate();
   const [lead, setLead] = useState<Lead | null>(null);
   const [etiquettes, setEtiquettes] = useState<Etiquette[]>([]);
+  const [partenaire, setPartenaire] = useState<Partenaire | null>(null);
   const [notes, setNotes] = useState('');
   const [statut, setStatut] = useState('nouveau');
   const [enVol, setEnVol] = useState(false);
@@ -22,6 +23,7 @@ export default function AdminLeadDetail() {
       .then((r) => {
         setLead(r.lead);
         setEtiquettes(r.etiquettes);
+        setPartenaire(r.partenaire);
         setNotes(r.lead.notes_internes ?? '');
         setStatut(r.lead.statut);
       })
@@ -88,6 +90,18 @@ export default function AdminLeadDetail() {
             <dt>Courriel</dt><dd><a href={`mailto:${lead.courriel}`}>{lead.courriel}</a></dd>
             <dt>Téléphone</dt><dd>{lead.telephone ? <a href={`tel:${lead.telephone}`}>{lead.telephone}</a> : '—'}</dd>
             <dt>Page d'origine</dt><dd>{lead.page_origine ?? '—'}</dd>
+            <dt>Dirigé vers</dt>
+            <dd>
+              {lead.profil_slug ? (
+                <>
+                  <strong>{partenaire?.nom ?? lead.profil_slug}</strong>
+                  {partenaire?.role && <> — {partenaire.role}</>}
+                  {partenaire?.courriel
+                    ? <> · <a href={`mailto:${partenaire.courriel}`}>{partenaire.courriel}</a></>
+                    : <span style={{ color: 'var(--adm-texte-faible)' }}> · courriel non renseigné</span>}
+                </>
+              ) : '—'}
+            </dd>
             <dt>Adresse IP</dt><dd>{lead.adresse_ip ?? '—'}</dd>
             <dt>Consentement</dt><dd>{lead.consentement ? `Oui (${formaterDateHeure(lead.consentement_horodatage)})` : 'Non'}</dd>
             <dt>Infolettre</dt><dd>{lead.consentement_infolettre ? 'Oui' : 'Non'}</dd>

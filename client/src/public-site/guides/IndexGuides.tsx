@@ -15,7 +15,7 @@ export default function IndexGuides() {
         schema={schemaAgent}
       />
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <TitreSection
           eyebrow="Guides gratuits"
           titre="Des guides pour décider en confiance."
@@ -43,7 +43,7 @@ export default function IndexGuides() {
         </div>
       </Section>
 
-      <Section variante="charbon">
+      <Section variante="creme">
         <div style={{ textAlign: 'center', maxWidth: 'var(--rt-largeur-texte)', margin: '0 auto' }}>
           <p className="lead">
             Vous préférez en parler avant ? Échangeons directement. Premier appel sans engagement.

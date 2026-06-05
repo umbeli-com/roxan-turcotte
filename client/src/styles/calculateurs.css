@@ -10,19 +10,23 @@
 }
 
 .rt-calc__panneau {
-  background: var(--rt-charbon-2);
+  background: var(--rt-surface);
   border: 1px solid var(--rt-ligne);
   border-radius: var(--rt-radius-l);
   padding: var(--rt-esp-6);
+  box-shadow: var(--rt-ombre-douce);
 }
 
 .rt-calc__resultat {
   display: grid;
   gap: var(--rt-esp-4);
-  background: linear-gradient(160deg, rgba(200, 162, 74, 0.08) 0%, var(--rt-charbon-2) 60%);
-  border: 1px solid rgba(200, 162, 74, 0.32);
+  align-content: start;
+  background:
+    linear-gradient(165deg, rgba(176, 134, 58, 0.12) 0%, var(--rt-surface) 55%);
+  border: 1px solid var(--rt-or);
   border-radius: var(--rt-radius-l);
   padding: var(--rt-esp-6);
+  box-shadow: var(--rt-ombre-douce);
 }
 
 .rt-calc__metric {
@@ -37,21 +41,23 @@
 .rt-calc__metric:last-child { border-bottom: 0; }
 
 .rt-calc__libelle {
-  font-size: 0.86rem;
-  letter-spacing: 0.1em;
+  font-size: 0.9rem;
+  font-weight: 600;
+  letter-spacing: 0.06em;
   text-transform: uppercase;
-  color: var(--rt-gris-texte);
+  color: var(--rt-texte-doux);
 }
 
 .rt-calc__valeur {
   font-family: var(--rt-font-titre);
-  font-size: 1.3rem;
-  color: var(--rt-or-clair);
-  letter-spacing: 0.04em;
+  font-size: 1.35rem;
+  color: var(--rt-or-fonce);
+  letter-spacing: 0.02em;
 }
 
 .rt-calc__valeur--mise-en-avant {
-  font-size: 1.7rem;
+  font-size: 1.8rem;
+  color: var(--rt-texte);
 }
 
 .rt-calc__fourchette {
@@ -59,12 +65,12 @@
   align-items: baseline;
   gap: var(--rt-esp-2);
   font-family: var(--rt-font-titre);
-  font-size: 1.3rem;
-  color: var(--rt-or-clair);
+  font-size: 1.35rem;
+  color: var(--rt-or-fonce);
 }
 
 .rt-calc__fourchette span.sep {
-  color: var(--rt-gris-faible);
-  font-size: 0.9rem;
+  color: var(--rt-texte-faible);
+  font-size: 0.92rem;
   font-family: var(--rt-font-corps);
 }

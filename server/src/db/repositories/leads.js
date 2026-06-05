@@ -3,12 +3,12 @@ import { db } from '../connection.js';
 const INSERT = db.prepare(`
   INSERT INTO leads (
     prenom, nom, courriel, telephone, message,
-    type_formulaire, source_entite, page_origine,
+    type_formulaire, source_entite, page_origine, profil_slug,
     consentement, consentement_horodatage, consentement_infolettre,
     adresse_ip
   ) VALUES (
     @prenom, @nom, @courriel, @telephone, @message,
-    @type_formulaire, @source_entite, @page_origine,
+    @type_formulaire, @source_entite, @page_origine, @profil_slug,
     @consentement, @consentement_horodatage, @consentement_infolettre,
     @adresse_ip
   )
@@ -30,6 +30,7 @@ export function creerLead(payload, etiquettes = []) {
       type_formulaire: p.type_formulaire,
       source_entite: p.source_entite ?? null,
       page_origine: p.page_origine ?? null,
+      profil_slug: p.profil_slug ?? null,
       consentement: p.consentement ? 1 : 0,
       consentement_horodatage: p.consentement_horodatage ?? new Date().toISOString(),
       consentement_infolettre: p.consentement_infolettre ? 1 : 0,
@@ -46,11 +47,12 @@ export function creerLead(payload, etiquettes = []) {
   return SELECT_ID.get(id);
 }
 
-export function lister({ etiquette, statut, sourceEntite, recherche, depuis, jusqu, limite = 50, offset = 0 } = {}) {
+export function lister({ etiquette, statut, sourceEntite, profil, recherche, depuis, jusqu, limite = 50, offset = 0 } = {}) {
   const conditions = [];
   const params = {};
   if (statut) { conditions.push('l.statut = @statut'); params.statut = statut; }
   if (sourceEntite) { conditions.push('l.source_entite = @sourceEntite'); params.sourceEntite = sourceEntite; }
+  if (profil) { conditions.push('l.profil_slug = @profil'); params.profil = profil; }
   if (recherche) {
     conditions.push('(l.prenom LIKE @r OR l.nom LIKE @r OR l.courriel LIKE @r OR l.telephone LIKE @r)');
     params.r = `%${recherche}%`;

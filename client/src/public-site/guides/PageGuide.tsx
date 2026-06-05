@@ -1,13 +1,15 @@
 import { PageHead, schemaAgent } from '@/components/Head';
 import { Section, TitreSection } from '@/components/blocs';
 import { FormulaireContact } from '@/components/FormulaireContact';
+import { BlocServicesAide, BlocAllerPlusLoin } from '@/components/blocsAide';
+import { servicesAide } from '@content/aide';
 import guidesContent from '@content/guides.json';
 
 type Guide = (typeof guidesContent.guides)[number];
 
 export function PageGuide({ slug }: { slug: string }) {
   const guide = guidesContent.guides.find((g: Guide) => g.slug === slug);
-  if (!guide) return <Section variante="noir"><h1>Guide introuvable</h1></Section>;
+  if (!guide) return <Section variante="ivoire"><h1>Guide introuvable</h1></Section>;
   return <PageGuideTemplate guide={guide} />;
 }
 
@@ -21,7 +23,7 @@ export function PageGuideTemplate({ guide }: { guide: Guide }) {
         schema={schemaAgent}
       />
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <div style={{ display: 'grid', gridTemplateColumns: '320px 1fr', gap: '3rem', alignItems: 'start' }}>
           <div className="rt-guide-carte__couverture" style={{ height: '420px', borderRadius: '10px' }}>
             <span className="rt-guide-carte__couverture-titre" style={{ fontSize: '1.6rem' }}>
@@ -31,7 +33,7 @@ export function PageGuideTemplate({ guide }: { guide: Guide }) {
           <div>
             <span className="rt-eyebrow">Guide gratuit · {guide.categorie}</span>
             <h1 className="rt-titre-gravure">{guide.titre}</h1>
-            <p className="lead" style={{ fontStyle: 'italic', color: 'var(--rt-or-clair)' }}>
+            <p className="lead" style={{ fontStyle: 'italic', color: 'var(--rt-or-fonce)' }}>
               {guide.sousTitre}
             </p>
             <p>{guide.description}</p>
@@ -45,18 +47,18 @@ export function PageGuideTemplate({ guide }: { guide: Guide }) {
         </div>
       </Section>
 
-      <Section variante="charbon">
+      <Section variante="creme">
         <TitreSection eyebrow="Sommaire" titre="Ce que vous trouverez dans ce guide" />
         <div style={{ maxWidth: 'var(--rt-largeur-texte)', margin: '0 auto' }}>
           <ol style={{ counterReset: 'rt 0' }}>
             {guide.tableMatieres.map((s, i) => (
-              <li key={i} style={{ marginBottom: '0.5rem', color: 'var(--rt-ivoire)' }}>{s}</li>
+              <li key={i} style={{ marginBottom: '0.5rem', color: 'var(--rt-texte)' }}>{s}</li>
             ))}
           </ol>
         </div>
       </Section>
 
-      <Section variante="noir" id="formulaire">
+      <Section variante="ivoire" id="formulaire">
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <TitreSection
             eyebrow="Téléchargement"
@@ -74,6 +76,19 @@ export function PageGuideTemplate({ guide }: { guide: Guide }) {
             champInfolettre={true}
           />
         </div>
+      </Section>
+
+      <Section variante="creme">
+        <BlocServicesAide
+          titre="Des services pour vous accompagner"
+          intro="Ce guide est un point de départ — je peux vous aider concrètement, étape par étape."
+          services={servicesAide(['courtier-immobilier', 'investissement-immobilier'])}
+        />
+      </Section>
+
+      <Section variante="ivoire">
+        <TitreSection eyebrow="Pour aller plus loin" titre="Faire affaire avec Roxan" />
+        <BlocAllerPlusLoin />
       </Section>
     </>
   );

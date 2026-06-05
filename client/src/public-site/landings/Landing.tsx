@@ -35,21 +35,21 @@ export function LandingTemplate({ data }: { data: LandingContenu }) {
         </div>
       </section>
 
-      <Section variante="charbon">
+      <Section variante="creme">
         <TitreSection titre={data.benefices.titre} eyebrow="Bénéfices" />
         <div style={{ maxWidth: 'var(--rt-largeur-texte)', margin: '0 auto' }}>
           <ListeAvantages items={data.benefices.items} />
         </div>
       </Section>
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <TitreSection titre={data.processus.titre} eyebrow="Processus" />
         <div style={{ maxWidth: '900px', margin: '0 auto' }}>
           <Processus etapes={data.processus.etapes} />
         </div>
       </Section>
 
-      <Section variante="charbon" id="formulaire">
+      <Section variante="creme" id="formulaire">
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <FormulaireContact
             typeFormulaire={data.typeFormulaire}
@@ -63,7 +63,7 @@ export function LandingTemplate({ data }: { data: LandingContenu }) {
         </div>
       </Section>
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <CtaBandeau
           titre={data.ctaFinal.titre}
           sousTitre={data.ctaFinal.sousTitre}

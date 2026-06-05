@@ -13,11 +13,11 @@ export default function APropos() {
         schema={schemaAgent}
       />
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto' }}>
           <span className="rt-eyebrow">{contenuAPropos.hero.eyebrow}</span>
           <h1 className="rt-titre-gravure">{contenuAPropos.hero.titre}</h1>
-          <p className="lead" style={{ fontStyle: 'italic', color: 'var(--rt-or-clair)' }}>
+          <p className="lead" style={{ fontStyle: 'italic', color: 'var(--rt-or-fonce)' }}>
             {contenuAPropos.hero.sousTitre}
           </p>
           <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '0.5rem', marginTop: '2rem' }}>
@@ -28,7 +28,7 @@ export default function APropos() {
         </div>
       </Section>
 
-      <Section variante="charbon">
+      <Section variante="creme">
         <TitreSection eyebrow="Parcours" titre={contenuAPropos.parcours.titre} />
         <div style={{ maxWidth: 'var(--rt-largeur-texte)', margin: '0 auto' }}>
           {contenuAPropos.parcours.paragraphes.map((p, i) => (
@@ -37,7 +37,7 @@ export default function APropos() {
         </div>
       </Section>
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <TitreSection eyebrow="Valeurs" titre={contenuAPropos.valeurs.titre} />
         <div className="rt-grille rt-grille--2">
           {contenuAPropos.valeurs.items.map((v) => (
@@ -49,14 +49,14 @@ export default function APropos() {
         </div>
       </Section>
 
-      <Section variante="charbon">
+      <Section variante="creme">
         <blockquote className="rt-temoignage" style={{ fontSize: '1.6rem', maxWidth: '780px', margin: '0 auto' }}>
           <span>{contenuAPropos.citation.texte}</span>
           <span className="rt-temoignage__auteur">— {contenuAPropos.citation.auteur}</span>
         </blockquote>
       </Section>
 
-      <Section variante="noir">
+      <Section variante="ivoire">
         <CtaBandeau
           titre={contenuAPropos.cta.titre}
           sousTitre={contenuAPropos.cta.sousTitre}

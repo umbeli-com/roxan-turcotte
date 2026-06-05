@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { PageHead } from '@/components/Head';
-import { api, type Lead, type Etiquette } from '../lib/api';
+import { api, type Lead, type Etiquette, type Partenaire } from '../lib/api';
 import { formaterDateHeure, libelleStatut } from '../lib/format';
 
 const STATUTS = ['', 'nouveau', 'contacte', 'qualifie', 'client', 'perdu', 'archive'];
@@ -12,21 +12,24 @@ export default function AdminLeads() {
   const statut = params.get('statut') ?? '';
   const etiquette = params.get('etiquette') ?? '';
   const sourceEntite = params.get('sourceEntite') ?? '';
+  const profil = params.get('profil') ?? '';
 
   const [leads, setLeads] = useState<Lead[] | null>(null);
   const [tags, setTags] = useState<Etiquette[]>([]);
+  const [partenaires, setPartenaires] = useState<Partenaire[]>([]);
   const [erreur, setErreur] = useState<string | null>(null);
 
   useEffect(() => {
     api.listerTags().then((r) => setTags(r.tags)).catch(() => {});
+    api.listerPartenaires().then((r) => setPartenaires(r.partenaires)).catch(() => {});
   }, []);
 
   useEffect(() => {
     setLeads(null);
-    api.listerLeads({ recherche, statut, etiquette, sourceEntite, limite: 100 })
+    api.listerLeads({ recherche, statut, etiquette, sourceEntite, profil, limite: 100 })
       .then((r) => setLeads(r.leads))
       .catch((e) => setErreur(e.message));
-  }, [recherche, statut, etiquette, sourceEntite]);
+  }, [recherche, statut, etiquette, sourceEntite, profil]);
 
   function setParam(cle: string, val: string) {
     const next = new URLSearchParams(params);
@@ -73,6 +76,13 @@ export default function AdminLeads() {
             <option value="chalets">Chalets</option>
           </select>
         </label>
+        <label>
+          Partenaire
+          <select value={profil} onChange={(e) => setParam('profil', e.target.value)}>
+            <option value="">Tous</option>
+            {partenaires.map((p) => <option key={p.id} value={p.slug}>{p.nom} — {p.role}</option>)}
+          </select>
+        </label>
       </div>
 
       {erreur && <div className="rt-adm-message rt-adm-message--erreur">{erreur}</div>}
@@ -90,6 +100,7 @@ export default function AdminLeads() {
                 <th>Personne</th>
                 <th>Formulaire</th>
                 <th>Entité</th>
+                <th>Partenaire</th>
                 <th>Statut</th>
                 <th></th>
               </tr>
@@ -108,6 +119,7 @@ export default function AdminLeads() {
                     {l.page_origine && <div style={{ color: 'var(--adm-texte-faible)', fontSize: '0.78em' }}>{l.page_origine}</div>}
                   </td>
                   <td>{l.source_entite ?? '—'}</td>
+                  <td>{l.profil_slug ? <span className="rt-adm-tag">{l.profil_slug}</span> : '—'}</td>
                   <td><span className={`rt-adm-statut rt-adm-statut--${l.statut}`}>{libelleStatut(l.statut)}</span></td>
                   <td><Link to={`/admin/leads/${l.id}`} className="rt-adm-btn rt-adm-btn--ghost rt-adm-btn--small">Ouvrir</Link></td>
                 </tr>

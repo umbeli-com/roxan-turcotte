@@ -4,6 +4,12 @@ import { Section, TitreSection } from '@/components/blocs';
 import { MentionLegaleCalc } from './MentionLegaleCalc';
 import { dollarsArrondis } from '@/lib/format';
 import municipalitiesData from '@content/municipalities.json';
+import { BlocAideOutil } from '@/components/blocsAide';
+import { calculateursParSlug } from '@content/calculateurs';
+import { servicesAide } from '@content/aide';
+import { profilsPour } from '@content/profils';
+
+const calc = calculateursParSlug['taxes-municipales-scolaires'];
 
 export default function CalculateurTaxesMunicipales() {
   const muns = municipalitiesData.municipalites;
@@ -28,7 +34,7 @@ export default function CalculateurTaxesMunicipales() {
         schema={schemaAgent}
       />
 
-      <Section variante="noir">
+      <Section variante="creme">
         <TitreSection
           eyebrow="Calculateur"
           titre="Taxes municipales et scolaires"
@@ -75,6 +81,15 @@ export default function CalculateurTaxesMunicipales() {
           </div>
         </div>
       </Section>
+
+      <BlocAideOutil
+        aide={servicesAide(calc.aide)}
+        profils={profilsPour(calc.profils)}
+        typeFormulaire={`calculateur-${calc.slug}`}
+        pageOrigine={calc.route}
+        etiquettes={['calculateur', calc.slug]}
+        sourceEntite="royal-lepage"
+      />
     </>
   );
 }

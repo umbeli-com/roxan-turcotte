@@ -21,7 +21,7 @@ function PagesLegalesShell({
         description={titre}
         cheminCanonique={cheminCanonique}
       />
-      <Section variante="noir">
+      <Section variante="ivoire">
         <div style={{ maxWidth: 'var(--rt-largeur-texte)', margin: '0 auto' }}>
           <span className="rt-eyebrow">Document légal</span>
           <h1 className="rt-titre-gravure">{titre}</h1>
@@ -72,7 +72,7 @@ export function Desinscription() {
         cheminCanonique="/desinscription"
         noindex
       />
-      <Section variante="noir">
+      <Section variante="ivoire">
         <div style={{ maxWidth: '720px', margin: '0 auto', textAlign: 'center' }}>
           <span className="rt-eyebrow">Désinscription</span>
           <h1 className="rt-titre-gravure">Vous quittez l'infolettre.</h1>
@@ -103,7 +103,7 @@ export function DemandeDeDonnees() {
         description="Formulaire de demande d'accès, de rectification ou de suppression de vos renseignements personnels, conforme à la Loi 25 (Québec)."
         cheminCanonique="/demande-de-donnees"
       />
-      <Section variante="noir">
+      <Section variante="ivoire">
         <div style={{ maxWidth: '720px', margin: '0 auto' }}>
           <span className="rt-eyebrow">Loi 25</span>
           <h1 className="rt-titre-gravure">Demande relative à vos données</h1>

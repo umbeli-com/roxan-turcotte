@@ -1,32 +1,67 @@
+import { images } from '../images';
+
 export const contenuAccueil = {
-  hero: {
-    eyebrow: 'Roxan Turcotte • Royal LePage Centre',
-    titre: 'L\'immobilier, comme une œuvre patiemment bâtie.',
-    sousTitre: 'Passionné, ouvert sur le monde !',
-    accroche:
-      'Courtier immobilier résidentiel et commercial à Trois-Rivières, je conjugue une expertise rare en construction neuve et une stratégie de mise en marché professionnelle pour défendre vos intérêts à chaque étape.',
-    ctaPrimaire: { libelle: 'Estimer ma propriété', href: '/vendre-ma-maison' },
-    ctaSecondaire: { libelle: 'Découvrir mon approche', href: '/a-propos' },
-  },
   intro: {
-    eyebrow: 'Une stratégie, pas une annonce',
-    titre: 'Vendre ou acheter, c\'est une décision majeure. Donnez-vous les bons alliés.',
+    eyebrow: 'Qui est Roxan Turcotte',
+    titre: 'La rigueur du bâtisseur, l’écoute du courtier.',
     paragraphes: [
-      'Pendant 23 ans, j\'ai construit, rénové et lu des bâtiments dans tous leurs détails. Aujourd\'hui, je mets cette expertise au service de votre projet immobilier, avec la rigueur du bâtisseur et l\'écoute du courtier.',
-      'Vous accédez à une stratégie de mise en marché professionnelle, à une lecture honnête de chaque propriété, et à un accompagnement qui vous protège, du premier appel à la signature chez le notaire.',
+      'Pendant 23 ans, j’ai construit, rénové et lu des bâtiments dans tous leurs détails. Aujourd’hui, je mets cette expertise au service de votre projet immobilier : une lecture honnête de chaque propriété et une stratégie de mise en marché professionnelle.',
+      'Du premier appel à la signature chez le notaire, vous êtes accompagné par quelqu’un qui défend vos intérêts — chez Royal LePage Centre, à Trois-Rivières et partout en Mauricie.',
     ],
+    image: images.apropos.construction,
+    cta: { libelle: 'Découvrir mon parcours', href: '/a-propos' },
   },
-  servicesAffiches: ['courtier-immobilier', 'investissement-immobilier', 'commercial', 'sunset', 'chalets', 'international'],
-  reconnaissances: {
-    eyebrow: 'Reconnaissances',
-    titre: 'Un parcours salué, par ceux qui comptent.',
+
+  typesProprietes: {
+    eyebrow: 'Vos projets',
+    titre: 'Un service pour chaque type de projet.',
+    description:
+      'Vendre, acheter, investir ou construire : à chaque besoin son accompagnement, avec des photos et des explications claires.',
     items: [
-      { titre: 'Top 10 % National Royal LePage 2025', description: 'Reconnaissance attribuée aux courtiers les plus performants du réseau national.' },
-      { titre: 'Prix Platine du Directeur 2025', description: 'Distinction interne honorant la qualité du service et l\'engagement professionnel.' },
-      { titre: '23 ans en construction neuve', description: 'Une expérience terrain qui change la lecture d\'une propriété.' },
-      { titre: '8 ans comme entrepreneur général', description: 'Une vision globale du bâtiment, de la fondation à la finition.' },
+      { titre: 'Vendre ma maison', texte: 'Évaluation juste et mise en marché professionnelle pour vendre au bon prix.', image: images.proprietes.residentiel, etiquette: 'Résidentiel', lien: '/vendre-ma-maison' },
+      { titre: 'Acheter une maison', texte: 'Des visites avec un œil de bâtisseur et une négociation à votre service.', image: images.proprietes.interieur, etiquette: 'Achat', lien: '/acheter-une-maison' },
+      { titre: 'Investissement', texte: 'Lecture de la rentabilité et de l’état réel d’un immeuble à revenus.', image: images.proprietes.investissement, etiquette: 'Revenus', lien: '/services/investissement-immobilier' },
+      { titre: 'Immobilier commercial', texte: 'Bureaux, locaux et immeubles mixtes, en toute discrétion.', image: images.proprietes.commercial, etiquette: 'Commercial', lien: '/services/commercial' },
+      { titre: 'Construction neuve', texte: '23 ans de chantier pour lire un plan et anticiper les travaux.', image: images.proprietes.neuf, etiquette: 'Expertise', lien: '/a-propos' },
+      { titre: 'Service sur mesure', texte: 'Un accompagnement adapté à votre situation, sans modèle imposé.', image: images.proprietes.surMesure, etiquette: 'Sur mesure', lien: '/contact' },
     ],
   },
+
+  activites: {
+    eyebrow: 'Trois façons d’avancer',
+    titre: 'Royal LePage, Sunset et les chalets.',
+    description:
+      'Au-delà du courtage résidentiel, j’accompagne aussi les projets dans le Sud (Sunset) et les chalets en location courte durée.',
+  },
+
+  outils: {
+    eyebrow: 'Outils gratuits',
+    titre: 'Préparez votre projet, dès maintenant.',
+    description:
+      'Des calculateurs et des guides clairs — et, à côté de chaque outil, les bonnes personnes pour vous aider.',
+    cartes: [
+      {
+        titre: 'Calculateurs',
+        texte: 'Versements hypothécaires, taxe de bienvenue, taxes municipales, frais d’acquisition.',
+        bouton: { libelle: 'Ouvrir les calculateurs', href: '/calculateurs' },
+      },
+      {
+        titre: 'Guides pratiques',
+        texte: 'Guide de l’acheteur, du vendeur, home staging, investisseur — à télécharger.',
+        bouton: { libelle: 'Voir les guides', href: '/guides' },
+      },
+    ],
+  },
+
+  distinctions: {
+    eyebrow: 'Reconnaissances',
+    titre: 'Un parcours salué par le réseau Royal LePage.',
+    items: [
+      { badge: 'top10' as const, legende: 'Top 10 % National Royal LePage 2025 — parmi les courtiers les plus performants du réseau.' },
+      { badge: 'platine' as const, legende: 'Prix Platine du Directeur 2025 — qualité de service et engagement professionnel.' },
+    ],
+  },
+
   temoignages: {
     eyebrow: 'Témoignages',
     titre: 'Ce que vivent les clients.',
@@ -45,6 +80,18 @@ export const contenuAccueil = {
       },
     ],
   },
+
+  plusLoin: {
+    eyebrow: 'Pour aller plus loin',
+    titre: 'Faire affaire avec Roxan.',
+    description: 'Choisissez le point de départ qui vous ressemble. Je vous reviens rapidement, en toute confidentialité.',
+    cartes: [
+      { titre: 'Vendre ou acheter', texte: 'Courtage résidentiel chez Royal LePage Centre.', bouton: { libelle: 'Parler de mon projet', href: '/contact' } },
+      { titre: 'Une propriété au Sud', texte: 'Résidence secondaire, retraite ou investissement avec Sunset.', bouton: { libelle: 'Explorer Sunset', href: '/services/sunset' } },
+      { titre: 'Un chalet rentable', texte: 'Acquisition et location courte durée de type Airbnb.', bouton: { libelle: 'Évaluer un chalet', href: '/services/chalets' } },
+    ],
+  },
+
   cta: {
     titre: 'Parlons de votre projet.',
     sousTitre: 'Un appel, une visite, une analyse personnalisée. Sans engagement, en toute confidentialité.',

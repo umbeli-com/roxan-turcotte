@@ -27,8 +27,8 @@ export function Embleme({
         width: taille,
         height: taille,
         objectFit: 'contain',
-        // Halo subtil quand affiché sans fond contextuel (héros).
-        filter: sansFond ? 'none' : 'drop-shadow(0 0 18px rgba(230, 200, 120, 0.18))',
+        // Ombre douce adaptée au fond clair.
+        filter: sansFond ? 'none' : 'drop-shadow(0 6px 14px rgba(43, 36, 18, 0.20))',
       }}
     />
   );

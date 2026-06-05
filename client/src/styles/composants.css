@@ -1,0 +1,588 @@
+/* ==================================================================== *
+ * Composants partagés (thème clair). Inclut les blocs hérités restylés
+ * (témoignage, étape, carte service, coordonnées, carte guide) et les
+ * nouveaux composants photo / profils / blocs d'aide.
+ * ==================================================================== */
+
+/* Contenu réservé aux lecteurs d'écran */
+.rt-visuellement-cache {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* --- Image responsive (évite le décalage de mise en page) ----------- */
+.rt-img {
+  display: block;
+  width: 100%;
+  overflow: hidden;
+  background: var(--rt-fond-alt);
+  border-radius: var(--rt-radius-m);
+}
+
+.rt-img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.rt-img--ratio-16-9 { aspect-ratio: 16 / 9; }
+.rt-img--ratio-4-3 { aspect-ratio: 4 / 3; }
+.rt-img--ratio-3-2 { aspect-ratio: 3 / 2; }
+.rt-img--ratio-1-1 { aspect-ratio: 1 / 1; }
+
+/* --- Témoignages ---------------------------------------------------- */
+.rt-temoignage {
+  font-family: var(--rt-font-sous-titre);
+  font-style: italic;
+  font-size: 1.25rem;
+  color: var(--rt-texte);
+  line-height: 1.6;
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne);
+  border-left: 3px solid var(--rt-or);
+  border-radius: var(--rt-radius-m);
+  box-shadow: var(--rt-ombre-douce);
+  padding: var(--rt-esp-6);
+  margin: 0;
+}
+
+.rt-temoignage__auteur {
+  display: block;
+  margin-top: var(--rt-esp-4);
+  font-family: var(--rt-font-corps);
+  font-style: normal;
+  font-size: 0.88rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rt-or-fonce);
+}
+
+/* --- Étapes processus ----------------------------------------------- */
+.rt-etape {
+  display: grid;
+  grid-template-columns: 64px 1fr;
+  gap: var(--rt-esp-5);
+  align-items: flex-start;
+  padding: var(--rt-esp-5);
+  border-left: 2px solid var(--rt-ligne);
+  position: relative;
+}
+
+.rt-etape__num {
+  font-family: var(--rt-font-titre);
+  font-size: 2rem;
+  color: var(--rt-or-fonce);
+  letter-spacing: 0.03em;
+}
+
+.rt-etape__corps h4 {
+  font-family: var(--rt-font-sous-titre);
+  font-size: 1.3rem;
+  color: var(--rt-texte);
+  margin: 0 0 var(--rt-esp-2);
+}
+
+.rt-etape__corps p { margin: 0; color: var(--rt-texte-doux); }
+
+/* --- Carte service (texte) ------------------------------------------ */
+.rt-service-carte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rt-esp-3);
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne);
+  border-radius: var(--rt-radius-m);
+  padding: var(--rt-esp-6);
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--rt-ombre-douce);
+  transition: transform var(--rt-transition-douce), border-color var(--rt-transition-douce), box-shadow var(--rt-transition-douce);
+}
+
+.rt-service-carte:hover {
+  transform: translateY(-4px);
+  border-color: var(--rt-or);
+  box-shadow: var(--rt-ombre-carte);
+}
+
+.rt-service-carte::after {
+  content: '→';
+  position: absolute;
+  bottom: var(--rt-esp-4);
+  right: var(--rt-esp-5);
+  font-size: 1.3rem;
+  color: var(--rt-or-fonce);
+  opacity: 0.6;
+  transition: transform var(--rt-transition-douce), opacity var(--rt-transition-douce);
+}
+
+.rt-service-carte:hover::after { transform: translateX(6px); opacity: 1; }
+
+.rt-service-carte h3 { margin: 0; color: var(--rt-texte); }
+
+.rt-service-carte p { color: var(--rt-texte-doux); }
+
+.rt-service-carte__entite {
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rt-or-fonce);
+  margin-bottom: var(--rt-esp-2);
+}
+
+/* --- Carte photo (types de propriétés, activités, services illustrés) */
+.rt-carte-photo {
+  display: flex;
+  flex-direction: column;
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne);
+  border-radius: var(--rt-radius-l);
+  overflow: hidden;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  box-shadow: var(--rt-ombre-douce);
+  transition: transform var(--rt-transition-douce), border-color var(--rt-transition-douce), box-shadow var(--rt-transition-douce);
+}
+
+.rt-carte-photo:hover {
+  transform: translateY(-5px);
+  border-color: var(--rt-or);
+  box-shadow: var(--rt-ombre-carte);
+}
+
+.rt-carte-photo__media {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  background: var(--rt-fond-alt);
+}
+
+.rt-carte-photo__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--rt-transition-lente);
+}
+
+.rt-carte-photo:hover .rt-carte-photo__media img { transform: scale(1.05); }
+
+.rt-carte-photo__etiquette {
+  position: absolute;
+  top: var(--rt-esp-3);
+  left: var(--rt-esp-3);
+  padding: 5px 12px;
+  border-radius: var(--rt-radius-pill);
+  background: rgba(24, 32, 27, 0.82);
+  color: var(--rt-sur-nuit);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.rt-carte-photo__corps {
+  padding: var(--rt-esp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--rt-esp-2);
+  flex: 1;
+}
+
+.rt-carte-photo__corps h3 { margin: 0; color: var(--rt-texte); }
+.rt-carte-photo__corps p { margin: 0; color: var(--rt-texte-doux); font-size: 0.98rem; }
+
+.rt-carte-photo__lien {
+  margin-top: auto;
+  padding-top: var(--rt-esp-3);
+  font-weight: 700;
+  color: var(--rt-or-fonce);
+  letter-spacing: 0.02em;
+}
+
+/* --- Portrait (intro photo + texte) --------------------------------- */
+.rt-portrait {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: clamp(var(--rt-esp-6), 5vw, var(--rt-esp-8));
+  align-items: center;
+}
+
+.rt-portrait--inverse { grid-template-columns: 1.15fr 0.85fr; }
+.rt-portrait--inverse .rt-portrait__media { order: 2; }
+
+.rt-portrait__media {
+  border-radius: var(--rt-radius-l);
+  overflow: hidden;
+  box-shadow: var(--rt-ombre-carte);
+  aspect-ratio: 4 / 5;
+}
+
+.rt-portrait__media img { width: 100%; height: 100%; object-fit: cover; }
+
+@media (max-width: 880px) {
+  .rt-portrait,
+  .rt-portrait--inverse { grid-template-columns: 1fr; }
+  .rt-portrait--inverse .rt-portrait__media { order: 0; }
+  .rt-portrait__media { aspect-ratio: 16 / 10; }
+}
+
+/* --- Distinctions (badges images réels) ----------------------------- */
+.rt-distinctions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(var(--rt-esp-5), 5vw, var(--rt-esp-8));
+}
+
+.rt-distinction {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--rt-esp-3);
+  text-align: center;
+  max-width: 220px;
+}
+
+.rt-distinction img {
+  height: 120px;
+  width: auto;
+  object-fit: contain;
+}
+
+.rt-distinction span {
+  font-size: 0.86rem;
+  color: var(--rt-texte-doux);
+}
+
+/* --- Bande de logos (co-branding) ----------------------------------- */
+.rt-bande-logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: clamp(var(--rt-esp-5), 5vw, var(--rt-esp-8));
+}
+
+.rt-bande-logos img { height: 46px; width: auto; object-fit: contain; }
+
+/* --- Plaque logo (logo sombre lisible sur photo) -------------------- */
+.rt-logo-plaque {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--rt-surface);
+  border-radius: var(--rt-radius-m);
+  padding: var(--rt-esp-3) var(--rt-esp-4);
+  box-shadow: var(--rt-ombre-douce);
+}
+
+.rt-logo-plaque img { max-height: 100%; width: auto; }
+
+/* --- Coordonnées (contact) ------------------------------------------ */
+.rt-coord {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--rt-esp-6);
+  margin-top: var(--rt-esp-6);
+  align-items: start;
+}
+
+@media (max-width: 880px) { .rt-coord { grid-template-columns: 1fr; } }
+
+.rt-coord__bloc h4 {
+  font-family: var(--rt-font-sous-titre);
+  font-size: 1.2rem;
+  color: var(--rt-texte);
+  margin: 0 0 var(--rt-esp-2);
+}
+
+.rt-coord__bloc p { margin: 0; color: var(--rt-texte-doux); }
+
+/* --- Carte guide ---------------------------------------------------- */
+.rt-guide-carte {
+  display: flex;
+  flex-direction: column;
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne);
+  border-radius: var(--rt-radius-l);
+  overflow: hidden;
+  box-shadow: var(--rt-ombre-douce);
+  transition: transform var(--rt-transition-douce), border-color var(--rt-transition-douce), box-shadow var(--rt-transition-douce);
+}
+
+.rt-guide-carte:hover {
+  transform: translateY(-4px);
+  border-color: var(--rt-or);
+  box-shadow: var(--rt-ombre-carte);
+}
+
+.rt-guide-carte__couverture {
+  height: 200px;
+  background: linear-gradient(160deg, var(--rt-fond-alt) 0%, var(--rt-surface-2) 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-bottom: 1px solid var(--rt-ligne);
+  position: relative;
+  overflow: hidden;
+}
+
+.rt-guide-carte__couverture::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at top, rgba(176, 134, 58, 0.16) 0%, transparent 62%);
+}
+
+.rt-guide-carte__couverture-titre {
+  position: relative;
+  font-family: var(--rt-font-titre);
+  letter-spacing: 0.1em;
+  color: var(--rt-or-fonce);
+  text-align: center;
+  padding: 0 var(--rt-esp-5);
+}
+
+.rt-guide-carte__corps {
+  padding: var(--rt-esp-5);
+  display: flex;
+  flex-direction: column;
+  gap: var(--rt-esp-3);
+  flex: 1;
+}
+
+.rt-guide-carte__corps h3 { margin: 0; }
+.rt-guide-carte__corps p { margin: 0; color: var(--rt-texte-doux); font-size: 0.98rem; }
+.rt-guide-carte__actions { margin-top: auto; padding-top: var(--rt-esp-3); }
+
+/* --- Bloc « Des services pour vous aider » -------------------------- */
+.rt-aide {
+  background: var(--rt-fond-alt);
+  border: 1px solid var(--rt-ligne);
+  border-radius: var(--rt-radius-l);
+  padding: var(--rt-esp-6);
+}
+
+.rt-aide__titre {
+  font-family: var(--rt-font-sous-titre);
+  font-size: 1.4rem;
+  color: var(--rt-texte);
+  margin: 0 0 var(--rt-esp-2);
+}
+
+.rt-aide__intro { color: var(--rt-texte-doux); margin: 0 0 var(--rt-esp-5); }
+
+.rt-aide__liste { display: grid; gap: var(--rt-esp-3); }
+
+.rt-aide__item {
+  display: grid;
+  grid-template-columns: 44px 1fr auto;
+  align-items: center;
+  gap: var(--rt-esp-4);
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne);
+  border-radius: var(--rt-radius-m);
+  padding: var(--rt-esp-3) var(--rt-esp-4);
+  text-decoration: none;
+  color: inherit;
+  transition: border-color var(--rt-transition-rapide), transform var(--rt-transition-rapide);
+}
+
+.rt-aide__item:hover { border-color: var(--rt-or); transform: translateX(4px); }
+
+.rt-aide__icone {
+  width: 44px;
+  height: 44px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--rt-or-soft);
+  color: var(--rt-or-fonce);
+}
+
+.rt-aide__item h4 { margin: 0; font-size: 1.05rem; color: var(--rt-texte); }
+.rt-aide__item p { margin: 2px 0 0; font-size: 0.9rem; color: var(--rt-texte-faible); }
+.rt-aide__fleche { color: var(--rt-or-fonce); font-size: 1.2rem; }
+
+/* --- Bloc « Pour aller plus loin / faire affaire avec Roxan » -------- */
+.rt-plus-loin {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--rt-esp-5);
+}
+
+.rt-plus-loin__carte {
+  display: flex;
+  flex-direction: column;
+  gap: var(--rt-esp-3);
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne);
+  border-top: 3px solid var(--rt-or);
+  border-radius: var(--rt-radius-m);
+  padding: var(--rt-esp-6);
+  box-shadow: var(--rt-ombre-douce);
+}
+
+.rt-plus-loin__carte h3 { margin: 0; }
+.rt-plus-loin__carte p { margin: 0; flex: 1; }
+.rt-plus-loin__carte .rt-bouton { margin-top: var(--rt-esp-2); }
+
+/* --- Profils à contacter -------------------------------------------- */
+.rt-profils {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: var(--rt-esp-5);
+}
+
+.rt-profil-carte {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--rt-esp-3);
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne);
+  border-radius: var(--rt-radius-l);
+  padding: var(--rt-esp-6);
+  box-shadow: var(--rt-ombre-douce);
+  height: 100%;
+}
+
+.rt-profil-carte__tete {
+  display: flex;
+  align-items: center;
+  gap: var(--rt-esp-4);
+  width: 100%;
+}
+
+.rt-profil-carte__photo {
+  width: 72px;
+  height: 72px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--rt-or);
+  flex-shrink: 0;
+  background: var(--rt-fond-alt);
+}
+
+.rt-profil-carte__nom { margin: 0; font-size: 1.2rem; color: var(--rt-texte); }
+
+.rt-profil-carte__role {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--rt-or-fonce);
+}
+
+.rt-profil-carte__desc { margin: 0; color: var(--rt-texte-doux); font-size: 0.96rem; flex: 1; }
+
+.rt-profil-carte .rt-bouton { width: 100%; margin-top: var(--rt-esp-2); }
+.rt-profil-carte[aria-current='true'] { border-color: var(--rt-or); box-shadow: 0 0 0 2px var(--rt-or) inset, var(--rt-ombre-douce); }
+
+.rt-profil-carte__photo--initiales {
+  display: grid;
+  place-items: center;
+  background: var(--rt-degrade-or);
+  color: var(--rt-noir);
+  font-family: var(--rt-font-titre);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+/* --- Héros-photo de page (services / activités) --------------------- */
+.rt-page-hero {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  min-height: clamp(360px, 52vh, 520px);
+  display: flex;
+  align-items: center;
+  color: var(--rt-sur-nuit);
+}
+
+.rt-page-hero__fond {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-size: cover;
+  background-position: center;
+}
+
+.rt-page-hero__voile {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(90deg, rgba(15, 20, 16, 0.86) 0%, rgba(15, 20, 16, 0.5) 58%, rgba(15, 20, 16, 0.32) 100%);
+}
+
+.rt-page-hero__inner {
+  width: 100%;
+  max-width: var(--rt-largeur-max);
+  margin: 0 auto;
+  padding: clamp(2.5rem, 6vw, 4.5rem) var(--rt-esp-5);
+}
+
+.rt-page-hero__logo {
+  margin-bottom: var(--rt-esp-4);
+  height: 60px;
+  padding: 10px 16px;
+}
+
+.rt-page-hero__logo img { height: 40px; width: auto; }
+
+.rt-page-hero__eyebrow {
+  display: inline-block;
+  font-weight: 700;
+  font-size: 0.84rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--rt-or-clair);
+  margin-bottom: var(--rt-esp-3);
+}
+
+.rt-page-hero h1 {
+  color: #fff;
+  margin: 0 0 var(--rt-esp-4);
+  text-shadow: 0 2px 18px rgba(0, 0, 0, 0.42);
+}
+
+.rt-page-hero__accroche {
+  color: rgba(243, 239, 230, 0.94);
+  font-family: var(--rt-font-sous-titre);
+  font-size: clamp(1.15rem, 1.7vw, 1.45rem);
+  max-width: 620px;
+}
+
+.rt-page-hero__cta { margin-top: var(--rt-esp-6); display: flex; flex-wrap: wrap; gap: var(--rt-esp-4); }
+
+/* --- Galerie photo -------------------------------------------------- */
+.rt-galerie {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--rt-esp-4);
+}
+
+/* Bloc « profils + formulaire » */
+.rt-contact-profils { display: grid; gap: var(--rt-esp-7); }
+
+.rt-contact-profils__form {
+  max-width: 680px;
+  width: 100%;
+  margin: 0 auto;
+  scroll-margin-top: 110px;
+}

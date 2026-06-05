@@ -50,11 +50,22 @@ export const api = {
     return appel<{ leads: Lead[] }>(`/admin/leads?${qs.toString()}`);
   },
   detailLead: (id: number) =>
-    appel<{ lead: Lead; etiquettes: Etiquette[] }>(`/admin/leads/${id}`),
+    appel<{ lead: Lead; etiquettes: Etiquette[]; partenaire: Partenaire | null }>(`/admin/leads/${id}`),
   modifierLead: (id: number, champs: Partial<Lead>) =>
     appel<{ lead: Lead }>(`/admin/leads/${id}`, { method: 'PATCH', body: JSON.stringify(champs) }),
   archiverLead: (id: number) =>
     appel<{ lead: Lead }>(`/admin/leads/${id}/archive`, { method: 'POST' }),
+
+  // Partenaires (profils « personnes à contacter »)
+  listerPartenaires: () => appel<{ partenaires: Partenaire[] }>('/admin/partenaires'),
+  creerPartenaire: (p: Partial<Partenaire>) =>
+    appel<{ partenaire: Partenaire }>('/admin/partenaires', { method: 'POST', body: JSON.stringify(p) }),
+  modifierPartenaire: (id: number, p: Partial<Partenaire>) =>
+    appel<{ partenaire: Partenaire }>(`/admin/partenaires/${id}`, { method: 'PATCH', body: JSON.stringify(p) }),
+  supprimerPartenaire: (id: number) =>
+    appel<{ ok: true }>(`/admin/partenaires/${id}`, { method: 'DELETE' }),
+  leadsPartenaire: (slug: string) =>
+    appel<{ leads: Lead[] }>(`/admin/partenaires/${encodeURIComponent(slug)}/leads`),
 
   // Tags
   listerTags: () => appel<{ tags: Etiquette[] }>('/admin/tags'),
@@ -92,6 +103,7 @@ export type Lead = {
   consentement_infolettre: number;
   adresse_ip: string | null;
   notes_internes: string | null;
+  profil_slug: string | null;
   cree_le: string;
   modifie_le: string;
   archive: number;
@@ -102,4 +114,16 @@ export type Etiquette = {
   nom: string;
   couleur: string | null;
   entite: string | null;
+};
+
+export type Partenaire = {
+  id: number;
+  slug: string;
+  nom: string;
+  role: string | null;
+  courriel: string | null;
+  entite: string | null;
+  description: string | null;
+  actif: number;
+  cree_le: string;
 };

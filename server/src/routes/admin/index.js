@@ -12,6 +12,7 @@ import {
   incidentsRepo,
   adminUsersRepo,
 } from '../../db/repositories/divers.js';
+import { partenairesRepo } from '../../db/repositories/partenaires.js';
 import { genererCSV } from '../../services/csv-export.js';
 import { exigerAdmin, signerSession, optionsCookieSession } from '../../middleware/auth.js';
 
@@ -47,7 +48,8 @@ routesAdmin.get('/leads', exigerAdmin, (req, res) => {
 routesAdmin.get('/leads/:id', exigerAdmin, (req, res) => {
   const lead = leadsRepo.trouver(Number(req.params.id));
   if (!lead) return res.status(404).json({ erreur: 'lead-introuvable' });
-  res.json({ lead, etiquettes: leadsRepo.etiquettesDuLead(lead.id) });
+  const partenaire = lead.profil_slug ? partenairesRepo.parSlug(lead.profil_slug) : null;
+  res.json({ lead, etiquettes: leadsRepo.etiquettesDuLead(lead.id), partenaire });
 });
 routesAdmin.patch('/leads/:id', exigerAdmin, (req, res) => {
   const lead = leadsRepo.modifier(Number(req.params.id), req.body);
@@ -93,6 +95,13 @@ routesAdmin.get('/tags', exigerAdmin, (req, res) => res.json({ tags: tagsRepo.li
 routesAdmin.post('/tags', exigerAdmin, (req, res) => res.json({ tag: tagsRepo.creer(req.body) }));
 routesAdmin.patch('/tags/:id', exigerAdmin, (req, res) => res.json({ tag: tagsRepo.modifier(Number(req.params.id), req.body) }));
 routesAdmin.delete('/tags/:id', exigerAdmin, (req, res) => { tagsRepo.supprimer(Number(req.params.id)); res.json({ ok: true }); });
+
+// Partenaires (profils « personnes à contacter » — mini-CRM de revente)
+routesAdmin.get('/partenaires', exigerAdmin, (req, res) => res.json({ partenaires: partenairesRepo.lister() }));
+routesAdmin.post('/partenaires', exigerAdmin, (req, res) => res.json({ partenaire: partenairesRepo.creer(req.body) }));
+routesAdmin.patch('/partenaires/:id', exigerAdmin, (req, res) => res.json({ partenaire: partenairesRepo.modifier(Number(req.params.id), req.body) }));
+routesAdmin.delete('/partenaires/:id', exigerAdmin, (req, res) => { partenairesRepo.supprimer(Number(req.params.id)); res.json({ ok: true }); });
+routesAdmin.get('/partenaires/:slug/leads', exigerAdmin, (req, res) => res.json({ leads: partenairesRepo.leadsParSlug(req.params.slug) }));
 
 // Guides
 routesAdmin.get('/guides', exigerAdmin, (req, res) => res.json({ guides: guidesRepo.lister() }));

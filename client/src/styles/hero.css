@@ -1,9 +1,11 @@
-/* Hero prestige */
+/* Héros de pages internes (l'accueil utilise HeroActivites) — version claire */
 .rt-hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(var(--rt-esp-9), 14vw, var(--rt-esp-10)) var(--rt-esp-5);
-  background: var(--rt-noir);
+  padding: clamp(var(--rt-esp-8), 11vw, var(--rt-esp-10)) var(--rt-esp-5);
+  background:
+    radial-gradient(ellipse at 50% -10%, rgba(176, 134, 58, 0.12) 0%, transparent 60%),
+    linear-gradient(180deg, var(--rt-surface-2) 0%, var(--rt-fond) 100%);
   isolation: isolate;
 }
 
@@ -11,26 +13,26 @@
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(200, 162, 74, 0.08) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(200, 162, 74, 0.08) 1px, transparent 1px);
-  background-size: 90px 90px, 90px 90px;
-  mask-image: radial-gradient(ellipse at center, #000 0%, transparent 75%);
-  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, transparent 75%);
-  opacity: 0.55;
+    linear-gradient(rgba(176, 134, 58, 0.06) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(176, 134, 58, 0.06) 1px, transparent 1px);
+  background-size: 92px 92px, 92px 92px;
+  mask-image: radial-gradient(ellipse at center, #000 0%, transparent 72%);
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 0%, transparent 72%);
+  opacity: 0.7;
   z-index: -1;
 }
 
 .rt-hero__halo {
   position: absolute;
-  top: -10%;
+  top: -12%;
   left: 50%;
   width: 80vw;
   height: 80vw;
-  max-width: 900px;
-  max-height: 900px;
+  max-width: 880px;
+  max-height: 880px;
   transform: translateX(-50%);
-  background: radial-gradient(circle, rgba(230, 200, 120, 0.18) 0%, transparent 60%);
-  filter: blur(20px);
+  background: radial-gradient(circle, rgba(176, 134, 58, 0.14) 0%, transparent 62%);
+  filter: blur(24px);
   z-index: -1;
   pointer-events: none;
 }
@@ -44,15 +46,13 @@
   align-items: center;
 }
 
-.rt-hero__principal {
-  max-width: 720px;
-}
+.rt-hero__principal { max-width: 760px; }
 
 .rt-hero__embleme-grand {
-  width: clamp(160px, 22vw, 260px);
-  height: clamp(160px, 22vw, 260px);
+  width: clamp(160px, 22vw, 250px);
+  height: clamp(160px, 22vw, 250px);
   margin: 0 auto;
-  filter: drop-shadow(0 0 36px rgba(230, 200, 120, 0.22));
+  filter: drop-shadow(0 12px 28px rgba(43, 36, 18, 0.18));
 }
 
 .rt-hero h1 {
@@ -63,15 +63,15 @@
 .rt-hero__sous-titre {
   font-family: var(--rt-font-sous-titre);
   font-style: italic;
-  font-size: clamp(1.1rem, 1.6vw, 1.4rem);
-  color: var(--rt-or-clair);
+  font-size: clamp(1.2rem, 1.7vw, 1.5rem);
+  color: var(--rt-or-fonce);
   margin-bottom: var(--rt-esp-3);
 }
 
 .rt-hero__accroche {
-  color: var(--rt-gris-texte);
-  font-size: clamp(1rem, 1.4vw, 1.15rem);
-  max-width: 560px;
+  color: var(--rt-texte-doux);
+  font-size: clamp(1.05rem, 1.4vw, 1.2rem);
+  max-width: 580px;
 }
 
 .rt-hero__cta {
@@ -94,25 +94,26 @@
   align-items: center;
   justify-content: center;
   text-align: center;
-  width: 86px;
-  height: 86px;
+  width: 92px;
+  height: 92px;
   border-radius: 50%;
   border: 1px solid var(--rt-or);
-  background: radial-gradient(circle, rgba(200, 162, 74, 0.10) 0%, var(--rt-noir) 70%);
-  color: var(--rt-ivoire);
+  background: radial-gradient(circle, var(--rt-surface) 0%, var(--rt-surface-2) 75%);
+  box-shadow: var(--rt-ombre-douce);
+  color: var(--rt-texte);
   padding: 6px;
-  font-size: 0.7rem;
-  line-height: 1.15;
-  letter-spacing: 0.05em;
+  font-size: 0.72rem;
+  line-height: 1.2;
+  letter-spacing: 0.04em;
   text-transform: uppercase;
 }
 
 .rt-pastille strong {
   font-family: var(--rt-font-titre);
   display: block;
-  color: var(--rt-or-clair);
-  font-size: 0.95rem;
-  letter-spacing: 0.08em;
+  color: var(--rt-or-fonce);
+  font-size: 0.98rem;
+  letter-spacing: 0.06em;
   margin-bottom: 2px;
 }
 

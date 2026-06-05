@@ -10,7 +10,7 @@ export default function PageNonTrouvee() {
         cheminCanonique="/404"
         noindex
       />
-      <Section variante="noir">
+      <Section variante="ivoire">
         <div style={{ textAlign: 'center', maxWidth: '620px', margin: '0 auto' }}>
           <span className="rt-eyebrow">Erreur 404</span>
           <h1 className="rt-titre-gravure">Page introuvable</h1>

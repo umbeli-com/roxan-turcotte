@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 600 600" fill="none" role="img" aria-label="Chalets & Airbnb — Location courte durée">
+  <!-- Sapin -->
+  <g fill="#2E4034">
+    <path d="M150 286 L186 286 L168 250 Z" />
+    <path d="M156 262 L180 262 L168 232 Z" />
+    <path d="M160 240 L176 240 L168 216 Z" />
+    <rect x="164" y="286" width="8" height="18" />
+  </g>
+
+  <!-- Chalet : corps encre -->
+  <rect x="226" y="236" width="148" height="92" rx="3" fill="#1E2420" />
+  <!-- Toit or -->
+  <path d="M300 168 L392 244 L388 252 L212 252 L208 244 Z" fill="#B0863A" />
+  <!-- Cheminée -->
+  <rect x="348" y="196" width="16" height="34" fill="#1E2420" />
+  <!-- Fenêtre éclairée -->
+  <rect x="248" y="258" width="34" height="34" rx="2" fill="#E6C878" />
+  <path d="M265 258 V292 M248 275 H282" stroke="#1E2420" stroke-width="3" />
+  <!-- Porte -->
+  <path d="M312 328 V274 a16 16 0 0 1 32 0 V328 Z" fill="#B0863A" />
+  <circle cx="338" cy="300" r="2.4" fill="#1E2420" />
+
+  <!-- Reflet d'eau (écho à Sunset) -->
+  <g stroke="#1FA7A0" stroke-width="9" stroke-linecap="round" fill="none">
+    <path d="M150 352 q34 -16 68 0 t68 0 t68 0 t68 0" />
+    <path d="M168 380 q34 -16 68 0 t68 0 t68 0" opacity="0.7" />
+  </g>
+
+  <!-- Wordmark -->
+  <text x="300" y="466" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="86" letter-spacing="4" fill="#1E2420">CHALETS</text>
+  <text x="300" y="512" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="700" font-size="27" letter-spacing="7" fill="#B0863A">&amp; AIRBNB</text>
+  <text x="300" y="548" text-anchor="middle" font-family="'Helvetica Neue', Arial, sans-serif" font-weight="600" font-size="19" letter-spacing="6" fill="#545B51">LOCATION COURTE DUR&#201;E</text>
+</svg>

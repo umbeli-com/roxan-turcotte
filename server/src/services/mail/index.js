@@ -20,11 +20,12 @@ function getTransporteur() {
   return transporteur;
 }
 
-export async function sendMail({ to, subject, html, attachments, leadId, type }) {
+export async function sendMail({ to, subject, html, attachments, replyTo, leadId, type }) {
   try {
     const info = await getTransporteur().sendMail({
       from: env.mail.from,
       to,
+      replyTo,
       subject,
       html,
       attachments,
@@ -72,5 +73,37 @@ export function notifierInterneNouveauLead(lead) {
     html,
     leadId: lead.id,
     type: 'notification-interne',
+  });
+}
+
+// Transfère le lead à un partenaire (« personne à contacter » sélectionnée par
+// le visiteur), depuis l'adresse de Roxan. No-op gracieux si le SMTP n'est pas
+// configuré ou si le partenaire n'a pas encore de courriel renseigné.
+export function notifierPartenaireNouveauLead(lead, partenaire) {
+  // No-op si le SMTP n'est pas configuré (pas d'identifiant) ou si le
+  // partenaire n'a pas encore de courriel renseigné.
+  if (!env.mail.host || !env.mail.user || !partenaire?.courriel) return Promise.resolve();
+  const html = `
+    <div style="font-family: sans-serif; padding: 16px; color: #1E2420;">
+      <h2 style="color: #B0863A;">Un client potentiel vous est transféré</h2>
+      <p>Bonjour ${partenaire.nom},</p>
+      <p>Une personne a demandé à être mise en relation avec vous depuis le site de Roxan Turcotte.</p>
+      <ul>
+        <li><strong>${lead.prenom} ${lead.nom}</strong></li>
+        <li>Courriel : <a href="mailto:${lead.courriel}">${lead.courriel}</a></li>
+        <li>Téléphone : ${lead.telephone ?? '—'}</li>
+        <li>Origine : ${lead.page_origine ?? '—'}</li>
+      </ul>
+      ${lead.message ? `<p><strong>Message :</strong><br>${lead.message}</p>` : ''}
+      <p style="color:#6C746A; font-size: 13px;">Vous pouvez répondre directement à ce courriel pour joindre la personne.</p>
+    </div>
+  `;
+  return sendMail({
+    to: partenaire.courriel,
+    replyTo: lead.courriel,
+    subject: `Client potentiel transféré — ${lead.prenom} ${lead.nom}`,
+    html,
+    leadId: lead.id,
+    type: 'notification-partenaire',
   });
 }

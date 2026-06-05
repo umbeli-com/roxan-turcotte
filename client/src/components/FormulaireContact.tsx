@@ -1,5 +1,6 @@
 import { useState, FormEvent } from 'react';
 import { marque } from '@content/marque';
+import type { Profil } from '@content/profils';
 
 export type FormulaireProps = {
   typeFormulaire: string;
@@ -11,7 +12,22 @@ export type FormulaireProps = {
   champMessage?: boolean;
   champTelephoneRequis?: boolean;
   champInfolettre?: boolean;
+  // Profils « personnes à contacter ». Si fourni, un champ « Vous contactez »
+  // apparaît et le lead est envoyé avec le profil sélectionné.
+  profils?: Profil[];
+  profilSelectionne?: string;          // contrôlé (slug)
+  profilParDefaut?: string;            // non contrôlé (slug initial)
+  onProfilChange?: (slug: string) => void;
 };
+
+function initiales(nom?: string): string {
+  if (!nom) return '?';
+  return nom
+    .split(/\s+/)
+    .slice(0, 2)
+    .map((m) => m[0]?.toUpperCase() ?? '')
+    .join('');
+}
 
 type Statut = 'idle' | 'envoi' | 'succes' | 'erreur';
 
@@ -32,9 +48,22 @@ export function FormulaireContact({
   champMessage = true,
   champTelephoneRequis = true,
   champInfolettre = false,
+  profils,
+  profilSelectionne,
+  profilParDefaut,
+  onProfilChange,
 }: FormulaireProps) {
   const [statut, setStatut] = useState<Statut>('idle');
   const [erreur, setErreur] = useState<string | null>(null);
+  const [selInterne, setSelInterne] = useState<string>(
+    profilParDefaut ?? profils?.[0]?.slug ?? '',
+  );
+  const slugSel = profilSelectionne ?? selInterne ?? '';
+  const profilSel = profils?.find((p) => p.slug === slugSel);
+  const changerProfil = (s: string) => {
+    setSelInterne(s);
+    onProfilChange?.(s);
+  };
 
   async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
@@ -62,7 +91,8 @@ export function FormulaireContact({
       type_formulaire: typeFormulaire,
       page_origine: pageOrigine,
       source_entite: sourceEntite ?? null,
-      tags: etiquettes,
+      tags: profilSel ? [...etiquettes, profilSel.tag] : etiquettes,
+      profil: profilSel?.slug ?? null,
       consentement_horodatage: new Date().toISOString(),
     };
 
@@ -108,6 +138,39 @@ export function FormulaireContact({
         <span className="rt-badge">Loi 25 conforme</span>
       </div>
       {intro && <p className="rt-formulaire__intro">{intro}</p>}
+
+      {profils && profils.length > 0 && (
+        <div className="rt-formulaire__destinataire">
+          {profilSel?.photo ? (
+            <img src={profilSel.photo} alt="" />
+          ) : (
+            <span className="rt-formulaire__destinataire-initiales" aria-hidden="true">
+              {initiales(profilSel?.nom)}
+            </span>
+          )}
+          <div className="rt-formulaire__destinataire-texte">
+            <span className="rt-formulaire__destinataire-libelle">Vous contactez</span>
+            {profils.length === 1 ? (
+              <span className="rt-formulaire__destinataire-nom">
+                {profilSel?.nom} — {profilSel?.role}
+              </span>
+            ) : (
+              <select
+                aria-label="Choisir la personne à contacter"
+                className="rt-formulaire__destinataire-select"
+                value={slugSel}
+                onChange={(e) => changerProfil(e.target.value)}
+              >
+                {profils.map((p) => (
+                  <option key={p.slug} value={p.slug}>
+                    {p.nom} — {p.role}
+                  </option>
+                ))}
+              </select>
+            )}
+          </div>
+        </div>
+      )}
 
       <div className="rt-champ--double">
         <div className="rt-champ">

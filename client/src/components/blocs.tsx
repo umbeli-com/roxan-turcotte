@@ -1,12 +1,14 @@
 import { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
+export type VarianteSection = 'noir' | 'charbon' | 'ivoire' | 'creme' | 'blanc' | 'nuit' | 'vert';
+
 export function Section({
-  variante = 'noir',
+  variante = 'ivoire',
   children,
   id,
 }: {
-  variante?: 'noir' | 'charbon';
+  variante?: VarianteSection;
   children: ReactNode;
   id?: string;
 }) {
@@ -99,11 +101,11 @@ export function ListeAvantages({ items }: { items: string[] }) {
             gridTemplateColumns: '24px 1fr',
             gap: '0.75rem',
             alignItems: 'baseline',
-            color: 'var(--rt-ivoire)',
+            color: 'var(--rt-texte)',
             lineHeight: 1.55,
           }}
         >
-          <span aria-hidden="true" style={{ color: 'var(--rt-or)', fontWeight: 700 }}>
+          <span aria-hidden="true" style={{ color: 'var(--rt-or-fonce)', fontWeight: 700 }}>
             ✦
           </span>
           <span>{it}</span>

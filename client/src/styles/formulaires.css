@@ -2,9 +2,10 @@
   display: grid;
   gap: var(--rt-esp-4);
   padding: var(--rt-esp-6);
-  background: var(--rt-charbon-2);
+  background: var(--rt-surface);
   border: 1px solid var(--rt-ligne);
   border-radius: var(--rt-radius-l);
+  box-shadow: var(--rt-ombre-douce);
   position: relative;
 }
 
@@ -18,15 +19,76 @@
 
 .rt-formulaire__titre {
   font-family: var(--rt-font-sous-titre);
-  font-size: 1.4rem;
+  font-size: 1.55rem;
   margin: 0;
-  color: var(--rt-ivoire);
+  color: var(--rt-texte);
 }
 
 .rt-formulaire__intro {
-  color: var(--rt-gris-texte);
+  color: var(--rt-texte-doux);
   margin-bottom: var(--rt-esp-4);
-  font-size: 0.96rem;
+  font-size: 1rem;
+}
+
+/* Bandeau « Vous contactez : … » (profil pré-sélectionné) */
+.rt-formulaire__destinataire {
+  display: flex;
+  align-items: center;
+  gap: var(--rt-esp-3);
+  padding: var(--rt-esp-3) var(--rt-esp-4);
+  background: var(--rt-or-soft);
+  border: 1px solid var(--rt-or);
+  border-radius: var(--rt-radius-m);
+}
+
+.rt-formulaire__destinataire img {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.rt-formulaire__destinataire-texte { display: grid; gap: 1px; }
+
+.rt-formulaire__destinataire-libelle {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rt-or-fonce);
+}
+
+.rt-formulaire__destinataire-nom {
+  font-weight: 600;
+  color: var(--rt-texte);
+}
+
+.rt-formulaire__destinataire-initiales {
+  width: 46px;
+  height: 46px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  background: var(--rt-degrade-or);
+  color: var(--rt-noir);
+  font-family: var(--rt-font-titre);
+  font-weight: 700;
+  font-size: 1rem;
+}
+
+.rt-formulaire__destinataire-select {
+  font-family: var(--rt-font-corps);
+  font-size: 1.02rem;
+  font-weight: 600;
+  color: var(--rt-texte);
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne-forte);
+  border-radius: var(--rt-radius-s);
+  padding: 8px 12px;
+  margin-top: 2px;
+  min-height: 44px;
 }
 
 .rt-champ {
@@ -45,10 +107,11 @@
 }
 
 .rt-champ label {
-  font-size: 0.82rem;
-  letter-spacing: 0.1em;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
   text-transform: uppercase;
-  color: var(--rt-gris-texte);
+  color: var(--rt-texte-doux);
 }
 
 .rt-champ input[type='text'],
@@ -59,22 +122,26 @@
 .rt-champ textarea {
   width: 100%;
   font-family: var(--rt-font-corps);
-  font-size: 1rem;
-  color: var(--rt-ivoire);
-  background: var(--rt-charbon);
-  border: 1px solid var(--rt-ligne);
+  font-size: 1.05rem;
+  color: var(--rt-texte);
+  background: var(--rt-surface-2);
+  border: 1px solid var(--rt-ligne-forte);
   border-radius: var(--rt-radius-s);
-  padding: 12px 14px;
-  transition: border-color var(--rt-transition-rapide), background var(--rt-transition-rapide);
+  padding: 13px 15px;
+  min-height: 48px;
+  transition: border-color var(--rt-transition-rapide), box-shadow var(--rt-transition-rapide), background var(--rt-transition-rapide);
 }
+
+.rt-champ input::placeholder,
+.rt-champ textarea::placeholder { color: var(--rt-texte-faible); }
 
 .rt-champ input:focus,
 .rt-champ select:focus,
 .rt-champ textarea:focus {
   border-color: var(--rt-or);
-  background: var(--rt-noir);
+  background: var(--rt-surface);
   outline: none;
-  box-shadow: 0 0 0 3px rgba(200, 162, 74, 0.18);
+  box-shadow: 0 0 0 3px rgba(176, 134, 58, 0.22);
 }
 
 .rt-champ textarea { min-height: 140px; resize: vertical; }
@@ -83,16 +150,16 @@
   display: flex;
   align-items: flex-start;
   gap: var(--rt-esp-3);
-  font-size: 0.85rem;
-  color: var(--rt-gris-texte);
+  font-size: 0.9rem;
+  color: var(--rt-texte-doux);
   line-height: 1.5;
 }
 
 .rt-consentement input[type='checkbox'] {
   margin-top: 4px;
   accent-color: var(--rt-or);
-  width: 18px;
-  height: 18px;
+  width: 20px;
+  height: 20px;
   flex-shrink: 0;
 }
 
@@ -109,25 +176,23 @@
 .rt-message {
   padding: var(--rt-esp-4);
   border-radius: var(--rt-radius-s);
-  font-size: 0.92rem;
-  border-left: 3px solid;
+  font-size: 0.96rem;
+  border-left: 4px solid;
   margin-top: var(--rt-esp-3);
+  color: var(--rt-texte);
 }
 
 .rt-message--succes {
   border-color: var(--rt-succes);
-  background: rgba(63, 166, 106, 0.08);
-  color: var(--rt-ivoire);
+  background: rgba(47, 125, 79, 0.10);
 }
 
 .rt-message--erreur {
   border-color: var(--rt-erreur);
-  background: rgba(210, 73, 59, 0.08);
-  color: var(--rt-ivoire);
+  background: rgba(192, 57, 43, 0.09);
 }
 
 .rt-message--info {
   border-color: var(--rt-alerte);
-  background: rgba(224, 169, 46, 0.08);
-  color: var(--rt-ivoire);
+  background: rgba(185, 121, 26, 0.10);
 }

@@ -1,29 +1,8 @@
 import { Link } from 'react-router-dom';
 import { PageHead, schemaAgent } from '@/components/Head';
 import { Section, TitreSection } from '@/components/blocs';
-
-const calculateurs = [
-  {
-    titre: 'Versements hypothécaires',
-    description: 'Calculez votre versement périodique selon le prix, la mise de fonds, le taux et l\'amortissement.',
-    route: '/calculateurs/financement-hypothecaire',
-  },
-  {
-    titre: 'Taxe de bienvenue',
-    description: 'Estimez les droits de mutation immobilière selon la municipalité.',
-    route: '/calculateurs/taxe-de-bienvenue',
-  },
-  {
-    titre: 'Taxes municipales et scolaires',
-    description: 'Estimez les taxes annuelles à prévoir, selon la municipalité et la valeur d\'évaluation.',
-    route: '/calculateurs/taxes-municipales-scolaires',
-  },
-  {
-    titre: 'Frais d\'acquisition',
-    description: 'Estimez les frais à prévoir le jour de la signature : notaire, inspection, ajustements et plus.',
-    route: '/calculateurs/frais-acquisition',
-  },
-];
+import { BlocAllerPlusLoin } from '@/components/blocsAide';
+import { calculateurs } from '@content/calculateurs';
 
 export default function IndexCalculateurs() {
   return (
@@ -34,11 +13,11 @@ export default function IndexCalculateurs() {
         cheminCanonique="/calculateurs"
         schema={schemaAgent}
       />
-      <Section variante="noir">
+      <Section variante="ivoire">
         <TitreSection
           eyebrow="Calculateurs gratuits"
           titre="Préparer sa décision avec des chiffres clairs."
-          description="Quatre outils simples pour estimer rapidement, en respectant la nuance des fourchettes lorsque c'est pertinent. Les résultats sont approximatifs et doivent être validés auprès des professionnels concernés."
+          description="Quatre outils simples pour estimer rapidement. Les résultats sont approximatifs et doivent être validés auprès des professionnels concernés — et à côté de chaque outil, les bonnes personnes pour vous aider."
         />
         <div className="rt-grille rt-grille--2">
           {calculateurs.map((c) => (
@@ -48,6 +27,11 @@ export default function IndexCalculateurs() {
             </Link>
           ))}
         </div>
+      </Section>
+
+      <Section variante="creme">
+        <TitreSection eyebrow="Pour aller plus loin" titre="Faire affaire avec Roxan" />
+        <BlocAllerPlusLoin />
       </Section>
     </>
   );

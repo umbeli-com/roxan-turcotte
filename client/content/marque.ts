@@ -31,6 +31,25 @@ export const marque = {
     { titre: '23 ans', mention: 'Expérience construction neuve' },
     { titre: '8 ans', mention: 'Entrepreneur général' },
   ],
+  // Logos et badges (chemins relatifs au dossier public, résolus via lib/asset).
+  logos: {
+    lion: 'logo-roxan-lion.png',
+    royalLepage: 'marque/royal-lepage-couleur.png',
+    royalLepageBlanc: 'marque/royal-lepage-blanc.png',
+    sunset: 'marque/sunset.webp',
+    chaletsAirbnb: 'marque/chalets-airbnb.svg',
+  },
+  badges: {
+    top10: 'marque/top10-noir.png',
+    top10Blanc: 'marque/top10-blanc.png',
+    platine: 'marque/platine-couleur.png',
+    platineBlanc: 'marque/platine-blanc.png',
+  },
+  // Liens externes. Airbnb : placeholder éditable — laisser vide tant que
+  // l'URL réelle n'est pas fournie (le bouton retombe alors sur le formulaire).
+  liens: {
+    airbnb: '',
+  },
   reseaux: {
     facebook: 'https://www.facebook.com',
     instagram: 'https://www.instagram.com',

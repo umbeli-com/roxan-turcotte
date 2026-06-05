@@ -1,6 +1,9 @@
 // Définition centralisée des services. Sert à la fois aux pages de service
 // (génération SSG) et aux cartes de l'accueil.
 
+import { images, type Photo } from './images';
+import { marque } from './marque';
+
 export type Service = {
   slug: string;
   route: string;
@@ -176,3 +179,51 @@ export const services: Service[] = [
 ];
 
 export const servicesParSlug = Object.fromEntries(services.map((s) => [s.slug, s])) as Record<string, Service>;
+
+// Enrichissement visuel et relationnel par service (image de héros, logo de
+// marque, galerie photo, profils à contacter et services d'aide). Séparé de la
+// définition principale pour rester lisible. `sunset` et `chalets` sont traités
+// comme des pages d'activité à part entière.
+export type ServiceExtra = {
+  image?: Photo;
+  logo?: string;       // chemin du logo de marque (résolu via lib/asset)
+  galerie?: Photo[];
+  profils?: string[];  // slugs de profils à contacter
+  aide?: string[];     // slugs de services d'aide
+};
+
+export const servicesExtra: Record<string, ServiceExtra> = {
+  'courtier-immobilier': {
+    image: images.proprietes.residentiel,
+    profils: ['roxan-turcotte'],
+    aide: ['investissement-immobilier', 'commercial'],
+  },
+  'investissement-immobilier': {
+    image: images.proprietes.investissement,
+    profils: ['roxan-turcotte', 'courtier-hypothecaire'],
+    aide: ['courtier-immobilier'],
+  },
+  commercial: {
+    image: images.proprietes.commercial,
+    profils: ['roxan-turcotte'],
+    aide: ['investissement-immobilier'],
+  },
+  sunset: {
+    image: images.heros.sunset,
+    logo: marque.logos.sunset,
+    galerie: [images.sunset.villa, images.sunset.resort, images.sunset.tropical],
+    profils: ['roxan-sunset'],
+    aide: ['courtier-immobilier'],
+  },
+  chalets: {
+    image: images.heros.chalets,
+    logo: marque.logos.chaletsAirbnb,
+    galerie: [images.chalets.foret, images.chalets.sentier, images.chalets.lac],
+    profils: ['roxan-chalets'],
+    aide: ['investissement-immobilier', 'courtier-immobilier'],
+  },
+  international: {
+    profils: ['roxan-turcotte'],
+    aide: ['courtier-immobilier'],
+  },
+};
