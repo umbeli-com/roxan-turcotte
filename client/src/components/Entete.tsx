@@ -93,7 +93,6 @@ function ItemMenu({ entree, fermer }: { entree: EntreeNav; fermer: () => void })
     <div
       className="rt-nav__item"
       ref={refItem}
-      onMouseLeave={() => setOuvert(false)}
       onBlur={onBlurItem}
       onKeyDown={onKeyDownItem}
     >
