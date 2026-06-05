@@ -19,6 +19,10 @@ export type FormulaireProps = {
   profilSelectionne?: string;          // contrôlé (slug)
   profilParDefaut?: string;            // non contrôlé (slug initial)
   onProfilChange?: (slug: string) => void;
+  // Quand un sélecteur de personne est affiché hors du formulaire (ex.
+  // colonne de gauche), le formulaire se contente de rappeler le destinataire
+  // en lecture seule plutôt que d'afficher un second menu déroulant.
+  selecteurExterne?: boolean;
 };
 
 function initiales(nom?: string): string {
@@ -53,6 +57,7 @@ export function FormulaireContact({
   profilSelectionne,
   profilParDefaut,
   onProfilChange,
+  selecteurExterne = false,
 }: FormulaireProps) {
   const [statut, setStatut] = useState<Statut>('idle');
   const [erreur, setErreur] = useState<string | null>(null);
@@ -150,7 +155,7 @@ export function FormulaireContact({
           )}
           <div className="rt-formulaire__destinataire-texte">
             <span className="rt-formulaire__destinataire-libelle">Vous contactez</span>
-            {profils.length === 1 ? (
+            {profils.length === 1 || selecteurExterne ? (
               <span className="rt-formulaire__destinataire-nom">
                 {profilSel?.nom} — {profilSel?.role}
               </span>

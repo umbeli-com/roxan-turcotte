@@ -33,35 +33,36 @@
 }
 
 .rt-heroact__inner {
+  position: relative;
+  z-index: 2;
   width: 100%;
   max-width: var(--rt-largeur-max);
   margin: 0 auto;
   padding: clamp(2.5rem, 6vw, 4rem) var(--rt-esp-5);
   display: grid;
-  grid-template-columns: minmax(180px, 0.55fr) 1.25fr 0.85fr;
+  grid-template-columns: 1.5fr 0.7fr;
   gap: clamp(1.5rem, 3vw, 3rem);
-  align-items: stretch;
+  align-items: center;
 }
 
-/* Portrait détouré de Roxan : « c'est toujours lui », fixe sur toutes les activités */
+/* Portrait détouré de Roxan : « c'est toujours lui ». Grand, ancré au bas du
+   hero, avec un fondu qui le fait rejoindre le bas de la section. */
 .rt-heroact__portrait {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}
-
-.rt-heroact__portrait img {
-  width: 100%;
-  max-width: 300px;
-  max-height: 600px;
+  position: absolute;
+  left: clamp(0px, 1.5vw, 24px);
+  bottom: 0;
+  z-index: 1;
+  height: min(86%, 600px);
+  width: auto;
   object-fit: contain;
   object-position: bottom center;
-  filter: drop-shadow(0 18px 38px rgba(0, 0, 0, 0.55));
+  pointer-events: none;
+  -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 80%, transparent 100%);
+  filter: drop-shadow(0 12px 30px rgba(0, 0, 0, 0.40));
 }
 
-.rt-heroact__contenu { max-width: 640px; align-self: center; }
-
-.rt-heroact__apercus { align-self: center; }
+.rt-heroact__contenu { padding-left: clamp(400px, 28vw, 440px); }
 
 .rt-heroact__logo {
   margin-bottom: var(--rt-esp-5);
@@ -180,9 +181,10 @@
 
 /* Sous 1080px : le portrait se retire pour libérer de la place (il reste
    présent dans les sections « Qui est Roxan », contact, à-propos). */
-@media (max-width: 1080px) {
+@media (max-width: 1200px) {
   .rt-heroact__portrait { display: none; }
   .rt-heroact__inner { grid-template-columns: 1.15fr 0.85fr; }
+  .rt-heroact__contenu { padding-left: 0; }
 }
 
 @media (max-width: 920px) {

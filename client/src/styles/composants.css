@@ -484,75 +484,73 @@
 .rt-plus-loin__carte p { margin: 0; flex: 1; }
 .rt-plus-loin__carte .rt-bouton { margin-top: var(--rt-esp-2); }
 
-/* --- Profils à contacter -------------------------------------------- */
-.rt-profils {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
-  gap: var(--rt-esp-5);
-  min-width: 0;
-}
-
-.rt-profil-carte {
+/* --- Profils à contacter (sélecteur compact) ------------------------ */
+.rt-profils-choix {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
-  gap: var(--rt-esp-3);
-  background: var(--rt-surface);
-  border: 1px solid var(--rt-ligne);
-  border-radius: var(--rt-radius-l);
-  padding: var(--rt-esp-6);
-  box-shadow: var(--rt-ombre-douce);
-  height: 100%;
+  gap: var(--rt-esp-2);
   min-width: 0;
 }
 
-.rt-profil-carte__tete {
-  display: flex;
+.rt-profils-choix__libelle {
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--rt-or-fonce);
+  margin-bottom: var(--rt-esp-2);
+}
+
+.rt-profil-choix {
+  display: grid;
+  grid-template-columns: 48px minmax(0, 1fr) auto;
   align-items: center;
-  gap: var(--rt-esp-4);
+  gap: var(--rt-esp-3);
   width: 100%;
   min-width: 0;
+  padding: var(--rt-esp-3) var(--rt-esp-4);
+  background: var(--rt-surface);
+  border: 1px solid var(--rt-ligne);
+  border-radius: var(--rt-radius-m);
+  cursor: pointer;
+  text-align: left;
+  transition: border-color var(--rt-transition-rapide), background var(--rt-transition-rapide);
 }
 
-.rt-profil-carte__tete > div { min-width: 0; }
-.rt-profil-carte__nom,
-.rt-profil-carte__role { overflow-wrap: anywhere; }
+.rt-profil-choix:hover { border-color: var(--rt-or); }
 
-.rt-profil-carte__photo {
-  width: 72px;
-  height: 72px;
+.rt-profil-choix[aria-pressed='true'] {
+  border-color: var(--rt-or);
+  background: var(--rt-or-soft);
+  box-shadow: inset 0 0 0 1px var(--rt-or);
+}
+
+.rt-profil-choix__photo {
+  width: 48px;
+  height: 48px;
   border-radius: 50%;
   object-fit: cover;
   object-position: top center;
-  border: 2px solid var(--rt-or);
-  flex-shrink: 0;
+  border: 1px solid var(--rt-or);
   background: var(--rt-fond-alt);
 }
 
-.rt-profil-carte__nom { margin: 0; font-size: 1.2rem; color: var(--rt-texte); }
-
-.rt-profil-carte__role {
-  font-size: 0.8rem;
-  font-weight: 700;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
-  color: var(--rt-or-fonce);
-}
-
-.rt-profil-carte__desc { margin: 0; color: var(--rt-texte-doux); font-size: 0.96rem; flex: 1; }
-
-.rt-profil-carte .rt-bouton { width: 100%; margin-top: var(--rt-esp-2); }
-.rt-profil-carte[aria-current='true'] { border-color: var(--rt-or); box-shadow: 0 0 0 2px var(--rt-or) inset, var(--rt-ombre-douce); }
-
-.rt-profil-carte__photo--initiales {
+.rt-profil-choix__photo--initiales {
   display: grid;
   place-items: center;
-  background: var(--rt-degrade-or);
-  color: var(--rt-noir);
+  background: var(--rt-or-soft);
+  color: var(--rt-or-fonce);
   font-family: var(--rt-font-titre);
   font-weight: 700;
-  font-size: 1.4rem;
+  font-size: 1rem;
 }
+
+.rt-profil-choix__texte { display: grid; gap: 1px; min-width: 0; }
+.rt-profil-choix__nom { font-weight: 600; color: var(--rt-texte); font-size: 0.98rem; overflow-wrap: anywhere; }
+.rt-profil-choix__role { font-size: 0.82rem; color: var(--rt-texte-faible); overflow-wrap: anywhere; }
+
+.rt-profil-choix__check { color: var(--rt-or-fonce); font-weight: 700; opacity: 0; }
+.rt-profil-choix[aria-pressed='true'] .rt-profil-choix__check { opacity: 1; }
 
 /* --- Héros-photo de page (services / activités) --------------------- */
 .rt-page-hero {
@@ -631,13 +629,19 @@
   gap: var(--rt-esp-4);
 }
 
-/* Bloc « profils + formulaire » */
-.rt-contact-profils { display: grid; gap: var(--rt-esp-7); }
+/* Bloc « personnes + formulaire » : sélecteur à gauche, formulaire à droite */
+.rt-contact-profils { display: grid; gap: var(--rt-esp-6); align-items: start; }
 .rt-contact-profils > * { min-width: 0; }
 
-.rt-contact-profils__form {
+.rt-contact-profils--double { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); }
+
+@media (max-width: 880px) {
+  .rt-contact-profils--double { grid-template-columns: 1fr; }
+}
+
+.rt-contact-profils__form { width: 100%; min-width: 0; scroll-margin-top: 110px; }
+
+.rt-contact-profils:not(.rt-contact-profils--double) .rt-contact-profils__form {
   max-width: 680px;
-  width: 100%;
   margin: 0 auto;
-  scroll-margin-top: 110px;
 }

@@ -28,11 +28,9 @@ export function HeroActivites() {
         <div className="rt-heroact__voile" />
       </div>
 
-      <div className="rt-heroact__inner">
-        <div className="rt-heroact__portrait">
-          <img src={asset(marque.portrait)} alt="Roxan Turcotte, courtier immobilier" />
-        </div>
+      <img className="rt-heroact__portrait" src={asset(marque.portrait)} alt="Roxan Turcotte, courtier immobilier" />
 
+      <div className="rt-heroact__inner">
         <div className="rt-heroact__contenu">
           <span className="rt-logo-plaque rt-heroact__logo">
             <img src={asset(activite.logo.chemin)} alt={activite.logo.alt} />
