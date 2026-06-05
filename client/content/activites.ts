@@ -2,8 +2,8 @@
 // écran de l'accueil. Royal LePage (courtage) est l'activité phare et l'état
 // par défaut ; Sunset (Sud) et Chalets/Airbnb sont les activités secondaires.
 //
-// Chaque activité pilote : le fond plein écran, le logo, les pastilles et le
-// call-to-action — qui changent quand on bascule d'une activité à l'autre.
+// Chaque activité pilote : le fond plein écran, le logo, les accréditations et
+// le call-to-action — qui changent quand on bascule d'une activité à l'autre.
 
 import { marque } from './marque';
 import { images, type Photo } from './images';
@@ -14,7 +14,7 @@ export type CtaActivite = {
   variante: 'primaire' | 'sur-sombre';
 };
 
-export type PastilleActivite = { titre: string; mention: string };
+export type BadgeActivite = { chemin: string; alt: string };
 
 export type Activite = {
   slug: string;
@@ -26,7 +26,7 @@ export type Activite = {
   image: Photo;   // fond plein écran
   apercu: Photo;  // vignette du rectangle quand l'activité n'est pas active
   accent: string; // couleur d'accent (indicateur actif)
-  pastilles: PastilleActivite[];
+  badges: BadgeActivite[]; // vraies images d'accréditation (ex. Royal LePage)
   ctas: CtaActivite[];
 };
 
@@ -47,10 +47,9 @@ export const activitesAccueil: Activite[] = [
     image: images.heros.royalLepage,
     apercu: images.activites.royalLepage,
     accent: '#C8A24A',
-    pastilles: [
-      { titre: 'Top 10 %', mention: 'National Royal LePage 2025' },
-      { titre: 'Prix Platine', mention: 'du Directeur 2025' },
-      { titre: '23 ans', mention: 'En construction neuve' },
+    badges: [
+      { chemin: marque.badges.top10Blanc, alt: 'Top 10 % National Royal LePage 2025' },
+      { chemin: marque.badges.platineBlanc, alt: 'Prix Platine du Directeur 2025' },
     ],
     ctas: [
       { libelle: 'Faire évaluer ma maison', href: '/vendre-ma-maison', variante: 'primaire' },
@@ -68,11 +67,7 @@ export const activitesAccueil: Activite[] = [
     image: images.heros.sunset,
     apercu: images.activites.sunset,
     accent: '#F0A45A',
-    pastilles: [
-      { titre: 'Sur place', mention: 'Réseau local au Sud' },
-      { titre: 'Clé en main', mention: 'Sans déplacement inutile' },
-      { titre: 'Sur mesure', mention: 'Selon votre projet de vie' },
-    ],
+    badges: [],
     ctas: [
       { libelle: 'Parler de mon projet au Sud', href: '/services/sunset#formulaire', variante: 'primaire' },
       { libelle: 'Explorer Sunset', href: '/services/sunset', variante: 'sur-sombre' },
@@ -89,11 +84,7 @@ export const activitesAccueil: Activite[] = [
     image: images.heros.chalets,
     apercu: images.activites.chalets,
     accent: '#3C5444',
-    pastilles: [
-      { titre: 'Rentabilité', mention: 'Analyse Airbnb chiffrée' },
-      { titre: 'Règlements', mention: 'Zones permises vérifiées' },
-      { titre: 'Repérage', mention: 'Les chalets performants' },
-    ],
+    badges: [],
     ctas: [
       {
         libelle: airbnbConfigure ? 'Voir mes locations (Airbnb)' : 'Évaluer un projet de chalet',

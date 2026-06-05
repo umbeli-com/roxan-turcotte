@@ -16,21 +16,18 @@ export function LandingTemplate({ data }: { data: LandingContenu }) {
         schema={schemaAgent}
       />
 
-      <section className="rt-hero">
-        <div className="rt-hero__motif" aria-hidden="true" />
-        <div className="rt-hero__halo" aria-hidden="true" />
-        <div className="rt-hero__contenu" style={{ gridTemplateColumns: '1fr' }}>
-          <div className="rt-hero__principal" style={{ textAlign: 'center', margin: '0 auto' }}>
-            <span className="rt-eyebrow">{data.hero.eyebrow}</span>
-            <h1 className="rt-titre-gravure">{data.hero.titre}</h1>
-            <p className="rt-hero__sous-titre">{data.hero.sousTitre}</p>
-            <p className="rt-hero__accroche" style={{ margin: '0 auto' }}>{data.hero.accroche}</p>
-            <div className="rt-hero__cta" style={{ justifyContent: 'center' }}>
-              <BoutonInterne href={data.hero.ctaPrimaire.href}>{data.hero.ctaPrimaire.libelle}</BoutonInterne>
-              <BoutonInterne href={data.hero.ctaSecondaire.href} variante="secondaire">
-                {data.hero.ctaSecondaire.libelle}
-              </BoutonInterne>
-            </div>
+      <section className="rt-page-hero" aria-label={data.hero.titre}>
+        <div className="rt-page-hero__fond" style={{ backgroundImage: `url(${data.hero.image.src})` }} aria-hidden="true" />
+        <div className="rt-page-hero__voile" aria-hidden="true" />
+        <div className="rt-page-hero__inner">
+          <span className="rt-page-hero__eyebrow">{data.hero.eyebrow}</span>
+          <h1>{data.hero.titre}</h1>
+          <p className="rt-page-hero__accroche">{data.hero.accroche}</p>
+          <div className="rt-page-hero__cta">
+            <BoutonInterne href={data.hero.ctaPrimaire.href}>{data.hero.ctaPrimaire.libelle}</BoutonInterne>
+            <BoutonInterne href={data.hero.ctaSecondaire.href} variante="sur-sombre">
+              {data.hero.ctaSecondaire.libelle}
+            </BoutonInterne>
           </div>
         </div>
       </section>

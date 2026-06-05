@@ -40,6 +40,18 @@ export function Entete() {
           {navigationPrincipale.map((e) =>
             e.enfants && e.enfants.length > 0 ? (
               <ItemMenu key={e.href} entree={e} fermer={fermer} />
+            ) : /^https?:/i.test(e.href) ? (
+              <div className="rt-nav__item" key={e.href}>
+                <a
+                  className="rt-nav__lien"
+                  href={e.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={fermer}
+                >
+                  {e.libelle}
+                </a>
+              </div>
             ) : (
               <div className="rt-nav__item" key={e.href}>
                 <NavLink

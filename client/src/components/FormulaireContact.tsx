@@ -135,7 +135,6 @@ export function FormulaireContact({
     >
       <div className="rt-formulaire__entete">
         <h3 className="rt-formulaire__titre">{titre}</h3>
-        <span className="rt-badge">Loi 25 conforme</span>
       </div>
       {intro && <p className="rt-formulaire__intro">{intro}</p>}
 

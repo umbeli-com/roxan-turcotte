@@ -30,65 +30,66 @@
   font-size: 1rem;
 }
 
-/* Bandeau « Vous contactez : … » (profil pré-sélectionné) */
+/* « Vous contactez … » (profil pré-sélectionné) — discret et élégant */
 .rt-formulaire__destinataire {
   display: flex;
   align-items: center;
   gap: var(--rt-esp-3);
-  padding: var(--rt-esp-3) var(--rt-esp-4);
-  background: var(--rt-or-soft);
-  border: 1px solid var(--rt-or);
-  border-radius: var(--rt-radius-m);
+  padding: 0 0 var(--rt-esp-4);
+  margin-bottom: var(--rt-esp-1);
+  border-bottom: 1px solid var(--rt-ligne);
 }
 
 .rt-formulaire__destinataire img {
-  width: 46px;
-  height: 46px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   object-fit: cover;
   flex-shrink: 0;
 }
 
-.rt-formulaire__destinataire-texte { display: grid; gap: 1px; }
+.rt-formulaire__destinataire-texte { display: grid; gap: 1px; min-width: 0; }
 
 .rt-formulaire__destinataire-libelle {
-  font-size: 0.74rem;
-  font-weight: 700;
-  letter-spacing: 0.12em;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
-  color: var(--rt-or-fonce);
+  color: var(--rt-texte-faible);
 }
 
 .rt-formulaire__destinataire-nom {
   font-weight: 600;
   color: var(--rt-texte);
+  font-size: 0.96rem;
 }
 
 .rt-formulaire__destinataire-initiales {
-  width: 46px;
-  height: 46px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
   flex-shrink: 0;
   display: grid;
   place-items: center;
-  background: var(--rt-degrade-or);
-  color: var(--rt-noir);
+  background: var(--rt-or-soft);
+  color: var(--rt-or-fonce);
+  border: 1px solid var(--rt-or);
   font-family: var(--rt-font-titre);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.82rem;
 }
 
 .rt-formulaire__destinataire-select {
   font-family: var(--rt-font-corps);
-  font-size: 1.02rem;
+  font-size: 0.96rem;
   font-weight: 600;
   color: var(--rt-texte);
-  background: var(--rt-surface);
-  border: 1px solid var(--rt-ligne-forte);
-  border-radius: var(--rt-radius-s);
-  padding: 8px 12px;
-  margin-top: 2px;
-  min-height: 44px;
+  background: transparent;
+  border: 0;
+  border-bottom: 1px dashed var(--rt-ligne-forte);
+  border-radius: 0;
+  padding: 2px 0;
+  cursor: pointer;
 }
 
 .rt-champ {

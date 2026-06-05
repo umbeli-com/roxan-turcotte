@@ -3,10 +3,10 @@ import { Link } from 'react-router-dom';
 import { activitesAccueil, type Activite, type CtaActivite } from '@content/activites';
 import { asset } from '@/lib/asset';
 
-// Slider plein écran de l'accueil. Le fond, le logo, les pastilles et les
+// Slider plein écran de l'accueil. Le fond, le logo, les accréditations et les
 // call-to-action changent selon l'activité active. Les deux activités non
-// actives sont visibles à droite sous forme de rectangles cliquables
-// (aperçu du fond + logo) ; cliquer un rectangle le promeut en fond.
+// actives sont visibles à droite sous forme de rectangles cliquables ;
+// cliquer un rectangle le promeut en fond.
 export function HeroActivites() {
   const [actif, setActif] = useState(0);
   const activite = activitesAccueil[actif];
@@ -29,8 +29,6 @@ export function HeroActivites() {
 
       <div className="rt-heroact__inner">
         <div className="rt-heroact__contenu">
-          <span className="rt-heroact__eyebrow">{activite.entite}</span>
-
           <span className="rt-logo-plaque rt-heroact__logo">
             <img src={asset(activite.logo.chemin)} alt={activite.logo.alt} />
           </span>
@@ -38,34 +36,17 @@ export function HeroActivites() {
           <h1 className="rt-heroact__titre">{activite.titre}</h1>
           <p className="rt-heroact__accroche">{activite.accroche}</p>
 
-          <div className="rt-heroact__pastilles">
-            {activite.pastilles.map((p) => (
-              <span className="rt-heroact__puce" key={p.titre}>
-                <strong>{p.titre}</strong>
-                <span>{p.mention}</span>
-              </span>
-            ))}
-          </div>
+          {activite.badges.length > 0 && (
+            <div className="rt-heroact__badges">
+              {activite.badges.map((b) => (
+                <img key={b.chemin} className="rt-heroact__badge" src={asset(b.chemin)} alt={b.alt} />
+              ))}
+            </div>
+          )}
 
           <div className="rt-heroact__cta">
             {activite.ctas.map((c) => (
               <CtaHero key={c.libelle} cta={c} />
-            ))}
-          </div>
-
-          <div className="rt-heroact__tabs" role="tablist" aria-label="Choisir une activité">
-            {activitesAccueil.map((a, i) => (
-              <button
-                key={a.slug}
-                type="button"
-                role="tab"
-                aria-selected={i === actif}
-                className={`rt-heroact__tab ${i === actif ? 'actif' : ''}`}
-                style={i === actif ? { borderColor: a.accent } : undefined}
-                onClick={() => setActif(i)}
-              >
-                {nomCourt(a)}
-              </button>
             ))}
           </div>
         </div>

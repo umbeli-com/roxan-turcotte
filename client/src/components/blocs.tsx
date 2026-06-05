@@ -46,7 +46,7 @@ export function BoutonInterne({
 }: {
   href: string;
   children: ReactNode;
-  variante?: 'primaire' | 'secondaire' | 'ghost';
+  variante?: 'primaire' | 'secondaire' | 'ghost' | 'fonce' | 'sur-sombre';
 }) {
   // Lien externe (ancre ou autre) versus lien interne (react-router)
   if (href.startsWith('#') || href.startsWith('http')) {

@@ -36,12 +36,15 @@ export function ServiceTemplate({ data }: { data: Service }) {
           <div className="rt-page-hero__fond" style={{ backgroundImage: `url(${extra.image.src})` }} aria-hidden="true" />
           <div className="rt-page-hero__voile" aria-hidden="true" />
           <div className="rt-page-hero__inner">
-            {extra.logo && (
-              <span className="rt-logo-plaque rt-page-hero__logo">
-                <img src={asset(extra.logo)} alt={data.entite} />
-              </span>
+            {extra.logo ? (
+              <div className="rt-page-hero__logo-zone">
+                <span className="rt-logo-plaque rt-page-hero__logo">
+                  <img src={asset(extra.logo)} alt={data.entite} />
+                </span>
+              </div>
+            ) : (
+              <span className="rt-page-hero__eyebrow">{data.entite}</span>
             )}
-            <span className="rt-page-hero__eyebrow">{data.entite}</span>
             <h1>{data.titre}</h1>
             <p className="rt-page-hero__accroche">{data.resume}</p>
             <div className="rt-page-hero__cta">

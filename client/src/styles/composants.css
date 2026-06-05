@@ -149,19 +149,16 @@
   flex-direction: column;
   background: var(--rt-surface);
   border: 1px solid var(--rt-ligne);
-  border-radius: var(--rt-radius-l);
+  border-radius: var(--rt-radius-m);
   overflow: hidden;
   text-decoration: none;
   color: inherit;
   height: 100%;
-  box-shadow: var(--rt-ombre-douce);
-  transition: transform var(--rt-transition-douce), border-color var(--rt-transition-douce), box-shadow var(--rt-transition-douce);
+  transition: border-color var(--rt-transition-rapide);
 }
 
 .rt-carte-photo:hover {
-  transform: translateY(-5px);
   border-color: var(--rt-or);
-  box-shadow: var(--rt-ombre-carte);
 }
 
 .rt-carte-photo__media {
@@ -175,10 +172,7 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--rt-transition-lente);
 }
-
-.rt-carte-photo:hover .rt-carte-photo__media img { transform: scale(1.05); }
 
 .rt-carte-photo__etiquette {
   position: absolute;
@@ -537,13 +531,17 @@
   padding: clamp(2.5rem, 6vw, 4.5rem) var(--rt-esp-5);
 }
 
-.rt-page-hero__logo {
-  margin-bottom: var(--rt-esp-4);
-  height: 60px;
-  padding: 10px 16px;
+.rt-page-hero__logo-zone {
+  display: block;
+  margin-bottom: var(--rt-esp-5);
 }
 
-.rt-page-hero__logo img { height: 40px; width: auto; }
+.rt-page-hero__logo {
+  height: 84px;
+  padding: 14px 22px;
+}
+
+.rt-page-hero__logo img { height: 54px; width: auto; max-width: 280px; object-fit: contain; }
 
 .rt-page-hero__eyebrow {
   display: inline-block;

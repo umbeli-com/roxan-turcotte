@@ -4,6 +4,7 @@
 
 import guidesContent from './guides.json';
 import { calculateurs } from './calculateurs';
+import { marque } from './marque';
 
 export type EntreeNav = {
   libelle: string;
@@ -11,6 +12,9 @@ export type EntreeNav = {
   description?: string;
   enfants?: EntreeNav[];
 };
+
+// Airbnb : redirige vers l'annonce réelle si configurée, sinon vers la page chalets.
+const lienAirbnb = marque.liens.airbnb || '/services/chalets';
 
 const enfantsGuides: EntreeNav[] = guidesContent.guides.map((g) => ({
   libelle: g.titre,
@@ -28,19 +32,20 @@ export const navigationPrincipale: EntreeNav[] = [
   { libelle: 'Accueil', href: '/' },
   { libelle: 'À propos', href: '/a-propos' },
   {
-    libelle: 'Services',
+    // Tout le courtage Royal LePage regroupé dans un seul sous-menu.
+    libelle: 'Courtage',
     href: '/services/courtier-immobilier',
     enfants: [
-      { libelle: 'Courtage résidentiel', href: '/services/courtier-immobilier', description: 'Vendre ou acheter une résidence à Trois-Rivières et en Mauricie.' },
+      { libelle: 'Vendre ma maison', href: '/vendre-ma-maison', description: 'Évaluation juste et mise en marché professionnelle.' },
+      { libelle: 'Acheter une maison', href: '/acheter-une-maison', description: 'Recherche ciblée et négociation à votre service.' },
+      { libelle: 'Courtage résidentiel', href: '/services/courtier-immobilier', description: 'L’accompagnement complet vente et achat.' },
       { libelle: 'Investissement immobilier', href: '/services/investissement-immobilier', description: 'Rentabilité et état réel des immeubles à revenus.' },
       { libelle: 'Immobilier commercial', href: '/services/commercial', description: 'Bureaux, locaux et immeubles mixtes, en toute discrétion.' },
-      { libelle: 'Sunset — immobilier dans le Sud', href: '/services/sunset', description: 'Résidence secondaire, retraite ou investissement au soleil.' },
-      { libelle: 'Chalets & Airbnb', href: '/services/chalets', description: 'Acquisition et location courte durée en Mauricie.' },
       { libelle: 'Immobilier international', href: '/services/international', description: 'Coordination avec le réseau Royal LePage à l’étranger.' },
     ],
   },
-  { libelle: 'Vendre', href: '/vendre-ma-maison' },
-  { libelle: 'Acheter', href: '/acheter-une-maison' },
+  { libelle: 'Sunset', href: '/services/sunset' },
+  { libelle: 'Airbnb', href: lienAirbnb },
   {
     libelle: 'Guides',
     href: '/guides',
@@ -51,7 +56,6 @@ export const navigationPrincipale: EntreeNav[] = [
     href: '/calculateurs',
     enfants: enfantsCalculateurs,
   },
-  { libelle: 'Club Privilège', href: '/club-privilege' },
   { libelle: 'Contact', href: '/contact' },
 ];
 

@@ -1,3 +1,5 @@
+import { images } from '../images';
+
 export const landings = {
   vendre: {
     slug: 'vendre',
@@ -5,6 +7,7 @@ export const landings = {
     typeFormulaire: 'vente',
     etiquettes: ['vente', 'royal-lepage'],
     hero: {
+      image: images.proprietes.residentiel,
       eyebrow: 'Vous pensez vendre',
       titre: 'Obtenez une stratégie de mise en marché professionnelle.',
       sousTitre: 'Vente résidentielle, Trois-Rivières et Mauricie.',
@@ -47,6 +50,7 @@ export const landings = {
     typeFormulaire: 'achat',
     etiquettes: ['achat', 'royal-lepage'],
     hero: {
+      image: images.proprietes.interieur,
       eyebrow: 'Vous cherchez une propriété',
       titre: 'Trouvez la bonne, sans mauvaise surprise.',
       sousTitre: 'Achat résidentiel, Trois-Rivières et Mauricie.',
@@ -89,6 +93,7 @@ export const landings = {
     typeFormulaire: 'chalet',
     etiquettes: ['chalet', 'airbnb'],
     hero: {
+      image: images.chalets.chalet,
       eyebrow: 'Chalet et location courte durée',
       titre: 'Un chalet à habiter, à louer, ou à exploiter.',
       sousTitre: 'Acquisition et stratégie de location courte durée (type Airbnb).',

@@ -45,23 +45,13 @@
 
 .rt-heroact__contenu { max-width: 640px; }
 
-.rt-heroact__eyebrow {
-  display: inline-block;
-  font-weight: 700;
-  font-size: 0.86rem;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--rt-or-clair);
-  margin-bottom: var(--rt-esp-4);
-}
-
 .rt-heroact__logo {
   margin-bottom: var(--rt-esp-5);
-  height: 64px;
-  padding: 10px 16px;
+  height: 92px;
+  padding: 14px 22px;
 }
 
-.rt-heroact__logo img { height: 44px; width: auto; }
+.rt-heroact__logo img { height: 62px; width: auto; max-width: 320px; object-fit: contain; }
 
 .rt-heroact__titre {
   color: #fff;
@@ -80,61 +70,26 @@
   margin: 0 0 var(--rt-esp-5);
 }
 
-.rt-heroact__pastilles {
+.rt-heroact__badges {
   display: flex;
   flex-wrap: wrap;
-  gap: var(--rt-esp-3);
+  align-items: center;
+  gap: var(--rt-esp-5);
   margin-bottom: var(--rt-esp-6);
 }
 
-.rt-heroact__puce {
-  display: flex;
-  flex-direction: column;
-  padding: 8px 14px;
-  border: 1px solid rgba(243, 239, 230, 0.32);
-  background: rgba(15, 20, 16, 0.30);
-  backdrop-filter: blur(4px);
-  border-radius: var(--rt-radius-m);
-  line-height: 1.2;
+.rt-heroact__badge {
+  height: 78px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.45));
 }
-
-.rt-heroact__puce strong {
-  color: var(--rt-or-clair);
-  font-family: var(--rt-font-titre);
-  font-size: 0.98rem;
-  letter-spacing: 0.04em;
-}
-
-.rt-heroact__puce span { font-size: 0.8rem; color: rgba(243, 239, 230, 0.85); }
 
 .rt-heroact__cta {
   display: flex;
   flex-wrap: wrap;
   gap: var(--rt-esp-4);
   margin-bottom: var(--rt-esp-6);
-}
-
-.rt-heroact__tabs { display: flex; flex-wrap: wrap; gap: var(--rt-esp-3); }
-
-.rt-heroact__tab {
-  background: rgba(15, 20, 16, 0.32);
-  border: 1px solid rgba(243, 239, 230, 0.32);
-  color: rgba(243, 239, 230, 0.92);
-  border-radius: var(--rt-radius-pill);
-  padding: 9px 18px;
-  min-height: 44px;
-  font-weight: 600;
-  font-size: 0.92rem;
-  cursor: pointer;
-  transition: background var(--rt-transition-rapide), color var(--rt-transition-rapide), border-color var(--rt-transition-rapide);
-}
-
-.rt-heroact__tab:hover { background: rgba(15, 20, 16, 0.5); }
-
-.rt-heroact__tab.actif {
-  background: rgba(248, 245, 238, 0.96);
-  color: var(--rt-texte);
-  border-width: 2px;
 }
 
 /* Rectangles aperçu (les deux activités non actives) */

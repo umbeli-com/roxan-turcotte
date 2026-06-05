@@ -58,7 +58,7 @@ export default function Accueil() {
           titre={contenuAccueil.typesProprietes.titre}
           description={contenuAccueil.typesProprietes.description}
         />
-        <div className="rt-grille rt-grille--3">
+        <div className="rt-grille rt-grille--3x">
           {contenuAccueil.typesProprietes.items.map((it) => (
             <Link key={it.titre} to={it.lien} className="rt-carte-photo">
               <span className="rt-carte-photo__media">

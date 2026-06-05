@@ -37,7 +37,8 @@ export const marque = {
     royalLepage: 'marque/royal-lepage-couleur.png',
     royalLepageBlanc: 'marque/royal-lepage-blanc.png',
     sunset: 'marque/sunset.webp',
-    chaletsAirbnb: 'marque/chalets-airbnb.svg',
+    chaletsAirbnb: 'marque/airbnb.png',
+    airbnb: 'marque/airbnb.png',
   },
   badges: {
     top10: 'marque/top10-noir.png',
