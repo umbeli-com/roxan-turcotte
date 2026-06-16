@@ -47,6 +47,18 @@ const entrees: { libelle: string; href: string; icone: ReactNode }[] = [
     ),
   },
   {
+    libelle: 'Inclusions / Exclusions',
+    href: '/admin/checklist',
+    icone: (
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+        <path d="M9 4h6a1 1 0 0 1 1 1v0a1 1 0 0 1-1 1H9a1 1 0 0 1-1-1v0a1 1 0 0 1 1-1z" />
+        <path d="M8 5H6a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7a2 2 0 0 0-2-2h-2" />
+        <path d="M8.5 12l1.5 1.5L13 10" />
+        <path d="M16.5 16H17" />
+      </svg>
+    ),
+  },
+  {
     libelle: 'Export CSV',
     href: '/admin/export',
     icone: (

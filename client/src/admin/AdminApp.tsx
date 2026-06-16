@@ -7,6 +7,7 @@ import AdminDashboard from './pages/Dashboard';
 import AdminLeads from './pages/Leads';
 import AdminLeadDetail from './pages/LeadDetail';
 import AdminPartenaires from './pages/Partenaires';
+import AdminChecklist from './pages/Checklist';
 import AdminTags from './pages/Tags';
 import AdminExport from './pages/Export';
 
@@ -40,6 +41,7 @@ export default function AdminApp() {
           <Route path="leads" element={<AdminLeads />} />
           <Route path="leads/:id" element={<AdminLeadDetail />} />
           <Route path="partenaires" element={<AdminPartenaires />} />
+          <Route path="checklist" element={<AdminChecklist />} />
           <Route path="tags" element={<AdminTags />} />
           <Route path="export" element={<AdminExport />} />
         </Route>

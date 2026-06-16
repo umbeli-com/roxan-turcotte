@@ -15,6 +15,7 @@ import { appliquerMigrations } from './migrate.js';
 import { tagsRepo } from './repositories/tags.js';
 import { municipalitesRepo, adminUsersRepo } from './repositories/divers.js';
 import { partenairesRepo } from './repositories/partenaires.js';
+import { checklistRepo } from './repositories/checklist.js';
 
 const ETIQUETTES_DEFAUT = [
   { nom: 'royal-lepage', entite: 'royal-lepage' },
@@ -42,6 +43,49 @@ const PARTENAIRES_DEFAUT = [
   { slug: 'courtier-hypothecaire', nom: 'Courtier hypothécaire partenaire', role: 'Financement hypothécaire', entite: 'partenaire', description: 'Comparaison des taux et structuration du financement.' },
   { slug: 'notaire', nom: 'Notaire partenaire', role: 'Acte de vente · vérification des titres', entite: 'partenaire', description: 'Acte notarié, vérifications de titres et signature.' },
   { slug: 'inspecteur', nom: 'Inspecteur en bâtiment', role: 'Inspection préachat', entite: 'partenaire', description: 'Inspection rigoureuse avant l’engagement.' },
+];
+
+// Items par défaut de la check-list d'inclusions / exclusions (immobilier QC).
+// `e` = état par défaut : inclus | exclus | non-disponible | autre.
+const CHECKLIST_DEFAUT = [
+  // Électroménagers (souvent repris par le vendeur → exclus par défaut)
+  { categorie: 'Électroménagers', libelle: 'Cuisinière', e: 'exclus' },
+  { categorie: 'Électroménagers', libelle: 'Réfrigérateur', e: 'exclus' },
+  { categorie: 'Électroménagers', libelle: 'Lave-vaisselle', e: 'exclus' },
+  { categorie: 'Électroménagers', libelle: 'Four à micro-ondes / hotte', e: 'exclus' },
+  { categorie: 'Électroménagers', libelle: 'Laveuse', e: 'exclus' },
+  { categorie: 'Électroménagers', libelle: 'Sécheuse', e: 'exclus' },
+  { categorie: 'Électroménagers', libelle: 'Congélateur', e: 'exclus' },
+  // Luminaires et fenêtres
+  { categorie: 'Luminaires et fenêtres', libelle: 'Luminaires', e: 'inclus' },
+  { categorie: 'Luminaires et fenêtres', libelle: 'Ventilateurs de plafond', e: 'inclus' },
+  { categorie: 'Luminaires et fenêtres', libelle: 'Stores', e: 'inclus' },
+  { categorie: 'Luminaires et fenêtres', libelle: 'Toiles et persiennes', e: 'inclus' },
+  { categorie: 'Luminaires et fenêtres', libelle: 'Rideaux et tringles', e: 'inclus' },
+  // Chauffage, climatisation et eau
+  { categorie: 'Chauffage, climatisation et eau', libelle: 'Thermopompe / climatiseur mural', e: 'inclus' },
+  { categorie: 'Chauffage, climatisation et eau', libelle: 'Foyer / poêle', e: 'inclus' },
+  { categorie: 'Chauffage, climatisation et eau', libelle: 'Échangeur d’air (VRC/VRE)', e: 'inclus' },
+  { categorie: 'Chauffage, climatisation et eau', libelle: 'Réservoir d’eau chaude', e: 'autre' },
+  { categorie: 'Chauffage, climatisation et eau', libelle: 'Adoucisseur d’eau', e: 'inclus' },
+  { categorie: 'Chauffage, climatisation et eau', libelle: 'Système de filtration d’eau', e: 'inclus' },
+  // Systèmes
+  { categorie: 'Systèmes', libelle: 'Système d’alarme', e: 'inclus' },
+  { categorie: 'Systèmes', libelle: 'Aspirateur central et accessoires', e: 'inclus' },
+  { categorie: 'Systèmes', libelle: 'Ouvre-porte de garage et télécommandes', e: 'inclus' },
+  { categorie: 'Systèmes', libelle: 'Détecteurs de fumée et de CO', e: 'inclus' },
+  { categorie: 'Systèmes', libelle: 'Thermostats intelligents', e: 'inclus' },
+  { categorie: 'Systèmes', libelle: 'Sonnette / caméra connectée', e: 'inclus' },
+  // Extérieur
+  { categorie: 'Extérieur', libelle: 'Remise / cabanon', e: 'inclus' },
+  { categorie: 'Extérieur', libelle: 'Abri d’auto (abri Tempo)', e: 'inclus' },
+  { categorie: 'Extérieur', libelle: 'Piscine et accessoires', e: 'inclus' },
+  { categorie: 'Extérieur', libelle: 'Spa', e: 'inclus' },
+  { categorie: 'Extérieur', libelle: 'Système d’arrosage', e: 'inclus' },
+  { categorie: 'Extérieur', libelle: 'Aménagement paysager et plantations', e: 'inclus' },
+  { categorie: 'Extérieur', libelle: 'Corde à linge', e: 'inclus' },
+  { categorie: 'Extérieur', libelle: 'Module de jeu / balançoire', e: 'inclus' },
+  { categorie: 'Extérieur', libelle: 'Barbecue au gaz fixe (relié)', e: 'inclus' },
 ];
 
 const MUNICIPALITES_DEFAUT = [
@@ -76,6 +120,16 @@ export async function semer({ silencieux = false } = {}) {
     if (!avant) nbPartenaires += 1;
   }
   if (nbPartenaires) log(`Partenaires créés (${nbPartenaires}).`);
+
+  // Check-list d'inclusions / exclusions : items par défaut (seulement si vide,
+  // pour ne pas écraser les modifications de l'administrateur).
+  const existeChecklist = db.prepare('SELECT COUNT(*) AS c FROM checklist_items').get().c;
+  if (existeChecklist === 0) {
+    CHECKLIST_DEFAUT.forEach((it, i) =>
+      checklistRepo.creer({ libelle: it.libelle, categorie: it.categorie, etat_defaut: it.e, ordre: (i + 1) * 10 }),
+    );
+    log(`Check-list par défaut créée (${CHECKLIST_DEFAUT.length} items).`);
+  }
 
   // Compte admin initial : ne crée QUE s'il n'existe aucun admin du tout
   // (et pas seulement si l'admin avec ce nom-là n'existe pas) pour éviter

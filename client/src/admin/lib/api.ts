@@ -67,6 +67,15 @@ export const api = {
   leadsPartenaire: (slug: string) =>
     appel<{ leads: Lead[] }>(`/admin/partenaires/${encodeURIComponent(slug)}/leads`),
 
+  // Check-list inclusions / exclusions (modèle d'items)
+  listerChecklist: () => appel<{ items: ChecklistItem[] }>('/admin/checklist-items'),
+  creerChecklistItem: (it: Partial<ChecklistItem>) =>
+    appel<{ item: ChecklistItem }>('/admin/checklist-items', { method: 'POST', body: JSON.stringify(it) }),
+  modifierChecklistItem: (id: number, it: Partial<ChecklistItem>) =>
+    appel<{ item: ChecklistItem }>(`/admin/checklist-items/${id}`, { method: 'PATCH', body: JSON.stringify(it) }),
+  supprimerChecklistItem: (id: number) =>
+    appel<{ ok: true }>(`/admin/checklist-items/${id}`, { method: 'DELETE' }),
+
   // Tags
   listerTags: () => appel<{ tags: Etiquette[] }>('/admin/tags'),
   creerTag: (t: Partial<Etiquette>) =>
@@ -124,6 +133,18 @@ export type Partenaire = {
   courriel: string | null;
   entite: string | null;
   description: string | null;
+  actif: number;
+  cree_le: string;
+};
+
+export type EtatChecklist = 'inclus' | 'exclus' | 'non-disponible' | 'autre';
+
+export type ChecklistItem = {
+  id: number;
+  libelle: string;
+  categorie: string | null;
+  etat_defaut: EtatChecklist;
+  ordre: number;
   actif: number;
   cree_le: string;
 };

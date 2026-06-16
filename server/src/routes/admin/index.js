@@ -13,6 +13,7 @@ import {
   adminUsersRepo,
 } from '../../db/repositories/divers.js';
 import { partenairesRepo } from '../../db/repositories/partenaires.js';
+import { checklistRepo } from '../../db/repositories/checklist.js';
 import { genererCSV } from '../../services/csv-export.js';
 import { exigerAdmin, signerSession, optionsCookieSession } from '../../middleware/auth.js';
 
@@ -102,6 +103,12 @@ routesAdmin.post('/partenaires', exigerAdmin, (req, res) => res.json({ partenair
 routesAdmin.patch('/partenaires/:id', exigerAdmin, (req, res) => res.json({ partenaire: partenairesRepo.modifier(Number(req.params.id), req.body) }));
 routesAdmin.delete('/partenaires/:id', exigerAdmin, (req, res) => { partenairesRepo.supprimer(Number(req.params.id)); res.json({ ok: true }); });
 routesAdmin.get('/partenaires/:slug/leads', exigerAdmin, (req, res) => res.json({ leads: partenairesRepo.leadsParSlug(req.params.slug) }));
+
+// Check-list d'inclusions / exclusions (modèle d'items configurable)
+routesAdmin.get('/checklist-items', exigerAdmin, (req, res) => res.json({ items: checklistRepo.lister() }));
+routesAdmin.post('/checklist-items', exigerAdmin, (req, res) => res.json({ item: checklistRepo.creer(req.body) }));
+routesAdmin.patch('/checklist-items/:id', exigerAdmin, (req, res) => res.json({ item: checklistRepo.modifier(Number(req.params.id), req.body) }));
+routesAdmin.delete('/checklist-items/:id', exigerAdmin, (req, res) => { checklistRepo.supprimer(Number(req.params.id)); res.json({ ok: true }); });
 
 // Guides
 routesAdmin.get('/guides', exigerAdmin, (req, res) => res.json({ guides: guidesRepo.lister() }));

@@ -417,3 +417,105 @@
   border: 1px dashed var(--adm-ligne);
   border-radius: 10px;
 }
+
+/* -------------------------------------------------------------------- *
+ * Check-list d'inclusions / exclusions
+ * -------------------------------------------------------------------- */
+.checklist-layout {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+@media (max-width: 980px) { .checklist-layout { grid-template-columns: 1fr; } }
+
+.checklist-groupe { margin-bottom: 1.25rem; }
+.checklist-groupe__titre {
+  font-size: 0.92rem;
+  color: var(--adm-or-clair);
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+
+.checklist-ligne {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  padding: 0.45rem 0;
+  border-bottom: 1px solid var(--adm-ligne);
+}
+.checklist-ligne__libelle { flex: 1; min-width: 150px; color: var(--adm-texte); }
+
+.checklist-seg {
+  display: inline-flex;
+  border: 1px solid var(--adm-ligne);
+  border-radius: 6px;
+  overflow: hidden;
+}
+.checklist-seg__btn {
+  background: transparent;
+  border: 0;
+  border-left: 1px solid var(--adm-ligne);
+  padding: 6px 10px;
+  font-size: 0.8rem;
+  color: var(--adm-texte-faible);
+  cursor: pointer;
+  white-space: nowrap;
+}
+.checklist-seg__btn:first-child { border-left: 0; }
+.checklist-seg__btn:hover { background: var(--adm-fond-elev-2); }
+.checklist-seg__btn.actif { color: #fff; font-weight: 600; }
+.checklist-seg__btn--inclus.actif { background: #2f7d4f; }
+.checklist-seg__btn--exclus.actif { background: #c0392b; }
+.checklist-seg__btn--non-disponible.actif { background: #5b626c; }
+.checklist-seg__btn--autre.actif { background: #b9791a; }
+
+.checklist-note { flex-basis: 100%; margin-top: 4px; }
+
+.checklist-resultat {
+  position: sticky;
+  top: 1rem;
+  background: var(--adm-fond-elev);
+  border: 1px solid var(--adm-ligne);
+  border-radius: 8px;
+  padding: 1rem;
+}
+.checklist-resultat__tete {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.5rem;
+}
+.checklist-resultat__tete h3 { margin: 0; font-size: 1rem; }
+.checklist-md {
+  width: 100%;
+  min-height: 280px;
+  resize: vertical;
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85rem;
+  line-height: 1.55;
+  background: var(--adm-fond);
+  color: var(--adm-texte);
+  border: 1px solid var(--adm-ligne);
+  border-radius: 6px;
+  padding: 0.75rem;
+}
+.checklist-resultat__aide { font-size: 0.78rem; color: var(--adm-texte-faible); margin: 0.5rem 0 0; }
+
+/* Inputs/selects bruts (table des paramètres + note) */
+.rt-adm-tableau input,
+.rt-adm-tableau select,
+.checklist-note {
+  background: var(--adm-fond);
+  color: var(--adm-texte);
+  border: 1px solid var(--adm-ligne);
+  border-radius: 6px;
+  padding: 7px 10px;
+  font: inherit;
+}
+.rt-adm-tableau input:focus,
+.rt-adm-tableau select:focus,
+.checklist-note:focus { outline: none; border-color: var(--adm-or); }
