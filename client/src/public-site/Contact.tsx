@@ -74,17 +74,26 @@ export default function Contact() {
             borderRadius: '10px',
             overflow: 'hidden',
             height: '420px',
-            background: 'var(--rt-surface)',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-            color: 'var(--rt-texte-doux)',
-            fontFamily: 'var(--rt-font-sous-titre)',
-            fontStyle: 'italic',
           }}
         >
-          Emplacement réservé pour la carte (Google Maps ou OpenStreetMap intégrés).
+          <iframe
+            title="Carte — Trois-Rivières, Mauricie"
+            src="https://www.openstreetmap.org/export/embed.html?bbox=-72.6300%2C46.3210%2C-72.5100%2C46.3760&layer=mapnik&marker=46.3452%2C-72.5477"
+            style={{ border: 0, width: '100%', height: '100%', display: 'block' }}
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
         </div>
+        <p style={{ textAlign: 'center', marginTop: '0.75rem', fontSize: '0.85rem' }}>
+          <a
+            href="https://www.openstreetmap.org/?mlat=46.3452&mlon=-72.5477#map=13/46.3452/-72.5477"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Ouvrir la carte en grand
+          </a>
+        </p>
       </Section>
     </>
   );

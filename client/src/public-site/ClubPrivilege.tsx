@@ -1,6 +1,7 @@
 import { PageHead, schemaAgent } from '@/components/Head';
 import { Section, TitreSection } from '@/components/blocs';
 import { FormulaireContact } from '@/components/FormulaireContact';
+import { images } from '@content/images';
 import { contenuClubPrivilege } from '@content/pages/club-privilege';
 
 export default function ClubPrivilege() {
@@ -13,14 +14,28 @@ export default function ClubPrivilege() {
         schema={schemaAgent}
       />
 
-      <Section variante="ivoire">
-        <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto' }}>
-          <span className="rt-eyebrow">{contenuClubPrivilege.hero.eyebrow}</span>
-          <h1 className="rt-titre-gravure">{contenuClubPrivilege.hero.titre}</h1>
-          <p className="lead" style={{ fontStyle: 'italic', color: 'var(--rt-or-fonce)' }}>
+      <section className="rt-page-hero" aria-label={contenuClubPrivilege.hero.titre}>
+        <div
+          className="rt-page-hero__fond"
+          style={{ backgroundImage: `url(${images.proprietes.investissement.src})` }}
+          aria-hidden="true"
+        />
+        <div className="rt-page-hero__voile" aria-hidden="true" />
+        <div className="rt-page-hero__inner">
+          <span className="rt-page-hero__eyebrow">{contenuClubPrivilege.hero.eyebrow}</span>
+          <h1>{contenuClubPrivilege.hero.titre}</h1>
+          <p className="rt-page-hero__accroche" style={{ fontStyle: 'italic' }}>
             {contenuClubPrivilege.hero.sousTitre}
           </p>
-          <p style={{ marginTop: '2rem' }}>{contenuClubPrivilege.intro}</p>
+          <div className="rt-page-hero__cta">
+            <a className="rt-bouton rt-bouton--primaire" href="#formulaire">Rejoindre le Club</a>
+          </div>
+        </div>
+      </section>
+
+      <Section variante="ivoire">
+        <div style={{ textAlign: 'center', maxWidth: '780px', margin: '0 auto' }}>
+          <p className="lead">{contenuClubPrivilege.intro}</p>
         </div>
       </Section>
 

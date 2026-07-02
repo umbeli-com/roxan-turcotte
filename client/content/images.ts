@@ -66,4 +66,12 @@ export const images = {
 
   // Territoire / Mauricie.
   territoire: photo('1507371341162-763b5e419408', 1400, 'Paysage d’automne du Québec : lac bordé d’une forêt colorée'),
+
+  // Couvertures des guides téléchargeables (clé = slug du guide).
+  guides: {
+    'guide-de-lacheteur': photo('1600585154340-be6161a56a0c', 1000, 'Salon lumineux d’une propriété — guide de l’acheteur'),
+    'guide-du-vendeur': photo('1570129477492-45c003edd2be', 1000, 'Belle résidence à vendre — guide du vendeur'),
+    'guide-home-staging': photo('1616486338812-3dadae4b4ace', 1000, 'Intérieur mis en scène pour la vente — valorisation résidentielle'),
+    'guide-investisseur': photo('1600596542815-ffad4c1539a9', 1000, 'Propriété de prestige avec piscine — guide de l’investisseur'),
+  } as Record<string, Photo>,
 } as const;

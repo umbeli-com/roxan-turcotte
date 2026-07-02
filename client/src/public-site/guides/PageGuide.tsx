@@ -3,6 +3,7 @@ import { Section, TitreSection } from '@/components/blocs';
 import { FormulaireContact } from '@/components/FormulaireContact';
 import { BlocServicesAide, BlocAllerPlusLoin } from '@/components/blocsAide';
 import { servicesAide } from '@content/aide';
+import { images } from '@content/images';
 import guidesContent from '@content/guides.json';
 
 type Guide = (typeof guidesContent.guides)[number];
@@ -26,6 +27,15 @@ export function PageGuideTemplate({ guide }: { guide: Guide }) {
       <Section variante="ivoire">
         <div className="rt-guide-entete">
           <div className="rt-guide-carte__couverture" style={{ height: '420px', borderRadius: '10px' }}>
+            {images.guides[guide.slug] && (
+              <img
+                className="rt-guide-carte__couverture-image"
+                src={images.guides[guide.slug].src}
+                alt={images.guides[guide.slug].alt}
+                loading="eager"
+                decoding="async"
+              />
+            )}
             <span className="rt-guide-carte__couverture-titre" style={{ fontSize: '1.6rem' }}>
               {guide.couvertureMot}
             </span>

@@ -2,7 +2,13 @@ import { Router } from 'express';
 import { z } from 'zod';
 import * as leadsRepo from '../../db/repositories/leads.js';
 import { partenairesRepo } from '../../db/repositories/partenaires.js';
-import { notifierInterneNouveauLead, notifierPartenaireNouveauLead } from '../../services/mail/index.js';
+import { newsletterRepo } from '../../db/repositories/newsletter.js';
+import { dataRequestsRepo } from '../../db/repositories/divers.js';
+import {
+  notifierInterneNouveauLead,
+  notifierPartenaireNouveauLead,
+  accuserReceptionLead,
+} from '../../services/mail/index.js';
 
 export const routesLeadsPublic = Router();
 
@@ -30,8 +36,32 @@ routesLeadsPublic.post('/leads', async (req, res, next) => {
       { ...corps, profil_slug: corps.profil ?? null, adresse_ip: req.ip },
       corps.tags ?? [],
     );
+
+    // Le formulaire universel sert plusieurs intentions. On finalise ici le
+    // traitement propre à chaque type pour que « tout soit géré » côté backend.
+    if (corps.type_formulaire === 'desinscription') {
+      // Retire réellement l'adresse de l'infolettre.
+      try { newsletterRepo.desinscrireParCourriel(lead.courriel); } catch {}
+    } else if (corps.type_formulaire === 'loi25') {
+      // Consigne une demande d'accès/rectification/suppression conforme Loi 25.
+      // Le type précis est indiqué dans le message par le visiteur ; on garde
+      // « acces » par défaut et l'administrateur qualifie ensuite la demande.
+      try {
+        dataRequestsRepo.creer({ courriel: lead.courriel, type: 'acces', message: lead.message });
+      } catch {}
+    } else if (corps.consentement_infolettre) {
+      // Consentement infolettre coché sur un formulaire de contact / club :
+      // on inscrit effectivement l'adresse à la liste.
+      try { newsletterRepo.inscrire({ courriel: lead.courriel, prenom: lead.prenom }); } catch {}
+    }
+
     // Notifications, ne bloquent pas la réponse.
     notifierInterneNouveauLead(lead).catch(() => {});
+    // Accusé de réception au visiteur (sauf désinscription : le message serait
+    // contradictoire).
+    if (corps.type_formulaire !== 'desinscription') {
+      accuserReceptionLead(lead).catch(() => {});
+    }
     if (lead.profil_slug) {
       const partenaire = partenairesRepo.parSlug(lead.profil_slug);
       if (partenaire && partenaire.actif) {

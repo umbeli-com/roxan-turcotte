@@ -20,6 +20,12 @@ export const newsletterRepo = {
     db.prepare("UPDATE newsletter_subscribers SET statut='desinscrit' WHERE id = ?").run(sub.id);
     return sub;
   },
+  desinscrireParCourriel(courriel) {
+    const sub = db.prepare('SELECT * FROM newsletter_subscribers WHERE courriel = ?').get(courriel);
+    if (!sub) return null;
+    db.prepare("UPDATE newsletter_subscribers SET statut='desinscrit' WHERE id = ?").run(sub.id);
+    return sub;
+  },
   lister() { return db.prepare('SELECT * FROM newsletter_subscribers ORDER BY abonne_le DESC').all(); },
   campagnes() { return db.prepare('SELECT * FROM newsletter_campaigns ORDER BY cree_le DESC').all(); },
   creerCampagne({ sujet, corps_html, segment_tag_id }) {

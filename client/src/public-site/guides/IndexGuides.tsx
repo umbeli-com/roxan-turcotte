@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { PageHead, schemaAgent } from '@/components/Head';
 import { Section, TitreSection, BoutonInterne } from '@/components/blocs';
+import { images } from '@content/images';
 import guidesContent from '@content/guides.json';
 
 type Guide = (typeof guidesContent.guides)[number];
@@ -25,6 +26,15 @@ export default function IndexGuides() {
           {guidesContent.guides.map((g: Guide) => (
             <article key={g.slug} className="rt-guide-carte">
               <div className="rt-guide-carte__couverture">
+                {images.guides[g.slug] && (
+                  <img
+                    className="rt-guide-carte__couverture-image"
+                    src={images.guides[g.slug].src}
+                    alt={images.guides[g.slug].alt}
+                    loading="lazy"
+                    decoding="async"
+                  />
+                )}
                 <span className="rt-guide-carte__couverture-titre">{g.couvertureMot}</span>
               </div>
               <div className="rt-guide-carte__corps">
