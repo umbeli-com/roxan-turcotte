@@ -8,6 +8,44 @@ import nodemailer from 'nodemailer';
 import { env } from '../../config/env.js';
 import { emailLogRepo } from '../../db/repositories/divers.js';
 
+// --- Helpers de rendu courriel -------------------------------------------
+function escapeHtml(v) {
+  if (v === null || v === undefined) return '';
+  return String(v)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#39;');
+}
+
+function dateFrCA() {
+  try {
+    return new Date().toLocaleString('fr-CA', {
+      timeZone: 'America/Toronto',
+      dateStyle: 'long',
+      timeStyle: 'short',
+    });
+  } catch {
+    return new Date().toISOString();
+  }
+}
+
+// Une ligne label / valeur de la table de détails (charte or/encre).
+function ligneDetail(label, valeurHtml) {
+  if (!valeurHtml) return '';
+  return (
+    '<tr>' +
+    '<td style="padding:11px 0; border-bottom:1px solid #F3ECDD; color:#6C746A; font-size:13px; width:170px; vertical-align:top;">' +
+    escapeHtml(label) +
+    '</td>' +
+    '<td style="padding:11px 0; border-bottom:1px solid #F3ECDD; color:#1E2420; font-size:14px; vertical-align:top;">' +
+    valeurHtml +
+    '</td>' +
+    '</tr>'
+  );
+}
+
 let transporteur;
 function getTransporteur() {
   if (transporteur) return transporteur;
@@ -54,20 +92,59 @@ export async function sendMail({ to, cc, subject, html, attachments, replyTo, le
 
 export function notifierInterneNouveauLead(lead) {
   if (!env.mail.notifInternalTo) return Promise.resolve();
-  const html = `
-    <div style="font-family: sans-serif; padding: 16px;">
-      <h2 style="color: #C8A24A;">Nouveau lead reçu</h2>
-      <p><strong>${lead.prenom} ${lead.nom}</strong></p>
-      <ul>
-        <li>Courriel : ${lead.courriel}</li>
-        <li>Téléphone : ${lead.telephone ?? '—'}</li>
-        <li>Type de formulaire : ${lead.type_formulaire}</li>
-        <li>Page d'origine : ${lead.page_origine ?? '—'}</li>
-        <li>Source : ${lead.source_entite ?? '—'}</li>
-      </ul>
-      ${lead.message ? `<p><strong>Message :</strong><br>${lead.message}</p>` : ''}
-    </div>
-  `;
+
+  const nomComplet = `${lead.prenom ?? ''} ${lead.nom ?? ''}`.trim() || 'Contact';
+  const courrielHtml = lead.courriel
+    ? `<a href="mailto:${escapeHtml(lead.courriel)}" style="color:#8A6826; text-decoration:none; font-weight:600;">${escapeHtml(lead.courriel)}</a>`
+    : '';
+  const telHtml = lead.telephone
+    ? `<a href="tel:${escapeHtml(String(lead.telephone).replace(/[^0-9+]/g, ''))}" style="color:#8A6826; text-decoration:none; font-weight:600;">${escapeHtml(lead.telephone)}</a>`
+    : '';
+
+  const lignes =
+    ligneDetail('Courriel', courrielHtml) +
+    ligneDetail('Téléphone', telHtml) +
+    ligneDetail('Personne à contacter', lead.profil_slug ? escapeHtml(lead.profil_slug) : '') +
+    ligneDetail('Source', lead.source_entite ? escapeHtml(lead.source_entite) : '') +
+    ligneDetail('Page d’origine', lead.page_origine ? escapeHtml(lead.page_origine) : '') +
+    ligneDetail('Infolettre', lead.consentement_infolettre ? 'Oui — inscrit(e) à l’infolettre' : 'Non') +
+    ligneDetail('Reçu le', dateFrCA());
+
+  const messageBloc = lead.message
+    ? `<tr><td style="padding:8px 32px 4px;">
+         <div style="background:#FAF7F0; border-left:3px solid #B0863A; border-radius:8px; padding:16px 18px; color:#1E2420; font-size:14px; line-height:1.55;">
+           <div style="font-size:12px; letter-spacing:0.08em; text-transform:uppercase; color:#8A6826; font-weight:600; margin-bottom:6px;">Message</div>
+           ${escapeHtml(lead.message).replace(/\n/g, '<br>')}
+         </div>
+       </td></tr>`
+    : '';
+
+  const html = `<!doctype html>
+<html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"></head>
+<body style="margin:0; padding:0; background:#F3ECDD;">
+  <table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="background:#F3ECDD; padding:28px 12px;">
+    <tr><td align="center">
+      <table role="presentation" width="600" cellpadding="0" cellspacing="0" style="width:600px; max-width:100%; background:#FFFFFF; border:1px solid #E6DECD; border-radius:14px; overflow:hidden; font-family:'Segoe UI',Helvetica,Arial,sans-serif;">
+        <tr><td style="background:#1E2420; padding:26px 32px; border-bottom:3px solid #B0863A;">
+          <div style="font-size:12px; letter-spacing:0.18em; text-transform:uppercase; color:#C8A24A; font-weight:600;">Roxan Turcotte &middot; Courtier immobilier</div>
+          <div style="font-size:23px; color:#FFFFFF; font-weight:700; margin-top:6px;">Nouveau lead reçu</div>
+        </td></tr>
+        <tr><td style="padding:26px 32px 6px;">
+          <div style="font-size:20px; color:#1E2420; font-weight:700;">${escapeHtml(nomComplet)}</div>
+          <span style="display:inline-block; margin-top:10px; padding:4px 13px; background:rgba(176,134,58,0.12); color:#8A6826; border:1px solid #B0863A; border-radius:999px; font-size:12px; font-weight:600;">${escapeHtml(lead.type_formulaire ?? 'contact')}</span>
+        </td></tr>
+        <tr><td style="padding:12px 32px 6px;">
+          <table role="presentation" width="100%" cellpadding="0" cellspacing="0">${lignes}</table>
+        </td></tr>
+        ${messageBloc}
+        <tr><td style="padding:22px 32px 26px;">
+          <div style="font-size:12px; color:#6C746A; line-height:1.5;">Notification automatique — <a href="${escapeHtml(env.publicBaseUrl)}" style="color:#8A6826; text-decoration:none;">${escapeHtml(env.publicBaseUrl.replace(/^https?:\/\//, ''))}</a>. Répondez directement à ce courriel pour écrire à la personne.</div>
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body></html>`;
+
   return sendMail({
     to: env.mail.notifInternalTo,
     cc: env.mail.notifCc || undefined,
