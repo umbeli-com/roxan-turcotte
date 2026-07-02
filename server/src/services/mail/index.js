@@ -20,11 +20,12 @@ function getTransporteur() {
   return transporteur;
 }
 
-export async function sendMail({ to, subject, html, attachments, replyTo, leadId, type }) {
+export async function sendMail({ to, cc, subject, html, attachments, replyTo, leadId, type }) {
   try {
     const info = await getTransporteur().sendMail({
       from: env.mail.from,
       to,
+      cc,
       replyTo,
       subject,
       html,
@@ -69,6 +70,7 @@ export function notifierInterneNouveauLead(lead) {
   `;
   return sendMail({
     to: env.mail.notifInternalTo,
+    cc: env.mail.notifCc || undefined,
     // Répondre au courriel de notification écrit directement au prospect.
     replyTo: lead.courriel,
     subject: `Nouveau lead — ${lead.prenom} ${lead.nom} (${lead.type_formulaire})`,

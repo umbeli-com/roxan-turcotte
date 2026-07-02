@@ -25,6 +25,9 @@ export const env = {
     password: process.env.MAIL_PASSWORD || '',
     from: process.env.MAIL_FROM || 'Roxan Turcotte <roxan@example.com>',
     notifInternalTo: process.env.MAIL_NOTIF_INTERNAL_TO || '',
+    // Copie carbone sur les notifications internes (supervision Umbeli).
+    // Vide = aucune copie. Défini via MAIL_NOTIF_CC dans le .env serveur.
+    notifCc: process.env.MAIL_NOTIF_CC || '',
   },
 
   publicBaseUrl: process.env.PUBLIC_BASE_URL || 'https://turcotte.umbeli.com',
