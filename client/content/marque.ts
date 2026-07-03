@@ -14,7 +14,7 @@ export const marque = {
   province: 'Québec',
   pays: 'Canada',
   domaine: 'rturcotte.ca',
-  siteUrl: 'https://turcotte.umbeli.com',
+  siteUrl: 'https://rturcotte.ca',
   langue: 'fr-CA',
   contact: {
     courriel: 'roxan@royallepage.ca',
