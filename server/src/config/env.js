@@ -23,7 +23,7 @@ export const env = {
     secure: process.env.MAIL_SECURE === 'true',
     user: process.env.MAIL_USER || '',
     password: process.env.MAIL_PASSWORD || '',
-    from: process.env.MAIL_FROM || 'Roxan Turcotte <roxan@example.com>',
+    from: process.env.MAIL_FROM || 'Roxan Turcotte <roxanturcotte@rturcotte.ca>',
     notifInternalTo: process.env.MAIL_NOTIF_INTERNAL_TO || '',
     // Copie carbone sur les notifications internes (supervision Umbeli).
     // Vide = aucune copie. Défini via MAIL_NOTIF_CC dans le .env serveur.

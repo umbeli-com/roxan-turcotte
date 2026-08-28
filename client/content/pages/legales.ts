@@ -2,6 +2,8 @@
 // en service. Adapté à la Loi 25 (Québec) et aux exigences de l'OACIQ pour
 // l'identification professionnelle. À compléter et signer par le client.
 
+import { marque } from '../marque';
+
 export const politiqueConfidentialite = {
   titre: 'Politique de confidentialité',
   derniereMaj: '2026-01-01',
@@ -10,7 +12,7 @@ export const politiqueConfidentialite = {
       titre: '1. Responsable des renseignements personnels',
       paragraphes: [
         'Roxan Turcotte, Courtier Immobilier inc. (ci-après « nous ») est responsable de la protection des renseignements personnels recueillis sur le présent site, conformément à la Loi sur la protection des renseignements personnels dans le secteur privé du Québec (Loi 25).',
-        'Pour toute question concernant la présente politique ou pour exercer vos droits, vous pouvez écrire à : roxan@royallepage.ca.',
+        `Pour toute question concernant la présente politique ou pour exercer vos droits, vous pouvez écrire à : ${marque.contact.courriel}.`,
       ],
     },
     {
@@ -36,7 +38,7 @@ export const politiqueConfidentialite = {
     {
       titre: '5. Vos droits',
       paragraphes: [
-        'Conformément à la Loi 25, vous disposez d\'un droit d\'accès, de rectification et de suppression de vos données. Vous pouvez exercer ces droits via le formulaire de demande à l\'adresse /demande-de-donnees, ou par courriel à roxan@royallepage.ca.',
+        `Conformément à la Loi 25, vous disposez d'un droit d'accès, de rectification et de suppression de vos données. Vous pouvez exercer ces droits via le formulaire de demande à l'adresse /demande-de-donnees, ou par courriel à ${marque.contact.courriel}.`,
         'Vous pouvez également vous désinscrire de l\'infolettre à tout moment en un clic, via le lien présent dans chaque envoi.',
       ],
     },

@@ -17,9 +17,9 @@ export const marque = {
   siteUrl: 'https://rturcotte.ca',
   langue: 'fr-CA',
   contact: {
-    courriel: 'roxan@royallepage.ca',
-    telephone: '+1 819 000 0000',
-    telephoneAffiche: '819 000 0000',
+    courriel: 'roxanturcotte@rturcotte.ca',
+    telephone: '+1 819 448 4471',
+    telephoneAffiche: '819 448-4471',
     adresse: 'Royal LePage Centre, Trois-Rivières (Québec)',
     region: 'Mauricie',
     fuseau: 'America/Toronto',
