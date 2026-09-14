@@ -9,6 +9,7 @@
     "server"
   ],
   "scripts": {
+    "test": "npm --workspace server test",
     "dev": "npm-run-all -p dev:client dev:server",
     "dev:client": "npm --workspace client run dev",
     "dev:server": "npm --workspace server run dev",

@@ -15,6 +15,7 @@ import {
 import { partenairesRepo } from '../../db/repositories/partenaires.js';
 import { checklistRepo } from '../../db/repositories/checklist.js';
 import { genererCSV } from '../../services/csv-export.js';
+import { colonnesKvcore, preparerLeadKvcore } from '../../services/kvcore-export.js';
 import { exigerAdmin, signerSession, optionsCookieSession } from '../../middleware/auth.js';
 
 export const routesAdmin = Router();
@@ -46,12 +47,6 @@ routesAdmin.get('/dashboard', exigerAdmin, (req, res) => {
 routesAdmin.get('/leads', exigerAdmin, (req, res) => {
   res.json({ leads: leadsRepo.lister(req.query) });
 });
-routesAdmin.get('/leads/:id', exigerAdmin, (req, res) => {
-  const lead = leadsRepo.trouver(Number(req.params.id));
-  if (!lead) return res.status(404).json({ erreur: 'lead-introuvable' });
-  const partenaire = lead.profil_slug ? partenairesRepo.parSlug(lead.profil_slug) : null;
-  res.json({ lead, etiquettes: leadsRepo.etiquettesDuLead(lead.id), partenaire });
-});
 routesAdmin.patch('/leads/:id', exigerAdmin, (req, res) => {
   const lead = leadsRepo.modifier(Number(req.params.id), req.body);
   res.json({ lead });
@@ -64,9 +59,23 @@ routesAdmin.delete('/leads/:id', exigerAdmin, (req, res) => {
   res.json({ ok: true });
 });
 
-// Export CSV paramétré : profil = nom du profil OU JSON inline
+// Déclarer l'export avant GET /leads/:id pour que « export » ne soit pas pris pour un ID.
+// Profil intégré kvCORE ou profil de colonnes enregistré en base.
 routesAdmin.get('/leads/export', exigerAdmin, (req, res) => {
-  const { profil, etiquette, statut, depuis, jusqu, separateur } = req.query;
+  const requete = z.object({
+    profil: z.string().optional(),
+    etiquette: z.string().optional(),
+    sourceEntite: z.string().optional(),
+    statut: z.string().optional(),
+    depuis: z.string().date().optional(),
+    jusqu: z.string().date().optional(),
+    separateur: z.enum([',', ';']).optional(),
+    agent: z.string().email().optional(),
+  }).safeParse(req.query);
+  if (!requete.success) return res.status(400).json({ erreur: 'parametres-export-invalides' });
+  const { profil, etiquette, sourceEntite, statut, depuis, jusqu, separateur, agent } = requete.data;
+  if (depuis && jusqu && depuis > jusqu) return res.status(400).json({ erreur: 'periode-invalide' });
+  const kvcore = profil === 'kvcore';
   let colonnes = [
     { cle: 'prenom', titre: 'Prénom' },
     { cle: 'nom', titre: 'Nom' },
@@ -78,17 +87,28 @@ routesAdmin.get('/leads/export', exigerAdmin, (req, res) => {
     { cle: 'cree_le', titre: 'Reçu le' },
   ];
   let sep = (separateur || ',').toString();
-  if (profil) {
+  if (kvcore) {
+    colonnes = colonnesKvcore;
+    sep = ',';
+  } else if (profil) {
     const p = exportProfilesRepo.lister().find((x) => x.nom === profil);
     if (!p) return res.status(404).json({ erreur: 'profil-introuvable' });
     colonnes = JSON.parse(p.colonnes);
     sep = p.separateur || ',';
   }
-  const lignes = leadsRepo.lister({ etiquette, statut, depuis, jusqu, limite: 50_000 });
+  let lignes = leadsRepo.lister({ etiquette, sourceEntite, statut, depuis, jusqu, limite: 50_000, avecDetailsExport: kvcore });
+  if (kvcore) lignes = lignes.map((lead) => preparerLeadKvcore(lead, agent));
   const csv = genererCSV(colonnes, lignes, sep);
   res.setHeader('Content-Type', 'text/csv; charset=utf-8');
-  res.setHeader('Content-Disposition', 'attachment; filename="leads-export.csv"');
+  res.setHeader('Content-Disposition', `attachment; filename="${kvcore ? 'leads-kvcore' : 'leads-export'}.csv"`);
   res.send(csv);
+});
+
+routesAdmin.get('/leads/:id', exigerAdmin, (req, res) => {
+  const lead = leadsRepo.trouver(Number(req.params.id));
+  if (!lead) return res.status(404).json({ erreur: 'lead-introuvable' });
+  const partenaire = lead.profil_slug ? partenairesRepo.parSlug(lead.profil_slug) : null;
+  res.json({ lead, etiquettes: leadsRepo.etiquettesDuLead(lead.id), partenaire });
 });
 
 // Tags

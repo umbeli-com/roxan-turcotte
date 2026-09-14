@@ -6,7 +6,7 @@ const BOM = '﻿';
 function echapper(valeur, separateur) {
   if (valeur === null || valeur === undefined) return '';
   const s = String(valeur);
-  if (s.includes('"') || s.includes('\n') || s.includes(separateur)) {
+  if (s.includes('"') || s.includes('\n') || s.includes('\r') || s.includes(separateur)) {
     return `"${s.replace(/"/g, '""')}"`;
   }
   return s;

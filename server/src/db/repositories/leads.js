@@ -47,10 +47,13 @@ export function creerLead(payload, etiquettes = []) {
   return SELECT_ID.get(id);
 }
 
-export function lister({ etiquette, statut, sourceEntite, profil, recherche, depuis, jusqu, limite = 50, offset = 0 } = {}) {
+export function lister({ etiquette, statut, sourceEntite, profil, recherche, depuis, jusqu, limite = 50, offset = 0, avecDetailsExport = false } = {}) {
   const conditions = [];
   const params = {};
-  if (statut) { conditions.push('l.statut = @statut'); params.statut = statut; }
+  if (statut) {
+    conditions.push(statut === 'archive' ? '(l.statut = @statut OR l.archive = 1)' : '(l.statut = @statut AND l.archive = 0)');
+    params.statut = statut;
+  }
   if (sourceEntite) { conditions.push('l.source_entite = @sourceEntite'); params.sourceEntite = sourceEntite; }
   if (profil) { conditions.push('l.profil_slug = @profil'); params.profil = profil; }
   if (recherche) {
@@ -58,13 +61,25 @@ export function lister({ etiquette, statut, sourceEntite, profil, recherche, dep
     params.r = `%${recherche}%`;
   }
   if (depuis) { conditions.push('l.cree_le >= @depuis'); params.depuis = depuis; }
-  if (jusqu) { conditions.push('l.cree_le <= @jusqu'); params.jusqu = jusqu; }
+  if (jusqu) {
+    // Un filtre de date inclut toute la dernière journée, même avec un horodatage ISO.
+    conditions.push(/^\d{4}-\d{2}-\d{2}$/.test(jusqu) ? 'substr(l.cree_le, 1, 10) <= @jusqu' : 'l.cree_le <= @jusqu');
+    params.jusqu = jusqu;
+  }
   if (etiquette) {
     conditions.push('l.id IN (SELECT lead_id FROM lead_tags lt JOIN tags t ON t.id = lt.tag_id WHERE t.nom = @etiquette)');
     params.etiquette = etiquette;
   }
   const where = conditions.length ? `WHERE ${conditions.join(' AND ')}` : '';
-  const sql = `SELECT l.* FROM leads l ${where} ORDER BY l.cree_le DESC LIMIT @limite OFFSET @offset`;
+  const detailsExport = avecDetailsExport ? `,
+    (SELECT json_group_array(nom) FROM (
+      SELECT t.nom FROM tags t JOIN lead_tags lt ON lt.tag_id = t.id
+      WHERE lt.lead_id = l.id ORDER BY t.nom
+    )) AS etiquettes_export,
+    EXISTS(SELECT 1 FROM newsletter_subscribers ns
+      WHERE ns.courriel = l.courriel COLLATE NOCASE AND ns.statut = 'desinscrit'
+    ) AS infolettre_desinscrit` : '';
+  const sql = `SELECT l.*${detailsExport} FROM leads l ${where} ORDER BY l.cree_le DESC LIMIT @limite OFFSET @offset`;
   return db.prepare(sql).all({ ...params, limite, offset });
 }
 

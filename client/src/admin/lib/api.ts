@@ -85,6 +85,8 @@ export const api = {
   supprimerTag: (id: number) =>
     appel<{ ok: true }>(`/admin/tags/${id}`, { method: 'DELETE' }),
 
+  listerProfilsExport: () => appel<{ profils: { id: number; nom: string; separateur: string }[] }>('/admin/export-profiles'),
+
   // Export CSV : on retourne directement la réponse brute pour pouvoir
   // déclencher un téléchargement côté composant.
   urlExport: (filtres: Record<string, string | undefined>) => {
