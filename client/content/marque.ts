@@ -49,10 +49,9 @@ export const marque = {
     platine: 'marque/platine-couleur.png',
     platineBlanc: 'marque/platine-blanc.png',
   },
-  // Liens externes. Airbnb : placeholder éditable — laisser vide tant que
-  // l'URL réelle n'est pas fournie (le bouton retombe alors sur le formulaire).
+  // Liens externes partagés par la navigation et les activités.
   liens: {
-    airbnb: '',
+    airbnb: 'https://fr.airbnb.ca/rooms/1366105779419544995',
   },
   reseaux: {
     facebook: 'https://www.facebook.com',

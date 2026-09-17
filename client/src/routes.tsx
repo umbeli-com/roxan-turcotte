@@ -68,11 +68,10 @@ export const routes: RouteRecord[] = [
       { path: 'desinscription', element: <Desinscription /> },
       { path: 'demande-de-donnees', element: <DemandeDeDonnees /> },
 
-      // Back-office (rendu client seulement, noindex).
-      { path: 'admin/*', element: <AdminApp />, entry: 'src/admin/AdminApp.tsx' },
-
       // 404
       { path: '*', element: <PageNonTrouvee /> },
     ],
   },
+  // Back-office indépendant du gabarit public, en plein écran (CSR, noindex).
+  { path: '/admin/*', element: <AdminApp />, entry: 'src/admin/AdminApp.tsx' },
 ];

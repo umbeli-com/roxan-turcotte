@@ -7,7 +7,8 @@ import { asset } from '@/lib/asset';
 // Slider plein écran de l'accueil. Le fond, le logo, les accréditations et les
 // call-to-action changent selon l'activité active. Les deux activités non
 // actives sont visibles à droite sous forme de rectangles cliquables ;
-// cliquer un rectangle le promeut en fond.
+// cliquer un rectangle le promeut en fond, sauf les activités externes qui
+// ouvrent directement leur annonce.
 export function HeroActivites() {
   const [actif, setActif] = useState(0);
   const activite = activitesAccueil[actif];
@@ -49,19 +50,28 @@ export function HeroActivites() {
         <div className="rt-heroact__apercus">
           {autres.map(({ a, i }) => (
             <div key={a.slug} className="rt-heroact__apercu-wrap">
-              <button
-                type="button"
-                className="rt-heroact__apercu"
-                onClick={() => setActif(i)}
-                aria-label={`Voir l’activité ${nomCourt(a)} en arrière-plan`}
-                style={{ backgroundImage: `url(${a.apercu.src})` }}
-              >
-                <span className="rt-heroact__apercu-voile" aria-hidden="true" />
-                <span className="rt-logo-plaque rt-heroact__apercu-logo">
-                  <img src={asset(a.logo.chemin)} alt="" />
-                </span>
-                <span className="rt-heroact__apercu-titre">{nomCourt(a)}</span>
-              </button>
+              {/^https?:/i.test(a.route) ? (
+                <a
+                  className="rt-heroact__apercu"
+                  href={a.route}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`Découvrir ${nomCourt(a)}`}
+                  style={{ backgroundImage: `url(${a.apercu.src})` }}
+                >
+                  <ContenuApercu activite={a} />
+                </a>
+              ) : (
+                <button
+                  type="button"
+                  className="rt-heroact__apercu"
+                  onClick={() => setActif(i)}
+                  aria-label={`Voir l’activité ${nomCourt(a)} en arrière-plan`}
+                  style={{ backgroundImage: `url(${a.apercu.src})` }}
+                >
+                  <ContenuApercu activite={a} />
+                </button>
+              )}
               <ApercuDecouvrir route={a.route} nom={nomCourt(a)} />
             </div>
           ))}
@@ -79,8 +89,19 @@ function nomCourt(a: Activite): string {
   return a.entite.split('·')[0].trim();
 }
 
-// Bouton « Découvrir » du rectangle : va à la page dédiée (ou au lien externe
-// Airbnb), distinct du clic sur la carte qui ne fait que changer le fond.
+function ContenuApercu({ activite }: { activite: Activite }) {
+  return (
+    <>
+      <span className="rt-heroact__apercu-voile" aria-hidden="true" />
+      <span className="rt-logo-plaque rt-heroact__apercu-logo">
+        <img src={asset(activite.logo.chemin)} alt="" />
+      </span>
+      <span className="rt-heroact__apercu-titre">{nomCourt(activite)}</span>
+    </>
+  );
+}
+
+// Bouton « Découvrir » du rectangle : va à la page dédiée ou au lien externe.
 function ApercuDecouvrir({ route, nom }: { route: string; nom: string }) {
   const stop = (e: MouseEvent) => e.stopPropagation();
   const libelle = 'Découvrir →';

@@ -8,12 +8,6 @@ import { contenuAccueil } from '@content/pages/accueil';
 import { marque } from '@content/marque';
 import { activitesAccueil } from '@content/activites';
 
-const routesActivite: Record<string, string> = {
-  'royal-lepage': '/services/courtier-immobilier',
-  sunset: '/services/sunset',
-  'chalets-airbnb': '/services/chalets',
-};
-
 export default function Accueil() {
   return (
     <>
@@ -85,7 +79,7 @@ export default function Accueil() {
         />
         <div className="rt-grille rt-grille--3">
           {activitesAccueil.map((a) => (
-            <Link key={a.slug} to={routesActivite[a.slug] ?? '/contact'} className="rt-carte-photo">
+            <Link key={a.slug} to={a.route} className="rt-carte-photo">
               <span className="rt-carte-photo__media">
                 <img src={a.apercu.src} alt={a.apercu.alt} loading="lazy" decoding="async" />
                 <span className="rt-logo-plaque" style={{ position: 'absolute', top: 12, left: 12, height: 38, padding: '6px 10px' }}>

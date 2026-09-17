@@ -1,9 +1,9 @@
 {
-  "_note": "Données provisoires pour les calculateurs. À valider et indexer chaque année avec le client avant mise en service. Tranches de droits de mutation = barème de base provincial; les municipalités peuvent ajouter des tranches supplémentaires.",
+  "_note": "Barèmes de droits de mutation 2026 et fourchettes de frais d’acquisition fournis par le client. Les barèmes sont à mettre à jour chaque année. Les taux municipaux et scolaires restent provisoires (champ provisoire).",
   "indexationAnnee": 2026,
   "tranchesParDefaut": [
-    { "plafond": 61500, "taux": 0.005 },
-    { "plafond": 307800, "taux": 0.010 },
+    { "plafond": 62900, "taux": 0.005 },
+    { "plafond": 315000, "taux": 0.010 },
     { "plafond": null, "taux": 0.015 }
   ],
   "municipalites": [
@@ -14,10 +14,10 @@
       "tauxMunicipal": 0.0095,
       "tauxScolaire": 0.0010,
       "tranchesMutation": [
-        { "plafond": 61500, "taux": 0.005 },
-        { "plafond": 307800, "taux": 0.010 },
+        { "plafond": 62900, "taux": 0.005 },
+        { "plafond": 315000, "taux": 0.010 },
         { "plafond": 500000, "taux": 0.015 },
-        { "plafond": null, "taux": 0.025 }
+        { "plafond": null, "taux": 0.030 }
       ],
       "provisoire": true
     },
@@ -27,7 +27,12 @@
       "region": "Mauricie",
       "tauxMunicipal": 0.0110,
       "tauxScolaire": 0.0010,
-      "tranchesMutation": null,
+      "tranchesMutation": [
+        { "plafond": 62900, "taux": 0.005 },
+        { "plafond": 315000, "taux": 0.010 },
+        { "plafond": 500000, "taux": 0.015 },
+        { "plafond": null, "taux": 0.030 }
+      ],
       "provisoire": true
     },
     {
@@ -36,7 +41,12 @@
       "region": "Centre-du-Québec",
       "tauxMunicipal": 0.0090,
       "tauxScolaire": 0.0010,
-      "tranchesMutation": null,
+      "tranchesMutation": [
+        { "plafond": 62900, "taux": 0.005 },
+        { "plafond": 315000, "taux": 0.010 },
+        { "plafond": 500000, "taux": 0.015 },
+        { "plafond": null, "taux": 0.030 }
+      ],
       "provisoire": true
     },
     {
@@ -45,7 +55,12 @@
       "region": "Mauricie",
       "tauxMunicipal": 0.0100,
       "tauxScolaire": 0.0010,
-      "tranchesMutation": null,
+      "tranchesMutation": [
+        { "plafond": 62900, "taux": 0.005 },
+        { "plafond": 315000, "taux": 0.010 },
+        { "plafond": 500000, "taux": 0.015 },
+        { "plafond": null, "taux": 0.025 }
+      ],
       "provisoire": true
     },
     {
@@ -68,10 +83,10 @@
     }
   ],
   "fraisAcquisition": {
-    "notaire": { "min": 1200, "max": 1800 },
-    "inspectionPrachat": { "min": 450, "max": 900 },
+    "notaire": { "min": 1500, "max": 2300 },
+    "inspectionPrachat": { "min": 600, "max": 1200 },
     "ajustementsNotaire": { "min": 800, "max": 2000 },
-    "evaluationFinanciere": { "min": 0, "max": 300 },
+    "evaluationFinanciere": { "min": 0, "max": 1000 },
     "fraisDivers": { "min": 200, "max": 600 }
   }
 }

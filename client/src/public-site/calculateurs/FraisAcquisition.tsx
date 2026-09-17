@@ -50,10 +50,8 @@ export default function CalculateurFraisAcquisition() {
           <div className="rt-calc__panneau">
             <p style={{ marginBottom: '1rem' }}>
               Ce calculateur affiche des <strong>fourchettes</strong> plutôt que des montants fixes, car les coûts
-              varient d'un dossier à l'autre. Les fourchettes affichées ci-dessous sont fournies par défaut et seront
-              ajustées avec les valeurs fournies par votre courtier.
+              varient d'un dossier à l'autre. Les fourchettes ci-dessous vous aident à prévoir votre budget d'acquisition.
             </p>
-            <span className="rt-mention-provisoire">Données provisoires à valider</span>
             <ul style={{ listStyle: 'none', padding: 0, marginTop: '1.5rem' }}>
               {Object.entries(sources).map(([cle, f]) => (
                 <li key={cle} style={{ display: 'flex', justifyContent: 'space-between', padding: '0.6rem 0', borderBottom: '1px solid var(--rt-ligne)' }}>

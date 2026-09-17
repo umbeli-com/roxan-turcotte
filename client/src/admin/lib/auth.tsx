@@ -54,7 +54,7 @@ export function RouteProtegee({ children }: { children: ReactNode }) {
   const location = useLocation();
   if (chargement) {
     return (
-      <div style={{ padding: '4rem', textAlign: 'center', color: 'var(--adm-texte-faible)' }}>
+      <div className="rt-admin" style={{ padding: '4rem', textAlign: 'center', color: 'var(--adm-texte-faible)' }}>
         Vérification de la session…
       </div>
     );

@@ -18,6 +18,7 @@
   color: var(--adm-texte);
   background: var(--adm-fond);
   min-height: 100vh;
+  min-height: 100dvh;
 }
 
 .rt-admin a { color: var(--adm-or-clair); }
@@ -26,6 +27,7 @@
 /* Shell auth (login) */
 .rt-admin-auth {
   min-height: 100vh;
+  min-height: 100dvh;
   display: grid;
   place-items: center;
   padding: var(--rt-esp-5);
@@ -59,8 +61,9 @@
 /* Layout principal */
 .rt-admin__corps {
   display: grid;
-  grid-template-columns: 240px 1fr;
+  grid-template-columns: 240px minmax(0, 1fr);
   min-height: 100vh;
+  min-height: 100dvh;
 }
 @media (max-width: 880px) {
   .rt-admin__corps { grid-template-columns: 1fr; }
@@ -77,6 +80,8 @@
   position: sticky;
   top: 0;
   height: 100vh;
+  height: 100dvh;
+  overflow-y: auto;
 }
 @media (max-width: 880px) { .rt-admin-side { height: auto; position: relative; } }
 
@@ -140,7 +145,7 @@
 }
 
 /* Zone principale */
-.rt-admin-main { padding: 2rem clamp(1rem, 3vw, 2.5rem); }
+.rt-admin-main { min-width: 0; padding: 2rem clamp(1rem, 3vw, 2.5rem); }
 .rt-admin-page__entete {
   display: flex;
   justify-content: space-between;

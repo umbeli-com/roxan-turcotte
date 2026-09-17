@@ -72,7 +72,7 @@ export const navigationPiedDePage = {
     { libelle: 'Investissement', href: '/services/investissement-immobilier' },
     { libelle: 'Commercial', href: '/services/commercial' },
     { libelle: 'Sunset (Sud)', href: '/services/sunset' },
-    { libelle: 'Chalets et Airbnb', href: '/services/chalets' },
+    { libelle: 'Chalets et Airbnb', href: lienAirbnb },
     { libelle: 'International', href: '/services/international' },
   ],
   ressources: [

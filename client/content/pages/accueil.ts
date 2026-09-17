@@ -1,4 +1,5 @@
 import { images } from '../images';
+import { marque } from '../marque';
 
 export const contenuAccueil = {
   intro: {
@@ -88,7 +89,7 @@ export const contenuAccueil = {
     cartes: [
       { titre: 'Vendre ou acheter', texte: 'Courtage résidentiel chez Royal LePage Centre.', bouton: { libelle: 'Parler de mon projet', href: '/contact' } },
       { titre: 'Une propriété au Sud', texte: 'Résidence secondaire, retraite ou investissement avec Sunset.', bouton: { libelle: 'Explorer Sunset', href: '/services/sunset' } },
-      { titre: 'Un chalet rentable', texte: 'Acquisition et location courte durée de type Airbnb.', bouton: { libelle: 'Évaluer un chalet', href: '/services/chalets' } },
+      { titre: 'Un chalet rentable', texte: 'Acquisition et location courte durée de type Airbnb.', bouton: { libelle: 'Voir le chalet sur Airbnb', href: marque.liens.airbnb } },
     ],
   },
 
