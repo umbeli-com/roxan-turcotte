@@ -1,4 +1,4 @@
-/* Thème back-office : plus clair et lisible pour la donnée, l'or reste
+/* Thème sombre du back-office : textes clairs, l'or reste
    l'accent d'action. Sépare visuellement le back-office du site public. */
 
 .rt-admin {
@@ -14,6 +14,13 @@
   --adm-or-clair: #E6C878;
   --adm-or-soft: rgba(200, 162, 74, 0.12);
 
+  /* Les titres, paragraphes, listes et textes en gras partagent les styles
+     de base du site : adapter leurs couleurs au fond sombre de l'admin. */
+  --rt-texte: var(--adm-texte-fort);
+  --rt-texte-doux: var(--adm-texte);
+  --rt-texte-faible: var(--adm-texte-faible);
+
+  color-scheme: dark;
   font-family: var(--rt-font-corps);
   color: var(--adm-texte);
   background: var(--adm-fond);
